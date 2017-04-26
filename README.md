@@ -23,7 +23,7 @@ Make sure you have installed all of the following prerequisites on your developm
 $ npm install -g bower
 ```
 
-##Windows you will need to have a C++ complier as well as python installed
+## Windows you will need to have a C++ complier as well as python installed
 ```bash
 npm install --global --production windows-build-tools
 ```
