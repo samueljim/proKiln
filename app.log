@@ -7977,3 +7977,125 @@ Error: listen EADDRINUSE 0.0.0.0:3000
 
 2017-04-23T12:49:40.918Z - info: 127.0.0.1 - - [23/Apr/2017:12:49:40 +0000] "GET /modules/core/client/img/brand/favicon.ico HTTP/1.1" 200 32038 "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 
+2017-04-26T10:04:42.111Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.175Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-ui-notification/dist/angular-ui-notification.min.css HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.178Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/bootstrap/dist/css/bootstrap-theme.min.css HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.180Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /dist/application-bd05781c76.min.css HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.186Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /bootstrap.css HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.212Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/bootstrap/dist/css/bootstrap.min.css HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.225Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-animate/angular-animate.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.226Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-messages/angular-messages.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.237Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular/angular.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.240Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-bootstrap/ui-bootstrap-tpls.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.241Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-resource/angular-resource.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.254Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-ui-notification/dist/angular-ui-notification.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.257Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-mocks/angular-mocks.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.259Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/angular-ui-router/release/angular-ui-router.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.273Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/ng-file-upload/ng-file-upload.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.274Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /lib/owasp-password-strength-test/owasp-password-strength-test.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.279Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /dist/application-62f48f660e.min.js HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.420Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /modules/core/client/views/header.client.view.html HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.422Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /modules/core/client/views/home.client.view.html HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.449Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /modules/core/client/img/loaders/loader.gif HTTP/1.1" 200 13980 "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:42.550Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:42 +0000] "GET /modules/core/client/img/brand/logo.png HTTP/1.1" 200 2826 "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:44.716Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:44 +0000] "GET /modules/users/client/views/authentication/authentication.client.view.html HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:44.730Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:44 +0000] "GET /modules/users/client/views/authentication/signup.client.view.html HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:46.958Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:46 +0000] "GET /modules/users/client/views/authentication/signin.client.view.html HTTP/1.1" 200 - "http://localhost:8443/authentication/signup" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:54.568Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:54 +0000] "POST /api/auth/signin HTTP/1.1" 302 35 "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:54.581Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:54 +0000] "GET /server-error HTTP/1.1" 500 - "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:54.594Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:54 +0000] "GET /lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 - "http://localhost:8443/lib/bootstrap/dist/css/bootstrap.min.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.390Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "POST /api/auth/signin HTTP/1.1" 302 35 "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.420Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "GET /server-error HTTP/1.1" 500 - "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.546Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "POST /api/auth/signin HTTP/1.1" 302 35 "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.561Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "GET /server-error HTTP/1.1" 500 - "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.699Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "POST /api/auth/signin HTTP/1.1" 302 35 "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.708Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "GET /server-error HTTP/1.1" 500 - "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.873Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "POST /api/auth/signin HTTP/1.1" 302 35 "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:04:56.885Z - info: 127.0.0.1 - - [26/Apr/2017:10:04:56 +0000] "GET /server-error HTTP/1.1" 500 - "http://localhost:8443/authentication/signin" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:17.626Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:17 +0000] "POST /api/auth/signup HTTP/1.1" 200 287 "http://localhost:8443/authentication/signup" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:17.664Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:17 +0000] "GET /modules/users/client/img/profile/default.png HTTP/1.1" 200 65838 "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:26.085Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:26 +0000] "GET /modules/users/client/views/settings/settings.client.view.html HTTP/1.1" 200 831 "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:26.105Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:26 +0000] "GET /modules/users/client/views/settings/edit-profile.client.view.html HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:29.577Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:29 +0000] "GET /modules/users/client/views/settings/change-password.client.view.html HTTP/1.1" 200 - "http://localhost:8443/settings/profile" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:44.768Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:44 +0000] "GET /settings/password HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:44.844Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:44 +0000] "GET /bootstrap.css HTTP/1.1" 200 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:45.200Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:45 +0000] "GET /modules/core/client/img/loaders/loader.gif HTTP/1.1" 304 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:45.213Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:45 +0000] "GET /modules/core/client/views/header.client.view.html HTTP/1.1" 304 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:45.220Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:45 +0000] "GET /modules/users/client/views/settings/settings.client.view.html HTTP/1.1" 304 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:45.313Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:45 +0000] "GET /modules/users/client/img/profile/default.png HTTP/1.1" 304 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:45.366Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:45 +0000] "GET /modules/users/client/views/settings/change-password.client.view.html HTTP/1.1" 304 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:45.607Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:45 +0000] "GET /modules/core/client/img/brand/favicon.ico HTTP/1.1" 200 32038 "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:47.459Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:47 +0000] "GET /modules/users/client/views/settings/edit-profile.client.view.html HTTP/1.1" 304 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:51.017Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:51 +0000] "GET /modules/users/client/views/settings/change-profile-picture.client.view.html HTTP/1.1" 200 - "http://localhost:8443/settings/password" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:51.617Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:51 +0000] "GET /modules/core/client/views/home.client.view.html HTTP/1.1" 304 - "http://localhost:8443/settings/picture" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:51.639Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:51 +0000] "GET /modules/core/client/img/brand/logo.png HTTP/1.1" 304 - "http://localhost:8443/settings/picture" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:05:56.637Z - info: 127.0.0.1 - - [26/Apr/2017:10:05:56 +0000] "GET /modules/chat/client/views/chat.client.view.html HTTP/1.1" 200 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:52.968Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:52 +0000] "GET / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.030Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /bootstrap.css HTTP/1.1" 304 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.234Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /modules/core/client/img/loaders/loader.gif HTTP/1.1" 304 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.246Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /modules/core/client/views/header.client.view.html HTTP/1.1" 304 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.247Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /modules/core/client/views/home.client.view.html HTTP/1.1" 304 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.301Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /modules/users/client/img/profile/default.png HTTP/1.1" 304 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.343Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /modules/core/client/img/brand/logo.png HTTP/1.1" 304 - "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+
+2017-04-26T10:09:53.423Z - info: 127.0.0.1 - - [26/Apr/2017:10:09:53 +0000] "GET /modules/core/client/img/brand/favicon.ico HTTP/1.1" 200 32038 "http://localhost:8443/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+

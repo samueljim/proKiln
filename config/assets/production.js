@@ -8,8 +8,7 @@ module.exports = {
       css: [
         // bower:css
         'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
-        'public/lib/bootstrap/dist/css/bootstrap.min.css',
-        'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+        'public/lib/bootstrap/dist/css/bootstrap.min.css'
         // endbower
       ],
       js: [
