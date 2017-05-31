@@ -1,0 +1,18 @@
+<section>
+  <div class="page-header">
+    <h1>Settingss</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="settings in vm.settingss" ui-sref="settingss.view({ settingsId: settings._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="settings.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="settings.user" ng-bind="settings.user.displayName"></span>
+        <span ng-if="!settings.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="settings.title"></h4>
+      <p class="list-group-item-text" ng-bind="settings.content"></p>
+    </a>
+  </div>
+</section>
