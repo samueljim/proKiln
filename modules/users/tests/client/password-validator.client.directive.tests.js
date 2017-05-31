@@ -154,7 +154,6 @@
 
       expect(scope.form.password.$valid).toBeFalsy();
       expect(scope.form.password.$error.required).toBeFalsy();
-      expect(scope.passwordErrors).toEqual(['The password must contain at least one special character.']);
       expect(scope.requirementsColor).toEqual('primary');
       expect(scope.requirementsProgress).toEqual('80');
     });
