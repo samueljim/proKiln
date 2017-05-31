@@ -1252,9 +1252,9 @@ angular.mock.dump = function(object) {
  *       // for requested url of '/user/1234' params is {id: '1234'}
  *     });
  *
- *   $httpBackend.whenPATCH(/\/user\/(.+)\/article\/(.+)/, undefined, undefined, ['user', 'article'])
+ *   $httpBackend.whenPATCH(/\/user\/(.+)\/kiln\/(.+)/, undefined, undefined, ['user', 'kiln'])
  *     .respond(function(method, url, data, headers, params) {
- *       // for url of '/user/1234/article/567' params is {user: '1234', article: '567'}
+ *       // for url of '/user/1234/kiln/567' params is {user: '1234', kiln: '567'}
  *     });
  * ```
  *

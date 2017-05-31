@@ -239,7 +239,7 @@ module.exports = function (grunt) {
         dest: 'dist/css/<%= pkg.name %>.min.css'
       },
       minifyTheme: {
-        src: 'dist/css/<%= pkg.name %>-theme.css',
+        src: 'dist/css/<%= pkg.name %>.css',
         dest: 'dist/css/<%= pkg.name %>-theme.min.css'
       },
       docs: {
