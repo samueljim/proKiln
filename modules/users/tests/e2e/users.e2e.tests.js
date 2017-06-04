@@ -329,24 +329,6 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one number.');
     });
 
-    it('Should report a password with less than one special character - "Passw0rdss"', function () {
-      browser.get('http://localhost:3001/authentication/signup');
-      // Enter First Name
-      element(by.model('vm.credentials.firstName')).sendKeys(user1.firstName);
-      // Enter Last Name
-      element(by.model('vm.credentials.lastName')).sendKeys(user1.lastName);
-      // Enter Email
-      element(by.model('vm.credentials.email')).sendKeys(user1.email);
-      // Enter Username
-      element(by.model('vm.credentials.username')).sendKeys(user1.username);
-      // Enter Invalid Password
-      element(by.model('vm.credentials.password')).sendKeys('Passw0rdss');
-      // Click Submit button
-      element(by.css('button[type=submit]')).click();
-      // Password Error
-      expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one special character.');
-    });
-
     it('Should Successfully register new user', function () {
       browser.get('http://localhost:3001/authentication/signup');
       // Enter FirstName
@@ -509,17 +491,6 @@ describe('Users E2E Tests:', function () {
       expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one number.');
     });
 
-    it('Should report a password with less than one special character - "Passw0rdss"', function () {
-      browser.get('http://localhost:3001/settings/password');
-      // Enter Current Password
-      element(by.model('vm.passwordDetails.currentPassword')).sendKeys(user1.password);
-      // Enter Invalid Password
-      element(by.model('vm.passwordDetails.newPassword')).sendKeys('Passw0rdss');
-      // Click Submit button
-      element(by.css('button[type=submit]')).click();
-      // Password Error
-      expect(element.all(by.css('.error-text')).get(0).getText()).toBe('The password must contain at least one special character.');
-    });
 
     it('Should report passwords do not match', function () {
       browser.get('http://localhost:3001/settings/password');

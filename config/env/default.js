@@ -2,10 +2,10 @@
 
 module.exports = {
   app: {
-    title: 'MEAN.JS',
-    description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-    keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
-    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
+    title: 'proKiln',
+    description: 'a glass kiln controlling platform',
+    keywords: 'glass works, glass, kiln, furnace, pi, arduino, lowcost',
+    googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'UA-98093068-1'
   },
   db: {
     promise: global.Promise
@@ -14,7 +14,7 @@ module.exports = {
   host: process.env.HOST || '0.0.0.0',
   // DOMAIN config should be set to the fully qualified application accessible
   // URL. For example: https://www.myapp.com (including port if required).
-  domain: process.env.DOMAIN,
+  domain: process.env.DOMAIN || 'https://prokiln.herokuapp.com',
   // Session Cookie settings
   sessionCookie: {
     // session expiration is set by default to 24 hours
@@ -28,7 +28,7 @@ module.exports = {
     secure: false
   },
   // sessionSecret should be changed for security measures and concerns
-  sessionSecret: process.env.SESSION_SECRET || 'MEAN',
+  sessionSecret: process.env.SESSION_SECRET || 'SAMUEL',
   // sessionKey is the cookie session name
   sessionKey: 'sessionId',
   sessionCollection: 'sessions',

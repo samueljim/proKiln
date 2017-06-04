@@ -26,7 +26,7 @@ exports.forgot = function (req, res, next) {
         done(err, token);
       });
     },
-    // Lookup user by username
+    // Lookup user by
     function (token, done) {
       if (req.body.username) {
         User.findOne({

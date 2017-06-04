@@ -10,7 +10,7 @@ Thumbs.db
 .nodemonignore
 .sass-cache/
 node_modules/
-public/lib/
+# public/lib/ I want to sync the modifications i make in these files
 app/tests/coverage/
 .bower-*/
 .idea/
