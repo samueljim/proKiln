@@ -1,6 +1,6 @@
 {
-  "name": "mean",
-  "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
+  "name": "prokiln",
+  "description": "a glass kiln controlling platform",
   "homepage": "http://meanjs.org/",
   "license": "MIT",
   "dependencies": {

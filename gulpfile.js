@@ -49,7 +49,8 @@ gulp.task('env:prod', function () {
 gulp.task('nodemon', function () {
 
   var nodeVersions = process.versions;
-  var debugArgument = '--debug';
+  // changes --debug
+  var debugArgument = '';
   switch (nodeVersions.node.substr(0, 1)) {
     case '4':
     case '5':
@@ -62,8 +63,8 @@ gulp.task('nodemon', function () {
   }
 
   return plugins.nodemon({
-    script: 'server.js',
     nodeArgs: [debugArgument],
+    script: 'server.js',
     ext: 'js,html',
     verbose: true,
     watch: _.union(defaultAssets.server.views, defaultAssets.server.allJS, defaultAssets.server.config)
@@ -445,7 +446,7 @@ gulp.task('lint', function (done) {
 
 // Lint project files and minify them into two production files.
 gulp.task('build', function (done) {
-  runSequence('env:dev', 'wiredep:prod', 'lint', ['uglify', 'cssmin'], done);
+  runSequence('env:dev', 'lint', ['uglify', 'cssmin'], done);
 });
 
 // Run the project tests
