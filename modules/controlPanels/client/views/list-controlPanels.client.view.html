@@ -3,7 +3,7 @@
     <h1>ControlPanels</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="controlPanel in vm.controlPanels" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
+    <a ng-repeat="controlPanel in vm.controlPanels | filter : vm.isContextUserSelf()" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="controlPanel.created | date:'mediumDate'"></span>

@@ -20,7 +20,8 @@
         controller: 'ControlPanelsListController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'ControlPanels List'
+          pageTitle: 'ControlPanels List',
+          roles: ['user']
         }
       })
       .state('controlPanels.view', {
@@ -32,7 +33,8 @@
           controlPanelResolve: getControlPanel
         },
         data: {
-          pageTitle: 'ControlPanel {{ controlPanelResolve.title }}'
+          pageTitle: 'ControlPanel {{ controlPanelResolve.title }}',
+          roles: ['user']
         }
       });
   }

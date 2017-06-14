@@ -9,7 +9,7 @@
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(Menus) {
-    Menus.addSubMenuItem('topbar', 'controlPanels', {
+    Menus.addSubMenuItem('topbar', 'admin', {
       title: 'Manage ControlPanels',
       state: 'admin.controlPanels.list'
     });
