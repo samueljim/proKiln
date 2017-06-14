@@ -1,0 +1,18 @@
+<section>
+  <div class="page-header">
+    <h1>ControlPanels</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="controlPanel in vm.controlPanels" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="controlPanel.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="controlPanel.user" ng-bind="controlPanel.user.displayName"></span>
+        <span ng-if="!controlPanel.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="controlPanel.title"></h4>
+      <p class="list-group-item-text" ng-bind="controlPanel.content"></p>
+    </a>
+  </div>
+</section>
