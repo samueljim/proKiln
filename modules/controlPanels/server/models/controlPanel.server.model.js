@@ -25,6 +25,19 @@ var ControlPanelSchema = new Schema({
     default: '',
     trim: true
   },
+  info: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  online: {
+    type: Boolean,
+    default: false
+  },
+  temp: {
+    type: Number,
+    default: ''
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
