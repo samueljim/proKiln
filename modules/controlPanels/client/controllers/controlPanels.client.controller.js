@@ -5,17 +5,12 @@
     .module('controlPanels')
     .controller('ControlPanelsController', ControlPanelsController);
 
-  ControlPanelsController.$inject = ['$scope', 'controlPanelResolve', 'userResolve' 'Authentication'];
+  ControlPanelsController.$inject = ['$scope', 'controlPanelResolve'];
 
-  function ControlPanelsController($scope, controlPanel, user, Authentication) {
+  function ControlPanelsController($scope, controlPanel,) {
     var vm = this;
 
     vm.controlPanel = controlPanel;
-    vm.authentication = Authentication;
-    vm.user = user;
-
-    function isOwnedByUser() {
-      return vm.controlPanels.user === vm.authentication.user._id;
-    }
   }
+
 }());

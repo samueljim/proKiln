@@ -11,13 +11,27 @@
       <span ng-if="!vm.controlPanel.user">Deleted User</span>
     </em>
   </small>
-  <strong class="lead" ng-bind="vm.controlPanel.temp"></strong>
-  <div class="table-responsive">
-    <table class="table table-hover table-striped">
-      <tr class="active">
-        <td ng-bind="vm.controlPanel.temp"> </td>
-      </tr>
-    </table>
-  </div>
+  <ul class="nav nav-tabs">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Help</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Dropdown <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </li>
+    </ul>
+  <h1 ng-bind="vm.controlPanel.temp + ' C'"></h1>
   <p class="lead" ng-bind="vm.controlPanel.content"></p>
+  <img class="img-responsive" src="modules/controlPanels/client/img/graph.gif" alt="graph"/>
+  <button type="button" class="btn btn-primary">Edit</button>
+  <button type="button" class="btn btn-success">Start</button>
+  <button type="button" class="btn btn-warning">Stop</button>
+
 </section>
