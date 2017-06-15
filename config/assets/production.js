@@ -9,7 +9,6 @@ module.exports = {
         // bower:css
         'public/lib/angular-ui-notification/dist/angular-ui-notification.min.css',
         'public/lib/bootstrap/dist/css/bootstrap.css',
-        'modules/core/client/css/bootstrap.css'
         // endbower
       ],
       js: [
@@ -27,7 +26,8 @@ module.exports = {
         // endbower
       ]
     },
-    // css: 'public/dist/application*.min.css',
-    // js: 'public/dist/application*.min.js'
+    css: 'public/dist/application*.min.css',
+    js: 'public/dist/application*.min.js',
+    css: 'modules/core/client/css/bootstrap.css'
   }
 };
