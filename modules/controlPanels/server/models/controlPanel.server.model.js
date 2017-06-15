@@ -38,6 +38,10 @@ var ControlPanelSchema = new Schema({
     type: Number,
     default: ''
   },
+  schedule: {
+    type: String,
+    default: ''
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
