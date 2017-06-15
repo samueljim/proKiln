@@ -31,6 +31,11 @@
             {{vm.controlPanel.online ? 'Online' : 'Offline'}}
           </button>
        </div>
+       schedule
+       <label class="control-label" for="schedule">schedule</label>
+
+       <input name="schedule" type="text" ng-model="vm.controlPanel.schedule" id="schedule" class="form-control">
+
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.controlPanel._id ? 'Update' : 'Create'}}</button>
         </div>

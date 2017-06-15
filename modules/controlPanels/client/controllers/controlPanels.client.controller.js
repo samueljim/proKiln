@@ -7,10 +7,11 @@
 
   ControlPanelsController.$inject = ['$scope', 'controlPanelResolve'];
 
-  function ControlPanelsController($scope, controlPanel,) {
+  function ControlPanelsController($scope, controlPanel) {
     var vm = this;
 
     vm.controlPanel = controlPanel;
   }
+
 
 }());

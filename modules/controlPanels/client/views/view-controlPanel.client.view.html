@@ -2,15 +2,18 @@
   <div class="page-header">
     <h1 ng-bind="vm.controlPanel.title"></h1>
   </div>
+  <span class="label label-success">Online</span>
+  <div class="col-md-6">
   <small>
     <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.controlPanel.created | date:'mediumDate'"></span>
-      by
+      Owned by
       <span ng-if="vm.controlPanel.user" ng-bind="vm.controlPanel.user.displayName"></span>
       <span ng-if="!vm.controlPanel.user">Deleted User</span>
+      kiln added on
+      <span ng-bind="vm.controlPanel.created | date:'mediumDate'"></span>
     </em>
   </small>
+  <h3>Temp over time</h3>
   <ul class="nav nav-tabs">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Help</a></li>
@@ -28,11 +31,33 @@
       </li>
     </ul>
   <h1 ng-bind="vm.controlPanel.temp + ' C'"></h1>
-  <p class="lead" ng-bind="vm.controlPanel.content"></p>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95276.jpg" alt="graph"/>
-  <br>
-  <button type="button" class="btn btn-primary">Edit</button>
-  <button type="button" class="btn btn-success">Start</button>
-  <button type="button" class="btn btn-warning">Stop</button>
+  <br><br>
+  <blockquote cite="http://">
 
+    <code class="lead" ng-bind="vm.controlPanel.content"></code>
+  </blockquote>
+</div>
+<div class=".col-md-4">
+  <br>
+  <h3>Schedule</h3>
+  <div class="form-group col-md-6">
+    <label for="sel1">Select Schedule:</label>
+    <select class="form-control" id="sel1">
+      <option ng-bind="vm.controlPanel.schedule">1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select>
+  </div>
+  <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95273.jpg" alt="graph"/>
+  <br>
+  <h6>Settings</h6>
+  <button type="button" class="btn btn-primary">Edit</button>
+  <div class="btn-group">
+    <button type="button" class="btn btn-success">Start</button>
+    <button type="button" class="btn btn-warning">Stop</button>
+  </div>
+
+</div>
 </section>

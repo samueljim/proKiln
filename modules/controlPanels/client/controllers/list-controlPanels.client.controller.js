@@ -5,14 +5,14 @@
     .module('controlPanels')
     .controller('ControlPanelsListController', ControlPanelsListController);
 
-  ControlPanelsListController.$inject = ['ControlPanelsService', 'userResolve' 'Authentication'];
+  ControlPanelsListController.$inject = ['ControlPanelsService'];
 
-  function ControlPanelsListController(ControlPanelsService, Authentication, user) {
+  function ControlPanelsListController(ControlPanelsService) {
     var vm = this;
 
     vm.controlPanels = ControlPanelsService.query();
-    function isOwnedByUser() {
-      return vm.controlPanels.user === vm.authentication.user._id;
-    }
+    // function isOwnedByUser() {
+    //   return vm.controlPanels.user === vm.authentication.user._id;
+    // }
   }
 }());
