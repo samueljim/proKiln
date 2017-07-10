@@ -8,7 +8,7 @@
   "license": "private",
   "repository": "https://Samueljim@bitbucket.org/glassartistry/kilncontroller.git",
   "engines": {
-    "node": "latest",
+    "node": ">=6.0.0",
     "npm": ">=3.10.8"
   },
   "scripts": {
@@ -56,7 +56,7 @@
     "mongoose": "~4.9.3",
     "morgan": "~1.8.1",
     "multer": "~1.3.0",
-    "nodemailer": "latest", 
+    "nodemailer": "^4.0.0",
     "owasp-password-strength-test": "^1.3.0",
     "passport": "~0.3.2",
     "passport-facebook": "~2.1.1",
@@ -73,6 +73,7 @@
     "wiredep": "~4.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^6.0.0",
     "coveralls": "~2.13.0",
     "del": "^2.2.2",
     "eslint": "^2.2.0",
