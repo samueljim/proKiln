@@ -1,0 +1,63 @@
+<section>
+  <div class="page-header">
+    <h1 ng-bind="vm.controlPanel.title"></h1>
+  </div>
+  <span class="label label-success">Online</span>
+  <div class="col-md-6">
+  <small>
+    <em class="text-muted">
+      Owned by
+      <span ng-if="vm.controlPanel.user" ng-bind="vm.controlPanel.user.displayName"></span>
+      <span ng-if="!vm.controlPanel.user">Deleted User</span>
+      kiln added on
+      <span ng-bind="vm.controlPanel.created | date:'mediumDate'"></span>
+    </em>
+  </small>
+  <h3>Temp over time</h3>
+  <ul class="nav nav-tabs">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Help</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Dropdown <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </li>
+    </ul>
+  <h1 ng-bind="vm.controlPanel.temp + ' C'"></h1>
+  <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95276.jpg" alt="graph"/>
+  <br><br>
+  <blockquote cite="http://">
+
+    <code class="lead" ng-bind="vm.controlPanel.content"></code>
+  </blockquote>
+</div>
+<div class=".col-md-4">
+  <br>
+  <h3>Schedule</h3>
+  <div class="form-group col-md-6">
+    <label for="sel1">Select Schedule:</label>
+    <select class="form-control" id="sel1">
+      <option ng-bind="vm.controlPanel.schedule">1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select>
+  </div>
+  <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95273.jpg" alt="graph"/>
+  <br>
+  <h6>Settings</h6>
+  <button type="button" class="btn btn-primary">Edit</button>
+  <div class="btn-group">
+    <button type="button" class="btn btn-success">Start</button>
+    <button type="button" class="btn btn-warning">Stop</button>
+  </div>
+
+</div>
+</section>
