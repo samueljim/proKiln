@@ -7,6 +7,15 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
+ * Validation
+ */
+function validateIsNumber (v) {
+  var patt = /^\-?\d+(?:\.\d+)?$/;
+  console.log('' + patt.test(v) + '');
+  return patt.test(v);
+}
+
+/**
  * ControlPanel Schema
  */
 var ControlPanelSchema = new Schema({
@@ -36,7 +45,12 @@ var ControlPanelSchema = new Schema({
   },
   temp: {
     type: Number,
-    default: ''
+    default: null,
+    trim: true,
+    patten: '/^\-?\d+(?:\.\d+)?$/',
+    messages: {
+        patten: 'temp must be a valid number'
+    }
   },
   schedule: {
     type: String,

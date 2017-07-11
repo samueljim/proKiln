@@ -48,6 +48,7 @@ exports.update = function (req, res) {
 
   controlPanel.title = req.body.title;
   controlPanel.content = req.body.content;
+  controlPanel.temp = req.body.temp;
 
   controlPanel.save(function (err) {
     if (err) {
