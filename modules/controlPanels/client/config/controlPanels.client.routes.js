@@ -33,7 +33,7 @@
           controlPanelResolve: getControlPanel
         },
         data: {
-          pageTitle: 'ControlPanel {{ controlPanelResolve.title }}',
+          pageTitle: '{{ controlPanelResolve.title }} ControlPanel',
           roles: ['user']
         }
       });
