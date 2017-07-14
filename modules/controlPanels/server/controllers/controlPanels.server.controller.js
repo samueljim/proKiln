@@ -85,7 +85,7 @@ exports.delete = function (req, res) {
  * List of ControlPanels
  */
 exports.list = function (req, res) {
-  ControlPanel.find().sort('-created').populate('user', 'displayName').exec(function (err, controlPanels) {
+  ControlPanel.find({ "user": req.user._id}).sort('-created').populate('user', 'displayName').exec(function (err, controlPanels) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
