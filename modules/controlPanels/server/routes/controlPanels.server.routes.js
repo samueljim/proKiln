@@ -11,6 +11,7 @@ module.exports = function (app) {
   app.route('/api/controlPanels').all(controlPanelsPolicy.isAllowed)
     .get(controlPanels.list)
     .post(controlPanels.create);
+    // .get(controlPanels.adminlist)
 
   // Single controlPanel routes
   app.route('/api/controlPanels/:controlPanelId').all(controlPanelsPolicy.isAllowed)

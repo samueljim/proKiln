@@ -85,7 +85,13 @@ exports.delete = function (req, res) {
  * List of ControlPanels
  */
 exports.list = function (req, res) {
-  ControlPanel.find({ "user": req.user._id}).sort('-created').populate('user', 'displayName').exec(function (err, controlPanels) {
+  console.log(""+ req.user.roles[1]);
+  if(req.user.roles[1] == "admin"){
+    var ownerOnly = "";
+  }else {
+    var ownerOnly = { "user": req.user._id};
+  }
+  ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function (err, controlPanels) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -95,6 +101,7 @@ exports.list = function (req, res) {
     }
   });
 };
+
 
 /**
  * ControlPanel middleware
