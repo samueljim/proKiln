@@ -26,7 +26,8 @@ module.exports = function (io, socket) {
 
     // updateDatabase(temp.text);
     // Emit the 'chatMessage' event
-    io.in(room).emit('tempUpdate', message);
+    // https://gist.github.com/crtr0/2896891 look at this
+    io.emit('tempUpdate', message);
   });
 
   // Emit the status event when a socket client is disconnected
