@@ -5,6 +5,7 @@ This web app allows for users to make accounts and control there kilns that use 
 
 ## Before You Begin
 Ask Sam Henry how to install it or read bellow.
+Yarn is better then npm so use that
 
 I recommend you read about the basic building blocks that assemble a MEAN.JS application:
 * MongoDB - Go through [MongoDB Official Website](http://mongodb.org/) and proceed to their [Official Manual](http://docs.mongodb.org/manual/), which should help you understand NoSQL and MongoDB better.
@@ -39,6 +40,10 @@ To install the dependencies, run this in the application folder from the command
 ```bash
 $ npm install
 ```
+OR
+```bash
+$ yarn
+```
 
 This command does a few things:
 * First it will install the dependencies needed for the application to run.
@@ -53,6 +58,10 @@ Run your application using npm:
 
 ```bash
 $ npm start
+```
+or
+```bash
+$ yarn start
 ```
 
 Your application should run on port 3000 with the *development* environment configuration, so in your browser just go to [http://localhost:3000](http://localhost:3000)
