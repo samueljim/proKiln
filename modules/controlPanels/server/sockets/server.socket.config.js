@@ -2,32 +2,40 @@
 
 /**
  * Module dependencies
- */
-var path = require('path'),
-  mongoose = require('mongoose'),
-  ControlPanel = mongoose.model('ControlPanel'),
-  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
+//  */
+// var path = require('path'),
+//   mongoose = require('mongoose'),
+//   ControlPanel = mongoose.model('ControlPanel'),
+//   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 // Create the chat configuration
 module.exports = function (io, socket) {
   // Emit the status event when a new socket client is connected
-  io.emit('tempUpdate', {
-    type: 'status',
-    text: "Waiting for temp change",
-    created: Date.now(),
-    username: socket.request.user.username
+  // io.emit('tempUpdate', {
+  //   type: 'status',
+  //   text: "Waiting for temp change",
+  //   created: Date.now(),
+  //   username: socket.request.user.username
+  // });
+
+  // id for the room of the connection
+  socket.on('id', function (data) {
+    console.log("user connected at " + data.id);
+    data.username = socket.request.user.username;
+    console.log("username is " + data.username);
+    socket.join(data.id);
   });
 
-  // Send a chat messages to all connected sockets when a message is received
-  socket.on('tempUpdate', function (message) {
-    message.type = 'temp';
-    message.time = Date.now();
-    message.username = socket.request.user.username;
+  // Send a temp messages to all connected sockets when a data is received
+  socket.on('tempUpdate', function (data) {
+    data.type = 'temp';
+    data.time = Date.now();
+    data.username = socket.request.user.username;
 
     // updateDatabase(temp.text);
     // Emit the 'chatMessage' event
     // https://gist.github.com/crtr0/2896891 look at this
-    io.emit('tempUpdate', message);
+    io.emit('tempUpdate', data);
   });
 
   // Emit the status event when a socket client is disconnected

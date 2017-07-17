@@ -85,8 +85,8 @@ exports.delete = function (req, res) {
  * List of ControlPanels
  */
 exports.list = function (req, res) {
-  console.log(""+ req.user.roles[1]);
   if(req.user.roles[1] == "admin"){
+    console.log(""+ req.user.roles[1]);
     var ownerOnly = "";
   }else {
     var ownerOnly = { "user": req.user._id};

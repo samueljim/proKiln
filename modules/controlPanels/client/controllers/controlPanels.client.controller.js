@@ -35,6 +35,17 @@
       if (!Socket.socket) {
         Socket.connect();
       }
+
+      Socket.emit('id', {
+        id: vm.controlPanel._id,
+        time: Date.now()
+      });
+      // console.log('the ID is ' + data.id);
+
+      Socket.on('connection', function() {
+        // Connected, let's sign-up for to receive messages for this room
+      });
+
       // Add an event listener to the 'chattemp' event
       Socket.on('tempUpdate', function (temp) {
         // vm.controlPanel.temp.unshift(temp);vm.tempText
