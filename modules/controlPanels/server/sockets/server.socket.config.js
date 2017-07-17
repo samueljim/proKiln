@@ -17,12 +17,13 @@ module.exports = function (io, socket) {
   //   created: Date.now(),
   //   username: socket.request.user.username
   // });
-
+  var room;
   // id for the room of the connection
   socket.on('id', function (data) {
     console.log("user connected at " + data.id);
     data.username = socket.request.user.username;
     console.log("username is " + data.username);
+    room = data.id;
     socket.join(data.id);
   });
 
@@ -35,7 +36,7 @@ module.exports = function (io, socket) {
     // updateDatabase(temp.text);
     // Emit the 'chatMessage' event
     // https://gist.github.com/crtr0/2896891 look at this
-    io.emit('tempUpdate', data);
+    io.in(""+room).emit('tempUpdate', data);
   });
 
   // Emit the status event when a socket client is disconnected
