@@ -28,7 +28,7 @@
     "test:coverage": "gulp test:coverage",
     "postinstall": "bower install --allow-root && bower prune --allow-root",
     "generate-ssl-certs": "scripts/generate-ssl-certs.sh",
-    "mongoPC": "cd C:/Program Files/MongoDB/Server/3.4/bin && mongod.exe",
+    "mongoWIN": "cd C:/Program Files/MongoDB/Server/3.4/bin && mongod.exe",
     "mongo": "sudo service mongod start"
   },
   "dependencies": {
