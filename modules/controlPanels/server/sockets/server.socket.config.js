@@ -28,15 +28,15 @@ module.exports = function (io, socket) {
   });
 
   // Send a temp messages to all connected sockets when a data is received
-  socket.on('tempUpdate', function (data) {
+  socket.on('tempClientUpdate', function (data) {
     data.type = 'temp';
     data.time = Date.now();
     data.username = socket.request.user.username;
-
+    // data.id = socket.request.controlPanel._id;
     // updateDatabase(temp.text);
     // Emit the 'chatMessage' event
     // https://gist.github.com/crtr0/2896891 look at this
-    io.in(""+room).emit('tempUpdate', data);
+    io.in(room).emit('tempServerUpdate', data);
   });
 
   // Emit the status event when a socket client is disconnected

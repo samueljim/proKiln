@@ -47,7 +47,7 @@
       });
 
       // Add an event listener to the 'chattemp' event
-      Socket.on('tempUpdate', function (temp) {
+      Socket.on('tempServerUpdate', function (temp) {
         // vm.controlPanel.temp.unshift(temp);vm.tempText
         vm.controlPanel.temp = temp.text;
         console.log("New Temp " + temp.text );    // vm.tempText = 10;
@@ -68,7 +68,7 @@
 
       console.log(" "+ temp.text);
       // Emit a 'chattemp' temp event
-      Socket.emit('tempUpdate', temp);
+      Socket.emit('tempClientUpdate', temp);
 
     }
   }
