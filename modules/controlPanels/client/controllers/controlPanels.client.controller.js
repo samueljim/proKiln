@@ -12,6 +12,7 @@
 
     vm.controlPanel = controlPanel;
     vm.sendtemp = sendtemp;
+    vm.controlPanel.temp.data = vm.controlPanel.temp.data;
     // $scope.$on('$update', stateChangeSuccess);
 
     if (vm.controlPanel.isCurrentUserOwner) {
@@ -58,6 +59,9 @@
         Socket.removeListener('tempUpdate');
       });
     }
+    Socket.on('connect_failed', function() {
+      document.write("Sorry, there seems to be an issue with the connection!");
+    })
     // Create a controller method for sending temp
     function sendtemp() {
       console.log('sendtemp run');
@@ -68,7 +72,7 @@
       };
       console.log('Sending ' + data.temp);
       // Emit a 'tempClientUpdate' temp event
-      Socket.emit('tempClientUpdate', data);
+      Socket.emit('tempKilnUpdate', data);
     }
   }
 }());

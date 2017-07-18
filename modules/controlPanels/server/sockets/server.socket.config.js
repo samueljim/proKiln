@@ -28,20 +28,20 @@ module.exports = function(io, socket) {
   });
 
   // Send a temp messages to all connected sockets when a data is received
-  socket.on('tempClientUpdate', function(data) {
+  socket.on('tempKilnUpdate', function(data) {
     data.type = 'temp';
     data.time = Date.now();
     // data.username = socket.request.user.username;
     // data.userID = socket.request.user._id;
     // var controlPanel = socket.request.;
     // data.id = socket.request.controlPanel._id;
-    console.log('New temp of ' + data.id + 'is now ' + data.temp);
+    console.log('New temp of ' + data.id + ' is now ' + data.temp);
     updateDatabase(data);
     // Emit the 'chatMessage' event
     // if(data.userID == socket.request.controlPanel.user._id){
     // io.in(room).emit('tempServer', "error");
     // }else{
-    io.in(room).emit('tempServerUpdate', data);
+    io.in(data.id).emit('tempServerUpdate', data);
     // }
   });
 
@@ -63,16 +63,16 @@ module.exports = function(io, socket) {
         _id: id
       }, {
         $push: {
-          'temp': {
-            data: data.temp,
-            time: data.time
+          "temp": {
+            time: data.time,
+            data: data.temp
           }
         }
       },
       function(err, raw) {
         if (err) {
           console.log('Error ' + err + ' The raw response from Mongo was ', raw);
-          // return errorHandler(err);
+          errorHandler(err);
         }
       });
     });
