@@ -63,7 +63,8 @@
       console.log("sendtemp run");
       // Create a new temp object
       var temp = {
-        text: vm.tempText
+        text: vm.tempText,
+        id: vm.controlPanel._id
       };
 
       console.log(" "+ temp.text);
