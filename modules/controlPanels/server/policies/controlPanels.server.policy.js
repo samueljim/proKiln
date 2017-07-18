@@ -33,10 +33,10 @@ exports.invokeRolesPolicies = function () {
   }, {
     roles: ['guest'],
     allows: [{
-      resources: '/api/controlPanels',
+      resources: '/api/controlPanels'
       // permissions: ['get']
     }, {
-      resources: '/api/controlPanels/:controlPanelId',
+      resources: '/api/controlPanels/:controlPanelId'
       // permissions: ['get']
     }]
   }]);

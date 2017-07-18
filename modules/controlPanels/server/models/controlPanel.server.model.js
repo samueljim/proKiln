@@ -9,10 +9,10 @@ var mongoose = require('mongoose'),
 /**
  * Validation
  */
-function validateIsNumber (v) {
+function validateIsNumber(v) {
   var patt = /^\-?\d+(?:\.\d+)?$/;
   console.log('' + patt.test(v) + '');
-  return patt.test(v);
+  return pat.test(v);
 }
 
 /**
@@ -43,15 +43,22 @@ var ControlPanelSchema = new Schema({
     type: Boolean,
     default: false
   },
-  temp: {
-    type: Number,
-    default: null,
-    trim: true,
-    patten: '/^\-?\d+(?:\.\d+)?$/',
-    messages: {
+  temp: [{
+    data: {
+      type: Number,
+      default: null,
+      trim: true,
+      patten: '/^\-?\d+(?:\.\d+)?$/',
+      messages: {
         patten: 'temp must be a valid number'
+      }
+    },
+    time: {
+      type: Date,
+      default: Date.now
     }
-  },
+    }
+  ],
   schedule: {
     type: String,
     default: ''

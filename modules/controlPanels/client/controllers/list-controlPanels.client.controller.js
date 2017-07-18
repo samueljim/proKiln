@@ -30,7 +30,7 @@
 
     function figureOutItemsToDisplay() {
       vm.filteredItems = $filter('filter')(vm.controlPanels, {
-        $: vm.search 
+        $: vm.search
       });
       vm.filterLength = vm.filteredItems.length;
       var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
