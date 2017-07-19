@@ -33,6 +33,8 @@ exports.read = function(req, res) {
   // convert mongoose document to JSON
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
 
+  // temp filter
+  controlPanel.temp = req.controlPanel.select({"temp": {"$slice": -1 }});
   // Add a custom field to the ControlPanel, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the ControlPanel model.
   controlPanel.isCurrentUserOwner = !!(req.user && controlPanel.user && controlPanel.user._id.toString() === req.user._id.toString());

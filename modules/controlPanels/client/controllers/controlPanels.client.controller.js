@@ -12,7 +12,7 @@
 
     vm.controlPanel = controlPanel;
     vm.sendtemp = sendtemp;
-    vm.controlPanel.temp = vm.controlPanel.temp.data;
+    // vm.controlPanel.temp.data = vm.controlPanel.temp;
     // $scope.$on('$update', stateChangeSuccess);
 
     if (vm.controlPanel.isCurrentUserOwner) {
