@@ -12,7 +12,7 @@
 
     vm.controlPanel = controlPanel;
     vm.sendtemp = sendtemp;
-    vm.controlPanel.temp.data = vm.controlPanel.temp.data;
+    vm.controlPanel.temp = vm.controlPanel.temp.data;
     // $scope.$on('$update', stateChangeSuccess);
 
     if (vm.controlPanel.isCurrentUserOwner) {
@@ -50,7 +50,7 @@
       // Add an event listener to the 'chattemp' event
       Socket.on('tempServerUpdate', function(data) {
         // vm.controlPanel.temp.unshift(temp);vm.tempText
-        vm.controlPanel.temp.data = data.temp;
+        vm.controlPanel.temp = data.temp;
         console.log('New Temp ' + data.temp);    // vm.tempText = 10;
 
       });

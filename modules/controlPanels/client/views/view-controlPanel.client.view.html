@@ -30,7 +30,7 @@
         </ul>
       </li>
     </ul>
-  <h1 ng-bind="vm.controlPanel.temp.data + ' C'"></h1>
+  <h1 ng-bind="vm.controlPanel.temp + ' C'"></h1>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95276.jpg" alt="graph"/>
   <br><br>
   <blockquote cite="http://">
@@ -61,6 +61,5 @@
 
 </div>
 
-<!-- TODO needs fixing  -->
-<input type="number" id="tempText" name="tempText" class="form-control" ng-model="vm.tempText" ng-change="vm.sendtemp()" value="{{vm.controlPanel.temp.data}}">
+<input type="number" id="tempText" name="tempText" class="form-control" ng-model="vm.tempText" ng-change="vm.sendtemp()" value="{{vm.controlPanel}}">
 </section>

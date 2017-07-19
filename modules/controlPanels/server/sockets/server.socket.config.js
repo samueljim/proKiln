@@ -56,25 +56,17 @@ module.exports = function(io, socket) {
   // this fuction will update the database so that it has the latest temp
   function updateDatabase(data) {
     var id = data.id;
-    ControlPanel.findById(id, function(err, ControlPanel) {
-      // if (err) return errorHandler(err);
-
-      ControlPanel.update({
-        _id: id
-      }, {
-        $push: {
-          "temp": {
-            time: data.time,
-            data: data.temp
-          }
+    ControlPanel.findByIdAndUpdate(id,
+      {$push: {"temp": {
+        data : data.temp
+      }
         }
-      },
+        },
       function(err, raw) {
         if (err) {
           console.log('Error ' + err + ' The raw response from Mongo was ', raw);
           errorHandler(err);
         }
       });
-    });
   }
 };
