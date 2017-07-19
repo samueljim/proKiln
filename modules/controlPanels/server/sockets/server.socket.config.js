@@ -47,10 +47,7 @@ module.exports = function(io, socket) {
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function() {
-    io.emit('tempClientMsg', {
-      type: 'status',
-      time: Date.now()
-    });
+    Socket.removeListener('tempKilnUpdate');
   });
 
   // this fuction will update the database so that it has the latest temp
