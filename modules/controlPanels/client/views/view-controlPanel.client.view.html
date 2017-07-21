@@ -30,7 +30,8 @@
         </ul>
       </li>
     </ul>
-  <h1 ng-bind="vm.controlPanel.temp + ' C'"></h1>
+  <h1 ng-bind="vm.temp + ' C'"></h1>
+  <h2 >{{ vm.updateTime | date : 'mediumTime'}}</h2>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95276.jpg" alt="graph"/>
   <br><br>
   <blockquote cite="http://">
@@ -61,5 +62,5 @@
 
 </div>
 
-<input type="number" id="tempText" name="tempText" class="form-control" ng-model="vm.tempText" ng-change="vm.sendtemp()" value="{{vm.controlPanel.temp}}">
+<input type="number" id="tempText" name="tempText" class="form-control" ng-model="vm.tempText" ng-change="vm.sendtemp()" value="{{vm.temp}}">
 </section>

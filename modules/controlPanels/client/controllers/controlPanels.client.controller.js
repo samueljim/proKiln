@@ -12,6 +12,9 @@
 
     vm.controlPanel = controlPanel;
     vm.sendtemp = sendtemp;
+    vm.temp = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].data;
+    vm.updateTime = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].time;
+
     // vm.controlPanel.temp.data = vm.controlPanel.temp;
     // $scope.$on('$update', stateChangeSuccess);
 
@@ -19,7 +22,7 @@
       console.log('you own this kiln 😀 everything is okay 👌👌');
     } else {
       console.log('👮👮 not the owner 🚓🚓🚓 please leave ASAP 🚨🚨🚨🚨🚨');
-      // TODO uncommnet after debug
+      // TODO put back in after debug
       // $state.go('home');
 
     }
@@ -46,7 +49,8 @@
       // Add an event listener to the 'chattemp' event
       Socket.on('tempServerUpdate', function(data) {
         // vm.controlPanel.temp.unshift(temp);vm.tempText
-        vm.controlPanel.temp = data.temp;
+        vm.temp = data.temp;
+        vm.updateTime = data.time;
         console.log('New Temp ' + data.temp);    // vm.tempText = 10;
 
       });

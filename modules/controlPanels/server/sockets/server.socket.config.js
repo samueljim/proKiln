@@ -22,9 +22,10 @@ module.exports = function(io, socket) {
   socket.on('id', function(data) {
     console.log('user connected at ' + data.id);
     data.username = socket.request.user.username;
+    console.log(socket.client.id);
     console.log('username is ' + data.username);
     room = data.id;
-    socket.join(data.id);
+    socket.join(socket.client.id);
   });
 
   // Send a temp messages to all connected sockets when a data is received
@@ -41,7 +42,7 @@ module.exports = function(io, socket) {
     // if(data.userID == socket.request.controlPanel.user._id){
     // io.in(room).emit('tempServer', "error");
     // }else{
-    io.in(data.id).emit('tempServerUpdate', data);
+    io.in(socket.client.id).emit('tempServerUpdate', data);
     // }
   });
 
