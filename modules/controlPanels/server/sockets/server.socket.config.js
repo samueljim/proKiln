@@ -37,7 +37,6 @@ module.exports = function(io, socket) {
     updateDatabase(data);
     // Emit the 'chatMessage' event
     // if(data.userID == socket.reques  var room;
-t.controlPanel.user._id){
     // io.in(room).emit('tempServer', "error");
     // }else{
     io.in(data.id).emit('tempServerUpdate' + data.id, data);
