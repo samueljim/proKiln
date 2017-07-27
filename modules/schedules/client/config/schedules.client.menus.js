@@ -19,7 +19,7 @@
     menuService.addSubMenuItem('topbar', 'schedules', {
       title: 'List Schedules',
       state: 'schedules.list',
-      roles: ['*']
+      roles: ['user']
     });
   }
 }());

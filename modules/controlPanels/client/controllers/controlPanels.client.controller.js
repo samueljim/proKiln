@@ -49,12 +49,10 @@
       // Add an event listener to the 'tempServerUpdate' event
       Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
         if (data.id === controlPanel._id){
-          // vm.controlPanel.temp.unshift(temp);vm.tempText
           vm.temp = data.temp;
           vm.updateTime = data.time;
-          console.log('New Temp ' + data.temp);    // vm.tempText = 10;
+          console.log('New Temp ' + data.temp);
         }
-
       });
 
       // Socket.on('connect_failed', function() {

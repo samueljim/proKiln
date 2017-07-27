@@ -35,13 +35,19 @@
       vm.filterLength = vm.filteredItems.length;
       var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
       var end = begin + vm.itemsPerPage;
+      //
+      // Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
+      //   if (data.id === controlPanel._id){
+      //     vm.temp = data.temp;
+      //     vm.updateTime = data.time;
+      //     console.log('New Temp ' + data.temp);
+      //   }
+      // });
       vm.pagedItems = vm.filteredItems.slice(begin, end);
-    }
 
+    }
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }
-
-
   }
 }());

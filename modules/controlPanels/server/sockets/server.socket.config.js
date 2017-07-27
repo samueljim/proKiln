@@ -17,13 +17,11 @@ module.exports = function(io, socket) {
   //   created: Date.now(),
   //   username: socket.request.user.username
   // });
-  var room;
   // id for the room of the connection
   socket.on('id', function(data) {
-    console.log('user connected at ' + data.id);
+    console.log('user connected to ' + data.id);
     data.username = socket.request.user.username;
     console.log('username is ' + data.username);
-    // room = data.id;
     socket.join(data.id);
   });
 
@@ -35,10 +33,11 @@ module.exports = function(io, socket) {
     // data.userID = socket.request.user._id;
     // var controlPanel = socket.request.;
     // data.id = socket.request.controlPanel._id;
-    console.log('New temp of ' + data.id + ' is now ' + data.temp);
+    console.log('New temp of ' + data.id + ' is now ' + data.temp + ' at ' + data.time);
     updateDatabase(data);
     // Emit the 'chatMessage' event
-    // if(data.userID == socket.request.controlPanel.user._id){
+    // if(data.userID == socket.reques  var room;
+t.controlPanel.user._id){
     // io.in(room).emit('tempServer', "error");
     // }else{
     io.in(data.id).emit('tempServerUpdate' + data.id, data);
