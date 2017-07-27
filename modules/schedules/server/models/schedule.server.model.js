@@ -31,9 +31,4 @@ var ScheduleSchema = new Schema({
   }
 });
 
-// time or length ?
-// temp
-// user
-
-
 mongoose.model('Schedule', ScheduleSchema);
