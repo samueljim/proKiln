@@ -48,7 +48,7 @@
 
       // Add an event listener to the 'tempServerUpdate' event
       Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
-        if (data.id === controlPanel._id){
+        if (data.id === controlPanel._id) {
           vm.temp = data.temp;
           vm.updateTime = data.time;
           console.log('New Temp ' + data.temp);

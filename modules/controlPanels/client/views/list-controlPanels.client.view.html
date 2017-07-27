@@ -12,15 +12,15 @@
   <div class="list-group">
     <a ng-repeat="controlPanel in vm.pagedItems" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
       <small class="list-group-item-text">
-        Posted on
-        <span ng-bind="controlPanel.created | date:'mediumDate'"></span>
-        by
-        <span ng-if="controlPanel.user" ng-bind="controlPanel.user.displayName"></span>
-        <span ng-if="!controlPanel.user">Deleted User</span>
+        <span ng-bind="controlPanel.content"></span>
+        <!-- by -->
+        <!-- <span ng-if="controlPanel.user" ng-bind="controlPanel.user.displayName"></span> -->
+        <!-- <span ng-if="!controlPanel.user">Deleted User</span> -->
       </small>
-      <h4 class="list-group-item-heading" ng-bind="controlPanel.title"></h4>
-      <p class="list-group-item-text" ng-bind="controlPanel.content"></p>
-      <p class="list-group-item-text" ng-bind="vm.temp"></p>
+      <span class="badge" ng-bind="vm.temp + ' C'"></span>
+      <h4 class="list-group-item-heading" ng-bind="controlPanel.title">d<span class="badge">3</span></h4>
+      <p ng-if="controlPanel.schedule" class="list-group-item-text" ng-bind="controlPanel.schedule"></p>
+      <p ng-if="!controlPanel.schedule" class="list-group-item-text" >Not running</p>
     </a>
   </div>
 

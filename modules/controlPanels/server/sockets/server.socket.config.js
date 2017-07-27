@@ -54,10 +54,10 @@ module.exports = function(io, socket) {
   function updateDatabase(data) {
     var id = data.id;
     ControlPanel.findByIdAndUpdate(id,
-      {$push: {"temp": {
-        data : data.temp
+      { $push: { 'temp': {
+        data: data.temp
       }
-        }
+      }
       },
       function(err, raw) {
         if (err) {

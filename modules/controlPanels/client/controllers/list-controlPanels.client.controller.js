@@ -5,11 +5,12 @@
     .module('controlPanels')
     .controller('ControlPanelsListController', ControlPanelsListController);
 
-  ControlPanelsListController.$inject = ['$scope', '$filter', 'ControlPanelsService'];
+  ControlPanelsListController.$inject = ['$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket'];
 
-  function ControlPanelsListController($scope, $filter, ControlPanelsService) {
+  function ControlPanelsListController($scope, $filter, ControlPanelsService, Authentication, Socket) {
     var vm = this;
-
+    // vm.temp = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].data;
+    // vm.updateTime = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].time;
     // vm.controlPanels = ControlPanelsService.query();
 
     vm.buildPager = buildPager;
