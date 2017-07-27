@@ -4,6 +4,7 @@
   angular
     .module('controlPanels')
     .controller('ControlPanelsListController', ControlPanelsListController);
+    // .directive('socketAdd', socketAdder);
 
   ControlPanelsListController.$inject = ['$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket'];
 
@@ -16,7 +17,7 @@
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
-    vm.addSockets = addSockets;
+
 
     ControlPanelsService.query(function (data) {
       vm.controlPanels = data;
@@ -47,15 +48,34 @@
       // });
       vm.pagedItems = vm.filteredItems.slice(begin, end);
       console.log(vm.pagedItems);
+
+      for (let controlPanel of vm.pagedItems) {
+        console.log("hey");
+        console.log(controlPanel);
+        vm.temp = controlPanel.temp[0].data;
+        vm.updateTime = controlPanel.temp[0].time;
+      }
     }
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }
     // socket adding fuction
-    function addSockets(controlPanel) {
-      vm.temp = controlPanel.temp[controlPanel.temp.length - 1].data;
-      vm.updateTime = controlPanel.temp[controlPanel.temp.length - 1].time;
-    }
 
   }
+
+  // function socketAdder() {
+  //   return {
+  //      restrict: "E",
+  //      scope: {
+  //          pos: "@"
+  //      },
+  //      template: "<td>{{ formattedText }}</td>", // should I have this?
+  //      link: function(scope, element, attrs){
+  //          // all of this can easily be done with a filter, but i understand you just want to
+  //          // know how it works
+  //          scope.formattedText = scope.pos.Name + ' (' + scope.pos.Code + ')';
+  //      }
+  //    }
+  // }
+
 }());

@@ -10,9 +10,11 @@
     </div>
   </div>
   <div class="list-group">
-    <a ng-repeat="controlPanel in vm.pagedItems" ng-init="vm.addSockets(controlPanel)" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
+    <a ng-repeat="controlPanel in vm.pagedItems" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
       <small class="list-group-item-text">
         <span ng-bind="controlPanel.content"></span>
+        <socketAdd pos="controlPanel">
+        </socketAdd>
         <!-- by -->
         <!-- <span ng-if="controlPanel.user" ng-bind="controlPanel.user.displayName"></span> -->
         <!-- <span ng-if="!controlPanel.user">Deleted User</span> -->
