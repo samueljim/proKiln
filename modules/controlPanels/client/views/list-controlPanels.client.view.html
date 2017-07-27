@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="list-group">
-    <a ng-repeat="controlPanel in vm.pagedItems" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
+    <a ng-repeat="controlPanel in vm.pagedItems" ng-init="vm.addSockets(controlPanel)" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
       <small class="list-group-item-text">
         <span ng-bind="controlPanel.content"></span>
         <!-- by -->
@@ -18,7 +18,8 @@
         <!-- <span ng-if="!controlPanel.user">Deleted User</span> -->
       </small>
       <span class="badge" ng-bind="vm.temp + ' C'"></span>
-      <h4 class="list-group-item-heading" ng-bind="controlPanel.title">d<span class="badge">3</span></h4>
+      <h4 class="list-group-item-heading" ng-bind="controlPanel.title"></h4>
+      <span class="badge">Last updated {{vm.updateTime | date : 'mediumTime'}}</span>
       <p ng-if="controlPanel.schedule" class="list-group-item-text" ng-bind="controlPanel.schedule"></p>
       <p ng-if="!controlPanel.schedule" class="list-group-item-text" >Not running</p>
     </a>

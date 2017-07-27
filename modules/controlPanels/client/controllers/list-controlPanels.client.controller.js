@@ -16,6 +16,7 @@
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
+    vm.addSockets = addSockets;
 
     ControlPanelsService.query(function (data) {
       vm.controlPanels = data;
@@ -45,10 +46,16 @@
       //   }
       // });
       vm.pagedItems = vm.filteredItems.slice(begin, end);
-
+      console.log(vm.pagedItems);
     }
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }
+    // socket adding fuction
+    function addSockets(controlPanel) {
+      vm.temp = controlPanel.temp[controlPanel.temp.length - 1].data;
+      vm.updateTime = controlPanel.temp[controlPanel.temp.length - 1].time;
+    }
+
   }
 }());
