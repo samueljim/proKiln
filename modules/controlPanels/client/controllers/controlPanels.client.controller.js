@@ -54,6 +54,11 @@
           console.log('New Temp ' + data.temp);
         }
       });
+      // Add an event listener to the 'kilnStatus' event
+      Socket.on('kilnStatus' + vm.controlPanel._id, function(data) {
+        vm.controlPanel.schedule = data.schedule;
+        vm.controlPanel.online = data.online;
+      });
 
       // Socket.on('connect_failed', function() {
       //   document.write("Sorry, there seems to be an issue with the connection!");

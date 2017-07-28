@@ -1,8 +1,12 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.controlPanel.title"></h1>
+    <h1>
+      <span ng-if="controlPanel.online" class="label label-success">Online</span>
+      <span ng-if="!controlPanel.online" class="label label-warning">Offline</span>
+      {{vm.controlPanel.title}}
+    </h1>
   </div>
-  <span class="label label-success">Online</span>
+
   <div class="col-md-6">
   <small>
     <em class="text-muted">
@@ -31,7 +35,7 @@
       </li>
     </ul>
   <h1 ng-bind="vm.temp + ' C'"></h1>
-  <h2 >{{ vm.updateTime | date : 'mediumTime'}}</h2>
+  <h2 >{{ vm.updateTime | date : 'short'}}</h2>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95276.jpg" alt="graph"/>
   <br><br>
   <blockquote cite="http://">
