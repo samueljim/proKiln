@@ -10,14 +10,7 @@ var path = require('path'),
 
 // Create the temp configuration
 module.exports = function(io, socket) {
-  // Emit the status event when a new socket client is connected
-  // io.emit('tempUpdate', {
-  //   type: 'status',
-  //   text: "Waiting for temp change",
-  //   created: Date.now(),
-  //   username: socket.request.user.username
-  // });
-  // id for the room of the connection
+  // add users to new room when they connect
   socket.on('id', function(data) {
     console.log('user connected to ' + data.id);
     data.username = socket.request.user.username;
@@ -29,24 +22,19 @@ module.exports = function(io, socket) {
   socket.on('tempKilnUpdate', function(data) {
     data.type = 'temp';
     data.time = Date.now();
-    // data.username = socket.request.user.username;
-    // data.userID = socket.request.user._id;
-    // var controlPanel = socket.request.;
-    // data.id = socket.request.controlPanel._id;
+
     console.log('New temp of ' + data.id + ' is now ' + data.temp + ' at ' + data.time);
+    // update the database before moving on
     updateDatabase(data);
-    // Emit the 'chatMessage' event
-    // if(data.userID == socket.reques  var room;
-    // io.in(room).emit('tempServer', "error");
-    // }else{
+    // send to client the new temp and time of temp change
     io.in(data.id).emit('tempServerUpdate' + data.id, data);
-    // }
   });
 
-
   // Emit the status event when a socket client is disconnected
-  socket.on('disconnect', function() {
-    Socket.removeListener('tempKilnUpdate'  + data.id);
+  socket.on('disconnect', function(data) {
+    // socket.removeListener('tempKilnUpdate');
+    console.log('User left sockets');
+    socket.leave(data.id);
   });
 
   // this fuction will update the database so that it has the latest temp

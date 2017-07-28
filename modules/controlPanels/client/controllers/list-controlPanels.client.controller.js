@@ -9,14 +9,10 @@
 
   function ControlPanelsListController($scope, $filter, ControlPanelsService, Authentication, Socket) {
     var vm = this;
-    // vm.temp = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].data;
-    // vm.updateTime = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].time;
-    // vm.controlPanels = ControlPanelsService.query();
 
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.pageChanged = pageChanged;
-
 
     ControlPanelsService.query(function (data) {
       vm.controlPanels = data;
@@ -49,6 +45,7 @@
       vm.figureOutItemsToDisplay();
     }
 
+    // this function takes care of joining all sockets for the current user
     function init() {
       // If user is not signed in then redirect back home
       if (!Authentication.user) {
@@ -59,11 +56,8 @@
       if (!Socket.socket) {
         Socket.connect();
       }
-      // emit the id of the kiln
-
 
     for (let controlPanel of vm.pagedItems) {
-      // console.log(controlPanel);
       Socket.emit('id', {
         id: controlPanel._id,
         time: Date.now()
@@ -74,7 +68,6 @@
             if (data.id === controlPanel._id){
               controlPanel.liveTemp = data.temp;
               controlPanel.updateTime = data.time;
-              console.log('New Temp ' + data.temp);
             }
           });
           Socket.on('kilnStatus' + controlPanel._id, function(data) {
@@ -83,49 +76,7 @@
             vm.controlPanel.scheduleProgress = data.scheduleProgress;
             vm.controlPanel.scheduleStatus = data.scheduleStatus;
           });
-      console.log(controlPanel.heat);
     }
   }
-    // socket adding fuction
-
   }
-//   function myDirective(){
-// return {
-//   restrict: "E",
-//   // template: '<div>{{ myDirective }}</div>', // where myDirective binds to scope.myDirective
-//   scope: {},
-//   link: function(scope) {
-//     scope.temp = 20;
-//     // scope.temp = scope.myDirective.temp[scope.myDirective.temp.length -1].data
-//     // console.log('Do action with data', myDirective);
-//     // console.log('Hey' + scope.myDirective.title);
-//     // console.log('' + element);
-//     // Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
-//     //   if (data.id === controlPanel._id){
-//     //     vm.temp = data.temp;
-//     //     vm.updateTime = data.time;
-//     //     console.log('New Temp ' + data.temp);
-//     //   }
-//     // });
-//     // scope.temp = scope.myDirective.temp[scope.myDirective.temp.length -1].data;
-//     // scope.updateTime = scope.myDirective.temp[scope.myDirective.temp.length -1].time;
-//   }
-// };
-// }
-
-  // function socketAdder() {
-  //   return {
-  //      restrict: "E",
-  //      scope: {
-  //          pos: "@"
-  //      },
-  //      template: "<td>{{ formattedText }}</td>", // should I have this?
-  //      link: function(scope, element, attrs){
-  //          // all of this can easily be done with a filter, but i understand you just want to
-  //          // know how it works
-  //          scope.formattedText = scope.pos.Name + ' (' + scope.pos.Code + ')';
-  //      }
-  //    }
-  // }
-
 }());

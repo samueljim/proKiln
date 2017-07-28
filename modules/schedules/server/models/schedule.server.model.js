@@ -25,6 +25,16 @@ var ScheduleSchema = new Schema({
     default: '',
     trim: true
   },
+  content: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  scheduleStatus: {
+    type: String,
+    trim: true,
+    default: 'Not Running'
+  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
