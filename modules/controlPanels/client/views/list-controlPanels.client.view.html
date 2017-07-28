@@ -11,16 +11,11 @@
   </div>
   <div class="list-group">
     <a ng-repeat="controlPanel in vm.pagedItems" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
-      <small class="list-group-item-text">
-        <span ng-bind="controlPanel.content"></span>
-
-        <!-- by -->
-        <!-- <span ng-if="controlPanel.user" ng-bind="controlPanel.user.displayName"></span> -->
-        <!-- <span ng-if="!controlPanel.user">Deleted User</span> -->
-      </small>
-      <span class="badge" ng-bind="controlPanel.liveTemp"></span>
-      <h4 class="list-group-item-heading" ng-bind="controlPanel.title"></h4>
-      <span class="badge">Last updated {{controlPanel.updateTime | date : 'mediumTime'}}</span>
+      <span ng-if="controlPanel.online" class="label label-success">Online</span>
+      <span ng-if="!controlPanel.online" class="label label-warning">Offline</span>
+      <span class="badge"><h4 ng-bind="controlPanel.liveTemp + ' C'"></h4>Last updated  {{controlPanel.updateTime | date : 'mediumTime'}}</span>
+      <!-- <span class="badge"></span> -->
+      <h4 class="list-group-item-heading" ng-bind="controlPanel.title"> <small class="list-group-item-text" ng-bind="controlPanel.content"></small></h4>
       <p ng-if="controlPanel.schedule" class="list-group-item-text" ng-bind="controlPanel.schedule"></p>
       <p ng-if="!controlPanel.schedule" class="list-group-item-text" >Not running</p>
     </a>

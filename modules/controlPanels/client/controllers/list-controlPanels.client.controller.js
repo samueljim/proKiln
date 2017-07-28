@@ -77,6 +77,10 @@
               console.log('New Temp ' + data.temp);
             }
           });
+          Socket.on('kilnStatus' + controlPanel._id, function(data) {
+            controlPanel.schedule = data.schedule;
+            controlPanel.online = data.online;
+          });
       console.log(controlPanel.heat);
     }
   }

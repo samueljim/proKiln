@@ -43,11 +43,10 @@ module.exports = function(io, socket) {
     // }
   });
 
-  // socket.on('kilnStatusChange')
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function() {
-    Socket.removeListener('tempKilnUpdate');
+    Socket.removeListener('tempKilnUpdate'  + data.id);
   });
 
   // this fuction will update the database so that it has the latest temp
