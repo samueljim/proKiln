@@ -7,6 +7,25 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
+* Points of data Schema
+*/
+var pointsSchema = new Schema({
+  temp: {
+    type: Number,
+    default: null,
+    required: 'Temp cannot be blank',
+    trim: true,
+    patten: '/^\-?\d+(?:\.\d+)?$/',
+    messages: {
+      patten: 'temp must be a valid number'
+    }
+  },
+  time: {
+    type: Number,
+    required: 'Time cannot be blank'
+  }
+});
+/**
  * Schedule Schema
  */
 var ScheduleSchema = new Schema({
@@ -25,11 +44,10 @@ var ScheduleSchema = new Schema({
     default: '',
     trim: true
   },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
+  data: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Points'
+  }],
   scheduleStatus: {
     type: String,
     trim: true,
@@ -41,9 +59,7 @@ var ScheduleSchema = new Schema({
   }
 });
 
-// time or length ?
-// temp
-// user
+var Points  = mongoose.model('Points', pointsSchema);
 
 
 mongoose.model('Schedule', ScheduleSchema);

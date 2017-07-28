@@ -10,16 +10,16 @@
   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
       title: 'Schedules',
-      state: 'schedules',
-      type: 'dropdown',
+      state: 'schedules.list',
+      // type: 'dropdown',
       roles: ['user']
     });
 
     // Add the dropdown list item
-    menuService.addSubMenuItem('topbar', 'schedules', {
-      title: 'List Schedules',
-      state: 'schedules.list',
-      roles: ['user']
-    });
+    // menuService.addSubMenuItem('topbar', 'schedules', {
+    //   title: 'List Schedules',
+    //   state: 'schedules.list',
+    //   roles: ['user']
+    // });
   }
 }());

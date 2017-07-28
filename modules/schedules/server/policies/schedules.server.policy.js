@@ -25,19 +25,19 @@ exports.invokeRolesPolicies = function () {
     roles: ['user'],
     allows: [{
       resources: '/api/schedules',
-      permissions: ['get']
+      permissions: '*'
     }, {
       resources: '/api/schedules/:scheduleId',
-      permissions: ['get']
+      permissions: '*'
     }]
   }, {
     roles: ['guest'],
     allows: [{
       resources: '/api/schedules',
-      permissions: ['get']
+      // permissions: ['get']
     }, {
       resources: '/api/schedules/:scheduleId',
-      permissions: ['get']
+      // permissions: ['get']
     }]
   }]);
 };

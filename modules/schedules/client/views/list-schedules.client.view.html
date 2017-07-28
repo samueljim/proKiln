@@ -1,9 +1,13 @@
 <section>
   <div class="page-header">
-    <h1>Schedules</h1>
+    <h1>Schedules
+      <a class="btn btn-primary pull-right" data-ui-sref="schedules.create">
+        <i class="glyphicon glyphicon-plus"></i>
+      </a>
+    </h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="schedule in vm.schedules" ui-sref="schedules.view({ scheduleId: schedule._id })" class="list-group-item">
+    <a ng-repeat="schedule in vm.schedules" ui-sref="schedules.edit({ scheduleId: schedule._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="schedule.created | date:'mediumDate'"></span>

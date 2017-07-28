@@ -20,21 +20,33 @@
         controller: 'SchedulesListController',
         controllerAs: 'vm',
         data: {
-          pageTitle: 'Schedules List'
+          pageTitle: 'Schedules'
         }
       })
-      .state('schedules.view', {
-        url: '/:scheduleId',
-        templateUrl: '/modules/schedules/client/views/view-schedule.client.view.html',
-        controller: 'SchedulesController',
-        controllerAs: 'vm',
-        resolve: {
-          scheduleResolve: getSchedule
-        },
-        data: {
-          pageTitle: 'Schedule {{ scheduleResolve.title }}'
-        }
-      });
+      .state('schedules.create', {
+      url: '/create',
+      templateUrl: '/modules/schedules/client/views/form-schedule.client.view.html',
+      controller: 'SchedulesController',
+      controllerAs: 'vm',
+      data: {
+        roles: ['user']
+      },
+      resolve: {
+        scheduleResolve: newSchedule
+      }
+    })
+    .state('schedules.edit', {
+      url: '/:scheduleId/edit',
+      templateUrl: '/modules/schedules/client/views/form-schedule.client.view.html',
+      controller: 'SchedulesController',
+      controllerAs: 'vm',
+      data: {
+        roles: ['user']
+      },
+      resolve: {
+        scheduleResolve: getSchedule
+      }
+    });
   }
 
   getSchedule.$inject = ['$stateParams', 'SchedulesService'];
@@ -43,5 +55,10 @@
     return SchedulesService.get({
       scheduleId: $stateParams.scheduleId
     }).$promise;
+  }
+  newSchedule.$inject = ['SchedulesService'];
+
+  function newSchedule(SchedulesService) {
+    return new SchedulesService();
   }
 }());
