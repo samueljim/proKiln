@@ -42,8 +42,6 @@
       vm.figureOutItemsToDisplay();
     }
 
-    // function isOwnedByUser() {
-    //   return vm.controlPanels.user === vm.authentication.user._id;
-    // }
+
   }
 }());

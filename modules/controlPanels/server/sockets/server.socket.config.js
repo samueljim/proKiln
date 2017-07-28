@@ -41,11 +41,11 @@ module.exports = function(io, socket) {
     // if(data.userID == socket.request.controlPanel.user._id){
     // io.in(room).emit('tempServer', "error");
     // }else{
-    io.in(data.id).emit('tempServerUpdate', data);
+    io.in(data.id).emit('tempServerUpdate' + data.id, data);
     // }
   });
 
-  socket.on('kilnStatusChange')
+  // socket.on('kilnStatusChange')
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function() {
