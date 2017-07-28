@@ -39,7 +39,7 @@ exports.read = function(req, res) {
   // Add a custom field to the ControlPanel, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the ControlPanel model.
   controlPanel.isCurrentUserOwner = !!(req.user && controlPanel.user && controlPanel.user._id.toString() === req.user._id.toString());
-  if (controlPanel.isCurrentUserOwner || req.user.roles[1] == 'admin') {
+  if (controlPanel.isCurrentUserOwner || req.user.roles[1] === 'admin') {
     res.json(controlPanel);
   } else {
     return res.status(403).json({
@@ -57,10 +57,11 @@ exports.update = function(req, res) {
 
   controlPanel.title = req.body.title;
   controlPanel.content = req.body.content;
-  // controlPanel.temp.data = req.body.temp;
   controlPanel.info = req.body.info;
   controlPanel.online = req.body.online;
   controlPanel.schedule = req.body.schedule;
+  controlPanel.scheduleProgress = req.body.scheduleProgress;
+  controlPanel.scheduleStatus = req.body.scheduleStatus;
 
   controlPanel.save(function(err) {
     if (err) {

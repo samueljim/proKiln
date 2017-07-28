@@ -1,8 +1,8 @@
 <section>
   <div class="page-header">
     <h1>
-      <span ng-if="controlPanel.online" class="label label-success">Online</span>
-      <span ng-if="!controlPanel.online" class="label label-warning">Offline</span>
+      <span ng-if="vm.controlPanel.online" class="label label-success">Online</span>
+      <span ng-if="!vm.controlPanel.online" class="label label-warning">Offline</span>
       {{vm.controlPanel.title}}
     </h1>
   </div>

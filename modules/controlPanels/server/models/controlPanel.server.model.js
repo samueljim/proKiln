@@ -62,7 +62,18 @@ var ControlPanelSchema = new Schema({
   ],
   schedule: {
     type: String,
+    trim: true,
     default: ''
+  },
+  scheduleProgress: {
+    type: Number,
+    trim: true,
+    default: '0'
+  },
+  scheduleStatus: {
+    type: String,
+    trim: true,
+    default: 'Not Running'
   },
   user: {
     type: Schema.ObjectId,

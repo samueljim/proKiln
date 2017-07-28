@@ -57,6 +57,8 @@
       // Add an event listener to the 'kilnStatus' event
       Socket.on('kilnStatus' + vm.controlPanel._id, function(data) {
         vm.controlPanel.schedule = data.schedule;
+        vm.controlPanel.scheduleProgress = data.scheduleProgress;
+        vm.controlPanel.scheduleStatus = data.scheduleStatus;
         vm.controlPanel.online = data.online;
       });
 
