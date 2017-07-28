@@ -4,7 +4,6 @@
   angular
     .module('controlPanels')
     .controller('ControlPanelsListController', ControlPanelsListController);
-    // .directive('socketAdd', socketAdder);
 
   ControlPanelsListController.$inject = ['$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket'];
 
@@ -39,29 +38,74 @@
       var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
       var end = begin + vm.itemsPerPage;
       //
-      // Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
-      //   if (data.id === controlPanel._id){
-      //     vm.temp = data.temp;
-      //     vm.updateTime = data.time;
-      //     console.log('New Temp ' + data.temp);
-      //   }
-      // });
+
       vm.pagedItems = vm.filteredItems.slice(begin, end);
       console.log(vm.pagedItems);
 
-      for (let controlPanel of vm.pagedItems) {
-        console.log("hey");
-        console.log(controlPanel);
-        vm.temp = controlPanel.temp[0].data;
-        vm.updateTime = controlPanel.temp[0].time;
-      }
+      init();
+
     }
     function pageChanged() {
       vm.figureOutItemsToDisplay();
     }
+
+    function init() {
+      // If user is not signed in then redirect back home
+      if (!Authentication.user) {
+        $state.go('home');
+      }
+
+      // Make sure the Socket is connected
+      if (!Socket.socket) {
+        Socket.connect();
+      }
+      // emit the id of the kiln
+
+
+    for (let controlPanel of vm.pagedItems) {
+      // console.log(controlPanel);
+      Socket.emit('id', {
+        id: controlPanel._id,
+        time: Date.now()
+      });
+      controlPanel.liveTemp = controlPanel.temp[controlPanel.temp.length -1].data;
+      controlPanel.updateTime = controlPanel.temp[controlPanel.temp.length -1].time;
+          Socket.on('tempServerUpdate' + controlPanel._id, function(data) {
+            if (data.id === controlPanel._id){
+              controlPanel.liveTemp = data.temp;
+              controlPanel.updateTime = data.time;
+              console.log('New Temp ' + data.temp);
+            }
+          });
+      console.log(controlPanel.heat);
+    }
+  }
     // socket adding fuction
 
   }
+//   function myDirective(){
+// return {
+//   restrict: "E",
+//   // template: '<div>{{ myDirective }}</div>', // where myDirective binds to scope.myDirective
+//   scope: {},
+//   link: function(scope) {
+//     scope.temp = 20;
+//     // scope.temp = scope.myDirective.temp[scope.myDirective.temp.length -1].data
+//     // console.log('Do action with data', myDirective);
+//     // console.log('Hey' + scope.myDirective.title);
+//     // console.log('' + element);
+//     // Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
+//     //   if (data.id === controlPanel._id){
+//     //     vm.temp = data.temp;
+//     //     vm.updateTime = data.time;
+//     //     console.log('New Temp ' + data.temp);
+//     //   }
+//     // });
+//     // scope.temp = scope.myDirective.temp[scope.myDirective.temp.length -1].data;
+//     // scope.updateTime = scope.myDirective.temp[scope.myDirective.temp.length -1].time;
+//   }
+// };
+// }
 
   // function socketAdder() {
   //   return {
