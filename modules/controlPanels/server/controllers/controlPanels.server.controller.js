@@ -33,16 +33,15 @@ exports.read = function(req, res) {
   // convert mongoose document to JSON
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
 
-  // temp filter
-  // controlPanels.temp = controlPanel.temp.find({},{"$slice": -1 });
+  // temp filterfindOne
+  // controlPanel.temp = req.controlPanel.temp[temp]
+  // req.controlPanel ? req.controlPanel.find( {}, { temp: { $slice: -1 }}) : {};
   // Add a custom field to the ControlPanel, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the ControlPanel model.
   controlPanel.isCurrentUserOwner = !!(req.user && controlPanel.user && controlPanel.user._id.toString() === req.user._id.toString());
   if (controlPanel.isCurrentUserOwner || req.user.roles[1] == "admin") {
-    console.log(controlPanel);
     res.json(controlPanel);
   } else {
-    console.log(controlPanel.user.username + " was trying to look at " + controlPanel.title);
     return res.status(403).json({
       message: 'User is not authorized'
     });

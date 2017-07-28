@@ -39,14 +39,13 @@
       if (!Socket.socket) {
         Socket.connect();
       }
-
+      // emit the id of the kiln
       Socket.emit('id', {
         id: vm.controlPanel._id,
         time: Date.now()
       });
-      // console.log('the ID is ' + data.id);
 
-      // Add an event listener to the 'chattemp' event
+      // Add an event listener to the 'tempServerUpdate' event
       Socket.on('tempServerUpdate', function(data) {
         // vm.controlPanel.temp.unshift(temp);vm.tempText
         vm.temp = data.temp;
@@ -55,15 +54,17 @@
 
       });
 
-      $scope.$on('$destroy', function () {
-        Socket.removeListener('tempServerUpdate');
-      });
+      // Socket.on('connect_failed', function() {
+      //   document.write("Sorry, there seems to be an issue with the connection!");
+      //   console.log('connection issue');
+      // });
+      //
+      // $scope.$on('$destroy', function () {
+      //   Socket.removeListener('tempServerUpdate');
+      // });
     }
-    Socket.on('connect_failed', function() {
-      document.write("Sorry, there seems to be an issue with the connection!");
-    })
 
-    // Create a controller method for sending temp
+    //  method for sending temp
     function sendtemp() {
       // console.log('sendtemp run');
       // Create a new temp object
@@ -71,9 +72,9 @@
         temp: vm.tempText,
         id: vm.controlPanel._id
       };
-      console.log('Sending ' + data.temp);
-      // Emit a 'tempClientUpdate' temp event
+      // Emit a 'tempKilnUpdate' temp event
       Socket.emit('tempKilnUpdate', data);
+      console.log('Sent ' + data.temp);
     }
   }
 }());

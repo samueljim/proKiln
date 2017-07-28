@@ -22,13 +22,12 @@ module.exports = function(io, socket) {
   socket.on('id', function(data) {
     console.log('user connected at ' + data.id);
     data.username = socket.request.user.username;
-    console.log(socket.client.id);
     console.log('username is ' + data.username);
-    room = data.id;
-    socket.join(socket.client.id);
+    // room = data.id;
+    socket.join(data.id);
   });
 
-  // Send a temp messages to all connected sockets when a data is received
+  // Send a temp updates to all connected sockets when a data is received
   socket.on('tempKilnUpdate', function(data) {
     data.type = 'temp';
     data.time = Date.now();
@@ -42,9 +41,11 @@ module.exports = function(io, socket) {
     // if(data.userID == socket.request.controlPanel.user._id){
     // io.in(room).emit('tempServer', "error");
     // }else{
-    io.in(socket.client.id).emit('tempServerUpdate', data);
+    io.in(data.id).emit('tempServerUpdate', data);
     // }
   });
+
+  socket.on('kilnStatusChange')
 
   // Emit the status event when a socket client is disconnected
   socket.on('disconnect', function() {
@@ -59,7 +60,7 @@ module.exports = function(io, socket) {
         data : data.temp
       }
         }
-        },
+      },
       function(err, raw) {
         if (err) {
           console.log('Error ' + err + ' The raw response from Mongo was ', raw);
