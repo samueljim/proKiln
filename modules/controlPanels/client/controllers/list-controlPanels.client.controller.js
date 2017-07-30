@@ -5,9 +5,9 @@
     .module('controlPanels')
     .controller('ControlPanelsListController', ControlPanelsListController);
 
-  ControlPanelsListController.$inject = ['$state', '$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket'];
+  ControlPanelsListController.$inject = ['$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket', 'Notification'];
 
-  function ControlPanelsListController($state, $scope, $filter, ControlPanelsService, Authentication, Socket) {
+  function ControlPanelsListController($scope, $filter, ControlPanelsService, Authentication, Socket, Notification) {
     var vm = this;
 
     vm.buildPager = buildPager;
@@ -75,6 +75,9 @@
             controlPanel.online = data.online;
             vm.controlPanel.scheduleProgress = data.scheduleProgress;
             vm.controlPanel.scheduleStatus = data.scheduleStatus;
+            Notification.info ({
+              message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + data.scheduleStatus
+            });
           });
     }
   }

@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular
@@ -24,29 +24,29 @@
         }
       })
       .state('schedules.create', {
-      url: '/create',
-      templateUrl: '/modules/schedules/client/views/form-schedule.client.view.html',
-      controller: 'SchedulesController',
-      controllerAs: 'vm',
-      data: {
-        roles: ['user']
-      },
-      resolve: {
-        scheduleResolve: newSchedule
-      }
-    })
-    .state('schedules.edit', {
-      url: '/:scheduleId/edit',
-      templateUrl: '/modules/schedules/client/views/form-schedule.client.view.html',
-      controller: 'SchedulesController',
-      controllerAs: 'vm',
-      data: {
-        roles: ['user']
-      },
-      resolve: {
-        scheduleResolve: getSchedule
-      }
-    });
+        url: '/create',
+        templateUrl: '/modules/schedules/client/views/form-schedule.client.view.html',
+        controller: 'SchedulesController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['user']
+        },
+        resolve: {
+          scheduleResolve: newSchedule
+        }
+      })
+      .state('schedules.edit', {
+        url: '/:scheduleId/edit',
+        templateUrl: '/modules/schedules/client/views/form-schedule.client.view.html',
+        controller: 'SchedulesController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['user']
+        },
+        resolve: {
+          scheduleResolve: getSchedule
+        }
+      });
   }
 
   getSchedule.$inject = ['$stateParams', 'SchedulesService'];
