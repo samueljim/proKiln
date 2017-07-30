@@ -38,7 +38,7 @@ module.exports.start = function start(callback) {
       // Create server URL
       var server = (process.env.NODE_ENV === 'secure' ? 'https://' : 'http://') + config.host + ':' + config.port;
       // Logging initialization
-      console.log('--');
+      console.log('---------------');
       console.log(chalk.green(config.app.title));
       console.log();
       console.log(chalk.green('Environment:     ' + process.env.NODE_ENV));
@@ -47,7 +47,7 @@ module.exports.start = function start(callback) {
       console.log(chalk.green('App version:     ' + config.meanjs.version));
       if (config.meanjs['meanjs-version'])
         console.log(chalk.green('MEAN.JS version: ' + config.meanjs['meanjs-version']));
-      console.log('--');
+      console.log('---------------');
 
       if (callback) callback(app, db, config);
     });

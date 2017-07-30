@@ -5,9 +5,9 @@
     .module('controlPanels')
     .controller('ControlPanelsListController', ControlPanelsListController);
 
-  ControlPanelsListController.$inject = ['$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket'];
+  ControlPanelsListController.$inject = ['$state', '$scope', '$filter', 'ControlPanelsService', 'Authentication', 'Socket'];
 
-  function ControlPanelsListController($scope, $filter, ControlPanelsService, Authentication, Socket) {
+  function ControlPanelsListController($state, $scope, $filter, ControlPanelsService, Authentication, Socket) {
     var vm = this;
 
     vm.buildPager = buildPager;
