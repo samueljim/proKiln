@@ -48,6 +48,9 @@ exports.update = function (req, res) {
 
   schedule.title = req.body.title;
   schedule.content = req.body.content;
+  controlPanel.schedule = req.body.schedule;
+  controlPanel.scheduleStatus = req.body.scheduleStatus;
+
 
   schedule.save(function (err) {
     if (err) {
@@ -81,7 +84,16 @@ exports.delete = function (req, res) {
  * List of Schedules
  */
 exports.list = function (req, res) {
-  Schedule.find().sort('-created').populate('user', 'displayName').exec(function (err, schedules) {
+  var ownerOnly;
+  if (req.user.roles[1] === 'admin') {
+    console.log('' + req.user.roles[1]);
+    ownerOnly = '';
+  } else {
+    ownerOnly = {
+      'user': req.user._id
+    };
+  }
+  Schedule.find(ownerOnly).sort('-created').populate('user', 'displayName').exec(function (err, schedules) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
