@@ -8,7 +8,7 @@
   "license": "private",
   "repository": "https://Samueljim@bitbucket.org/glassartistry/kilncontroller.git",
   "engines": {
-    "node": ">=6.0.0",
+    "node": ">=8.2.1",
     "npm": ">=3.10.8"
   },
   "scripts": {

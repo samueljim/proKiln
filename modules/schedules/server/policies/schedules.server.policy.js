@@ -30,16 +30,18 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/schedules/:scheduleId',
       permissions: '*'
     }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/schedules',
-      // permissions: ['get']
-    }, {
-      resources: '/api/schedules/:scheduleId',
-      // permissions: ['get']
-    }]
-  }]);
+  }
+  // , {
+  //   roles: ['guest'],
+  //   allows: [{
+  //     resources: '/api/schedules',
+  //     permissions: ['get']
+  //   }, {
+  //     resources: '/api/schedules/:scheduleId',
+  //     permissions: ['get']
+  //   }]
+  // }
+]);
 };
 
 /**

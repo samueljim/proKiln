@@ -30,16 +30,18 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/controlPanels/:controlPanelId',
       permissions: ['get']
     }]
-  }, {
-    roles: ['guest'],
-    allows: [{
-      resources: '/api/controlPanels'
-      // permissions: ['get']
-    }, {
-      resources: '/api/controlPanels/:controlPanelId'
-      // permissions: ['get']
-    }]
-  }]);
+  }
+  // ,{
+  //   roles: ['guest'],
+  //   allows: [{
+  //     resources: '/api/controlPanels'
+  //     permissions: ['']
+  //   }, { /api/controlPanelsget
+  //     resources: '/api/controlPanels/:controlPanelId'
+  //     permissions: ['']
+  //   }]
+  // }
+]);
 };
 
 /**
