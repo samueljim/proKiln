@@ -47,7 +47,7 @@ var ControlPanelSchema = new Schema({
     data: {
       type: Number,
       default: null,
-      required: 'Temp cannot be blank',
+      // required: 'Temp cannot be blank',
       trim: true,
       patten: '/^\-?\d+(?:\.\d+)?$/',
       messages: {
