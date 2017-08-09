@@ -15,6 +15,7 @@
     vm.form = {};
     vm.remove = remove;
     vm.save = save;
+    // vm.controlPanel.temp.data = vm.temp;
 
     // Remove existing ControlPanel
     function remove() {

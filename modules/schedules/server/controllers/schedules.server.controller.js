@@ -48,8 +48,8 @@ exports.update = function (req, res) {
 
   schedule.title = req.body.title;
   schedule.content = req.body.content;
-  controlPanel.schedule = req.body.schedule;
-  controlPanel.scheduleStatus = req.body.scheduleStatus;
+  // controlPanel.schedule = req.body.schedule;
+  schedule.scheduleStatus = req.body.scheduleStatus;
 
 
   schedule.save(function (err) {

@@ -46,13 +46,14 @@ var ControlPanelSchema = new Schema({
   temp: [{
     data: {
       type: Number,
-      default: null,
-      // required: 'Temp cannot be blank',
       trim: true,
-      patten: '/^\-?\d+(?:\.\d+)?$/',
-      messages: {
-        patten: 'temp must be a valid number'
-      }
+      default: null,
+      required: 'temp cannot be blank'
+      //
+      // patten: '/^\-?\d+(?:\.\d+)?$/',
+      // messages: {
+      //   patten: 'temp must be a valid number'
+      // }
     },
     time: {
       type: Date,
