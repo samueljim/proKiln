@@ -32,7 +32,7 @@ exports.create = function(req, res) {
 exports.read = function(req, res) {
   // convert mongoose document to JSON
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
-
+  var numOfTemps = 5;
   // temp filterfindOne
   // controlPanel.temp = req.controlPanel.temp[temp]
   // req.controlPanel ? req.controlPanel.find( {}, { temp: { $slice: -1 }}) : {};
@@ -40,6 +40,9 @@ exports.read = function(req, res) {
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the ControlPanel model.
   controlPanel.isCurrentUserOwner = !!(req.user && controlPanel.user && controlPanel.user._id.toString() === req.user._id.toString());
   if (controlPanel.isCurrentUserOwner || req.user.roles[1] === 'admin') {
+    // var test = controlPanel.temp.slice(10);
+    // controlPanel.temp.slice(3)
+    controlPanel.temp = controlPanel.temp.slice(-numOfTemps);
     res.json(controlPanel);
   } else {
     return res.status(403).json({
