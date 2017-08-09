@@ -14,7 +14,7 @@ var path = require('path'),
 exports.create = function(req, res) {
   var controlPanel = new ControlPanel(req.body);
   controlPanel.user = req.user;
-
+  controlPanel.temp = 0;
   controlPanel.save(function(err) {
     if (err) {
       return res.status(422).send({
