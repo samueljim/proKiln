@@ -55,8 +55,9 @@
       // Make sure the Socket is connected
       if (!Socket.socket) {
         Socket.connect();
+        console.log("Connection Socket");
       }
-
+      
     for (let controlPanel of vm.pagedItems) {
       Socket.emit('id', {
         id: controlPanel._id,
@@ -68,6 +69,9 @@
             if (data.id === controlPanel._id){
               controlPanel.liveTemp = data.temp;
               controlPanel.updateTime = data.time;
+              // Notification.info ({
+              //   message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + controlPanel.liveTemp
+              // });
             }
           });
           Socket.on('kilnStatus' + controlPanel._id, function(data) {
@@ -78,6 +82,12 @@
             Notification.info ({
               message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + data.scheduleStatus
             });
+          });
+          Socket.on('disconnect', function(){
+            console.log("disconnect so connecting again");
+            Socket.connect();
+
+            // init();
           });
     }
   }
