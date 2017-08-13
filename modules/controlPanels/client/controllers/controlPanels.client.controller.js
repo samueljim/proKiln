@@ -5,15 +5,18 @@
     .module('controlPanels')
     .controller('ControlPanelsController', ControlPanelsController);
 
-  ControlPanelsController.$inject = ['$scope', '$state', 'Authentication', 'controlPanelResolve', 'Socket'];
+  ControlPanelsController.$inject = ['$scope', '$state', 'Authentication', 'controlPanelResolve', 'Socket', 'SchedulesService'];
 
-  function ControlPanelsController($scope, $state, Authentication, controlPanel, Socket) {
+  function ControlPanelsController($scope, $state, Authentication, controlPanel, Socket, SchedulesService) {
     var vm = this;
+
 
     vm.controlPanel = controlPanel;
     vm.sendtemp = sendtemp;
     vm.temp = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].data;
     vm.updateTime = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].time;
+
+    vm.schedules = SchedulesService.query();
 
     // vm.controlPanel.temp.data = vm.controlPanel.temp;
     // $scope.$on('$update', stateChangeSuccess);

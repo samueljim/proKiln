@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/schedules',
       permissions: '*'
     }, {
-      resources: '/api/schedules/:scheduleId',
+      resources: '/api/schedules/:scheduleId/',
       permissions: '*'
     }]
   }

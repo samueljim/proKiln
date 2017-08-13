@@ -50,7 +50,7 @@ exports.update = function (req, res) {
   schedule.content = req.body.content;
   // controlPanel.schedule = req.body.schedule;
   schedule.scheduleStatus = req.body.scheduleStatus;
-
+  
 
   schedule.save(function (err) {
     if (err) {

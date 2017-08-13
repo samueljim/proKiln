@@ -18,6 +18,12 @@ module.exports = function (app) {
     .put(schedules.update)
     .delete(schedules.delete);
 
+    // Program schedule routes
+  app.route('/api/schedules/:scheduleId/program').all(schedulesPolicy.isAllowed)
+      .get(schedules.read)
+      .put(schedules.update)
+      .delete(schedules.delete);
+
   // Finish by binding the schedule middleware
   app.param('scheduleId', schedules.scheduleByID);
 };

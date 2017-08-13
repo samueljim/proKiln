@@ -46,6 +46,18 @@
         resolve: {
           scheduleResolve: getSchedule
         }
+      })
+      .state('schedules.program', {
+        url: '/:scheduleId/program',
+        templateUrl: '/modules/schedules/client/views/program-schedule.client.view.html',
+        controller: 'SchedulesProgramController',
+        controllerAs: 'vm',
+        data: {
+          roles: ['user']
+        },
+        resolve: {
+          scheduleResolve: getSchedule
+        }
       });
   }
 

@@ -49,10 +49,7 @@
   <div class="form-group col-md-6">
     <label for="sel1">Select Schedule:</label>
     <select class="form-control" id="sel1">
-      <option ng-bind="vm.controlPanel.schedule">1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
+      <option ng-repeat="schedule in vm.schedules" ng-bind="schedule.title"></option>
     </select>
   </div>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95273.jpg" alt="graph"/>

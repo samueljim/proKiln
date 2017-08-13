@@ -42,7 +42,7 @@ var ScheduleSchema = new Schema({
   },
   content: {
     type: String,
-    default: 'No content',
+    default: 'No contents',
     trim: true
   },
   program: [ProgramSchema],
