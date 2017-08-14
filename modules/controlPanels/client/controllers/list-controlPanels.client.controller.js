@@ -57,7 +57,7 @@
         Socket.connect();
         console.log("Connection Socket");
       }
-      
+
     for (let controlPanel of vm.pagedItems) {
       Socket.emit('id', {
         id: controlPanel._id,
@@ -65,6 +65,9 @@
       });
       controlPanel.liveTemp = controlPanel.temp[controlPanel.temp.length -1].data;
       controlPanel.updateTime = controlPanel.temp[controlPanel.temp.length -1].time;
+
+      Socket.removeListener('tempServerUpdate' + controlPanel._id);
+
           Socket.on('tempServerUpdate' + controlPanel._id, function(data) {
             if (data.id === controlPanel._id){
               controlPanel.liveTemp = data.temp;
@@ -74,6 +77,9 @@
               // });
             }
           });
+
+          Socket.removeListener('kilnStatus' + controlPanel._id);
+
           Socket.on('kilnStatus' + controlPanel._id, function(data) {
             controlPanel.schedule = data.schedule;
             controlPanel.online = data.online;
@@ -83,6 +89,8 @@
               message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + data.scheduleStatus
             });
           });
+
+          Socket.removeListener('disconnect');
           Socket.on('disconnect', function(){
             console.log("disconnect so connecting again");
             Socket.connect();

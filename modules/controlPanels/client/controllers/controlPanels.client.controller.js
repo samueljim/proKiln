@@ -5,9 +5,9 @@
     .module('controlPanels')
     .controller('ControlPanelsController', ControlPanelsController);
 
-  ControlPanelsController.$inject = ['$scope', '$state', 'Authentication', 'controlPanelResolve', 'Socket', 'SchedulesService'];
+  ControlPanelsController.$inject = ['$scope', '$state', 'Authentication', 'controlPanelResolve', 'Socket', 'SchedulesService', 'Notification'];
 
-  function ControlPanelsController($scope, $state, Authentication, controlPanel, Socket, SchedulesService) {
+  function ControlPanelsController($scope, $state, Authentication, controlPanel, Socket, SchedulesService, Notification) {
     var vm = this;
 
 
@@ -48,8 +48,9 @@
         time: Date.now()
       });
 
-
       // Add an event listener to the 'tempServerUpdate' event
+      Socket.removeListener('tempServerUpdate' + vm.controlPanel._id);
+
       Socket.on('tempServerUpdate' + vm.controlPanel._id, function(data) {
         if (data.id === controlPanel._id) {
           vm.temp = data.temp;
@@ -58,12 +59,17 @@
         }
       });
       // Add an event listener to the 'kilnStatus' event
+      Socket.removeListener('kilnStatus' + vm.controlPanel._id);
       Socket.on('kilnStatus' + vm.controlPanel._id, function(data) {
         vm.controlPanel.schedule = data.schedule;
         vm.controlPanel.scheduleProgress = data.scheduleProgress;
         vm.controlPanel.scheduleStatus = data.scheduleStatus;
         vm.controlPanel.online = data.online;
+        Notification.info ({
+          message: '<i class="glyphicon glyphicon-flash"></i> ' + vm.controlPanel.title + ' Has been updated to ' + data.scheduleStatus
+        });
       });
+
 
       // Socket.on('connect_failed', function() {
       //   document.write("Sorry, there seems to be an issue with the connection!");
