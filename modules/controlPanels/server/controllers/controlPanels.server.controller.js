@@ -8,6 +8,8 @@ var path = require('path'),
   ControlPanel = mongoose.model('ControlPanel'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
+var numOfTemps = 5;
+
 /**
  * Create an controlPanel
  */
@@ -32,7 +34,6 @@ exports.create = function(req, res) {
 exports.read = function(req, res) {
   // convert mongoose document to JSON
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
-  var numOfTemps = 5;
   // temp filterfindOne
   // controlPanel.temp = req.controlPanel.temp[temp]
   // req.controlPanel ? req.controlPanel.find( {}, { temp: { $slice: -1 }}) : {};
@@ -112,6 +113,10 @@ exports.list = function(req, res) {
     };
   }
   ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function(err, controlPanels) {
+    for (let controlPanel of controlPanels) {
+      controlPanel.temp = controlPanel.temp.slice(-1);
+    }
+
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
