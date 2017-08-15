@@ -38,11 +38,13 @@ module.exports = function(io, socket) {
   });
 
   // this fuction will update the database so that it has the latest temp
-  function updateDatabase(data) {
-    var id = data.id;
+  function updateDatabase(entries) {
+    var id = entries.id;
+    // var data.data = data.temp;
     ControlPanel.findByIdAndUpdate(id,
-      { $push: { 'temp': {
-        data: data.temp
+      { $push: { 'temp': { $each:[
+        {data: entries.temp}],
+        $slice: -400
       }
       }
       },
