@@ -5,30 +5,42 @@
     .module('schedules')
     .controller('SchedulesProgramController', SchedulesProgramController);
 
-  SchedulesProgramController.$inject = ['$scope', '$state', '$window', 'scheduleResolve', 'Notification'];
+  SchedulesProgramController.$inject = ['$scope', '$state', 'scheduleResolve', 'Notification'];
 
-  function SchedulesProgramController($scope, $state, $window, schedule, Notification) {
+  function SchedulesProgramController($scope, $state, schedule, Notification) {
     var vm = this;
 
     vm.schedule = schedule;
     vm.form = {};
+    vm.addSegment = addSegment;
     vm.remove = remove;
     vm.save = save;
-
+    // vm.schedule.program = [{
+    //   segment:"1"
+    // }];
     // Remove existing Schedule
     function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.schedule.$remove(function() {
-          $state.go('schedules.list');
+        vm.schedule.program.$remove(function() {
           Notification.success({
             message: '<i class="glyphicon glyphicon-ok"></i> Schedule deleted successfully!'
           });
         });
-      }
+    }
+    // add a new line to the segment
+    function addSegment() {
+      // console.log("addSegment clicked");
+      var program = {
+        segment: vm.schedule.program.length + 1,
+        rate: null,
+        goal: null,
+        hold: null
+      };
+      vm.schedule.program.push(program);
     }
 
     // Save Schedule
     function save(isValid) {
+      isValid = true;
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.scheduleForm');
         return false;
@@ -40,7 +52,6 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('schedules.list'); // should we send the User to the list or the updated Schedule's view?
         Notification.success({
           message: '<i class="glyphicon glyphicon-ok"></i> Schedule saved successfully!'
         });

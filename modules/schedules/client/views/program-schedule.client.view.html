@@ -20,15 +20,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>John</td>
-          <td>Doe</td>
-          <td>john@example.com</td>
+        <tr ng-repeat="segment in vm.schedule.program | orderBy: 'segment'">
+          <td name="segment" ng-bind="segment.segment"></td>
+          <td><input type="number" name="rate" ng-model="segment.rate" /></td>
+          <td><input type="number" name="goal" ng-model="segment.goal" /></td>
+          <td><input type="number" name="hold" ng-model="segment.hold" /></td>
+          <td> <button type="button" class='btn btn-warning' ng-click="vm.remove($index)">Remove</button></td>
         </tr>
       </tbody>
     </table>
-    <button type="button" class='btn btn-default' ng-click="addSegment()">Add Segment</button>
+    <button type="button" class='btn btn-default' ng-click="vm.addSegment()">Add Segment</button>
+    <button type="button" class='btn btn-success' ng-click="vm.save()">Save</button>
   </div>
 
 </section>
