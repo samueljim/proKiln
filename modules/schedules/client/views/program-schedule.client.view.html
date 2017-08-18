@@ -13,7 +13,7 @@
       <thead>
         <tr>
           <th>Move</th>
-          <th>Order</th>
+          <th></th>
           <th>Rate</th>
           <th>Goal</th>
           <th>Hold</th>
@@ -23,16 +23,16 @@
       <tbody>
         <tr ng-repeat="segment in vm.schedule.program | orderBy: 'segment'">
           <td>
-          <button type="button" ng-if="$first" class='btn btn-default disabled'><i class="glyphicon glyphicon-menu-up"></i></button>
-          <button type="button" ng-if="!$first" class='btn btn-default' ng-click="vm.up(segment)"><i class="glyphicon glyphicon-menu-up"></i></button>
-          <button type="button" ng-if="!$last" class='btn btn-default' ><i class="glyphicon glyphicon-menu-down"></i></button>
-          <button type="button" ng-if="$last" class='btn btn-default disabled' ng-click="vm.down(segment)"><i class="glyphicon glyphicon-menu-down"></i></button>
+          <button type="button" ng-if="$first" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-up"></i></button>
+          <button type="button" ng-if="!$first" class='btn btn-default btn-block btn-sm' ng-click="vm.up(segment)"><i class="glyphicon glyphicon-menu-up"></i></button>
+          <button type="button" ng-if="!$last" class='btn btn-default btn-block btn-sm' ng-click="vm.down(segment)"><i class="glyphicon glyphicon-menu-down"></i></button>
+          <button type="button" ng-if="$last" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-down"></i></button>
         </td>
           <td name="segment"><h6 ng-bind="segment.segment = $index + 1"></h6></td>
           <td><input id="rate" uib-tooltip='what is rate' type="number" class="form-control" name="rate" ng-model="segment.rate" required/></td>
           <td><input id="goal" uib-tooltip='what is goal' type="number" class="form-control" name="goal" ng-model="segment.goal" required/></td>
           <td><input id="hold" uib-tooltip='what is hold' type="number" class="form-control" name="hold" ng-model="segment.hold" required/></td>
-          <td><button type="button" uib-tooltip='Remove this segment' class='btn btn-warning' ng-click="vm.remove(segment)"><i class="glyphicon glyphicon-remove"></i></button></td>
+          <td><button type="button" uib-tooltip='Remove this segment' class='btn btn-warning btn-block' ng-click="vm.remove(segment)" ><i class="glyphicon glyphicon-remove"></i></button></td>
         </tr>
       </tbody>
     </table>

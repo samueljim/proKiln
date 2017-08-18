@@ -25,27 +25,25 @@
     //  Sortable.create(simpleList, { /* options */ });
     // Remove existing Schedule
     function remove(program) {
-      console.log("hey");
+      // console.log("hey");
       vm.remove = function(program) {
         var index = vm.schedule.program.indexOf(program);
-
+        vm.schedule.program.splice(index, 1);
       }
     }
     // change order up
     function up(program){
-      vm.schedule.program = vm.schedule.program.indexOf(program + 1);
+      var index = vm.schedule.program.indexOf(program);
+      // var indexbefore - 1 = vm.schedule.program.indexOf(program);
+      console.log("Up");
 
     }
     // change order down
     function down(program){
 
+      console.log("Down");
     }
-        // vm.schedule.program.remove();
-        // vm.schedule.program.$remove(function() {
-        //   Notification.success({
-        //     message: '<i class="glyphicon glyphicon-ok"></i> Schedule deleted successfully!'
-        //   });
-        // });
+
 
     // add a new line to the segment
     function addSegment() {
