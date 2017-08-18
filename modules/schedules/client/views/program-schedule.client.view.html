@@ -9,7 +9,11 @@
   </div>
   <div class="container">
     <!-- <h2>Hover Rows</h2> -->
-    <p>The .table-hover class enables a hover state on table rows:</p>
+    <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Intructions</button>
+    <div uib-collapse="!isCollapsed">
+      <div class="well well-lg">Please fill out each of the rows fully</div>
+      <h1>Add more content here Sam</h1>
+    </div>
     <table class="table table-hover table-striped">
       <thead>
         <tr>
@@ -21,11 +25,11 @@
       </thead>
       <tbody>
         <tr ng-repeat="segment in vm.schedule.program | orderBy: 'segment'">
-          <td name="segment" ng-bind="segment.segment"></td>
+          <td name="segment" ng-bind="segment.segment = $index + 1"></td>
           <td><input type="number" name="rate" ng-model="segment.rate" /></td>
           <td><input type="number" name="goal" ng-model="segment.goal" /></td>
           <td><input type="number" name="hold" ng-model="segment.hold" /></td>
-          <td> <button type="button" class='btn btn-warning' ng-click="vm.remove($index)">Remove</button></td>
+          <td> <button type="button" class='btn btn-warning' ng-click="vm.remove(segment)">Remove</button></td>
         </tr>
       </tbody>
     </table>

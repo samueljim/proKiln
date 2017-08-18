@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "acl": "~0.4.10",
+    "angular-legacy-sortablejs-maintained": "^0.5.2",
     "async": "~2.3.0",
     "body-parser": "~1.17.1",
     "bower": "~1.8.0",
@@ -68,6 +69,7 @@
     "passport-twitter": "~1.0.4",
     "serve-favicon": "~2.4.2",
     "socket.io": "^1.7.3",
+    "sortablejs": "^1.6.0",
     "validator": "~7.0.0",
     "winston": "^2.3.1",
     "wiredep": "~4.0.0"
