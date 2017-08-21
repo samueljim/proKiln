@@ -60,8 +60,8 @@ module.exports = {
       allowPassphrases: true,
       maxLength: 128,
       minLength: 5,
-      minPhraseLength: 20,
-      minOptionalTestsToPass: 3
+      minPhraseLength: 10,
+      minOptionalTestsToPass: 2
     }
   }
 

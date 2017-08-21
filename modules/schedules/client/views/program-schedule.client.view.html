@@ -7,6 +7,58 @@
       <i class="glyphicon glyphicon-edit"></i> Edit
     </a>
   </div>
+<script type="text/javascript">
+      window.onload = function() {
+        var dps = []; // dataPoints
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+          title: {
+            text: "Live Random Data"
+          },
+          data: [{
+            type: "line",
+            dataPoints: dps
+          }]
+        });
+
+        var xVal = 0;
+        var yVal = 100;
+        var updateInterval = 100;
+        var dataLength = 500; // number of dataPoints visible at any point
+
+        function updateChart(count) {
+          count = count || 1;
+          // count is number of times loop runs to generate random dataPoints.
+
+          for (var j = 0; j < count; j++) {
+            yVal = yVal + Math.round(5 + Math.random() * (-5 - 5));
+            dps.push({
+              x: xVal,
+              y: yVal
+            });
+            xVal++;
+          };
+          if (dps.length > dataLength) {
+            dps.shift();
+          }
+
+          chart.render();
+
+        };
+
+        // generates first set of dataPoints
+        updateChart(dataLength);
+
+        // update chart after specified time.
+        setInterval(function() {
+          updateChart()
+        }, updateInterval);
+      }
+      </script>
+
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div id="chartContainer" style="height: 300px; width:100%;">
+</div
   <div class="container">
     <!-- <h2>Hover Rows</h2> -->
     <table class="table table-hover table-striped">
@@ -21,17 +73,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="segment in vm.schedule.program | orderBy: 'segment'">
+        <tr ng-repeat="segment in vm.schedule.program">
           <td>
-          <button type="button" ng-if="$first" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-up"></i></button>
-          <button type="button" ng-if="!$first" class='btn btn-default btn-block btn-sm' ng-click="vm.up(segment)"><i class="glyphicon glyphicon-menu-up"></i></button>
-          <button type="button" ng-if="!$last" class='btn btn-default btn-block btn-sm' ng-click="vm.down(segment)"><i class="glyphicon glyphicon-menu-down"></i></button>
-          <button type="button" ng-if="$last" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-down"></i></button>
+          <!-- <button type="button" ng-if="$first" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-up"></i></button> -->
+          <button type="button" ng-if="!$first" class='btn btn-default btn-block btn-sm' ng-click="vm.move($index, 1)"><i class="glyphicon glyphicon-menu-up"></i></button>
+          <button type="button" ng-if="!$last" class='btn btn-default btn-block btn-sm' ng-click="vm.move($index, 0)"><i class="glyphicon glyphicon-menu-down"></i></button>
+          <!-- <button type="button" ng-if="$last" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-down"></i></button> -->
         </td>
           <td name="segment"><h6 ng-bind="segment.segment = $index + 1"></h6></td>
-          <td><input id="rate" uib-tooltip='what is rate' type="number" class="form-control" name="rate" ng-model="segment.rate" required/></td>
-          <td><input id="goal" uib-tooltip='what is goal' type="number" class="form-control" name="goal" ng-model="segment.goal" required/></td>
-          <td><input id="hold" uib-tooltip='what is hold' type="number" class="form-control" name="hold" ng-model="segment.hold" required/></td>
+          <td><input id="rate" uib-tooltip='what is rate' type="number" class="form-control" ng-change="vm.change()" name="rate" ng-model="segment.rate" required/></td>
+          <td><input id="goal" uib-tooltip='what is goal' type="number" class="form-control" ng-change="vm.change()" name="goal" ng-model="segment.goal" required/></td>
+          <td><input id="hold" uib-tooltip='what is hold' type="number" class="form-control" ng-change="vm.change()" name="hold" ng-model="segment.hold" required/></td>
           <td><button type="button" uib-tooltip='Remove this segment' class='btn btn-warning btn-block' ng-click="vm.remove(segment)" ><i class="glyphicon glyphicon-remove"></i></button></td>
         </tr>
       </tbody>

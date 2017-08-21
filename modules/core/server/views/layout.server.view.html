@@ -79,9 +79,7 @@
   <script type="text/javascript">
     var user = {
       {
-        {
           user
-        }
       }
     };
     var env = "{{ env }}";
@@ -97,10 +95,12 @@
   <!--owasp config sync-->
   <script type="text/javascript">
     var sharedConfig = {
-      {
-        {
-          sharedConfig
-        }
+      owasp: {
+        allowPassphrases: true,
+        maxLength: 128,
+        minLength: 5,
+        minPhraseLength: 15,
+        minOptionalTestsToPass: 2
       }
     };
     owaspPasswordStrengthTest.config(sharedConfig.owasp);
