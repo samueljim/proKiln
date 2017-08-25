@@ -14,6 +14,12 @@ var path = require('path'),
 exports.create = function (req, res) {
   var schedule = new Schedule(req.body);
   schedule.user = req.user;
+  schedule.program = [{
+    segment: 1,
+    rate: 0,
+    goal: 0,
+    hold: 0
+  }]
 
   schedule.save(function (err) {
     if (err) {
