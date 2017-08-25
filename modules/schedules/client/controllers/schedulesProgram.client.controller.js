@@ -35,42 +35,22 @@
     // Remove existing Schedule
     function remove(program) {
       // console.log("hey");
-      changes = true;
+      if(vm.schedule.program.length > 1){
+      change();
       vm.remove = function(program) {
         var index = vm.schedule.program.indexOf(program);
         vm.schedule.program.splice(index, 1);
       }
+    }else{
+      console.log("Without any items there is no schedule");
     }
-    // // change order up
-    // function up(program) {
-    //   var index = vm.schedule.program.indexOf(program);
-    //   var aboveProgram = vm.schedule.program[index - 1];
-    //   var rate1 = program.rate;
-    //   var goal1 = program.goal;
-    //   var hold1 = program.hold;
-    //   program.rate = vm.schedule.program[index - 1].rate;
-    //   program.goal = vm.schedule.program[index - 1].goal;
-    //   program.hold = vm.schedule.program[index - 1].hold;
-    //   vm.schedule.program[index - 1].rate = program.rate;
-    //   vm.schedule.program[index - 1].goal = program.goal;
-    //   vm.schedule.program[index - 1].hold = program.hold;
-    //
-    //   // var indexbefore - 1 = vm.schedule.program.indexOf(program);
-    //   console.log("Up");
-    //
-    // }
-    // // change order down
-    // function down(program) {
-    //
-    //   console.log("Down");
-    // }
+    }
 
+    // Moves the items in the scope up and down to reorder them
     function move(index, direction) {
-      changes = true;
+      change();
       var itemToMove = vm.schedule.program[index];
-      // console.log(vm.schedule.program[index]);
-      // console.log(vm.schedule.program[index - 1]);
-      // console.log(itemToMove);
+
       if (direction === 1) {
         vm.schedule.program[index].segment = index - 1;
         vm.schedule.program[index - 1].segment = index;
@@ -84,31 +64,30 @@
         vm.schedule.program[index + 1] = itemToMove;
         console.log("Down");
       }
-      // if (!$scope.$$phase)
-      //   $scope.$apply();
     }
-
 
     // add a new line to the segment
     function addSegment() {
-      changes = true;
-      // console.log("addSegment clicked");
+      change();
+
       var program = {
         segment: vm.schedule.program.length + 1,
-        rate: null,
-        goal: null,
-        hold: null
+        rate: vm.schedule.program[vm.schedule.program.length - 1].rate,
+        goal: vm.schedule.program[vm.schedule.program.length - 1].goal,
+        hold: 0
       };
       vm.schedule.program.push(program);
     }
 
+    // function which sets changes to true
     function change(){
         changes = true;
     }
+
     // Save Schedule
-    function save() {
+    function save(isValid) {
       // if (!isValid) {
-      //   $scope.$broadcast('show-errors-check-validity', 'vm.form.programForm');
+      //   $scope.$broadcast('show-errors-check-validity', 'vm.form.scheduleForm');
       //   return false;
       // }
 

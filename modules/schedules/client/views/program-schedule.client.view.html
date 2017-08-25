@@ -21,6 +21,7 @@
         </tr>
       </thead>
       <tbody>
+        <form name="vm.form.programForm" class="form-horizontal" ng-submit="vm.save(vm.form.scheduleForm.$valid)" validate>
         <tr ng-repeat="segment in vm.schedule.program">
           <td>
           <!-- <button type="button" ng-if="$first" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-up"></i></button> -->
@@ -29,16 +30,24 @@
           <!-- <button type="button" ng-if="$last" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-down"></i></button> -->
         </td>
           <td name="segment"><h6 ng-bind="segment.segment = $index + 1"></h6></td>
-          <td><input id="rate" uib-tooltip='what is rate' type="number" class="form-control" ng-change="vm.change()" name="rate" ng-model="segment.rate" required/></td>
+          <td>
+            <input id="rate" uib-tooltip='what is rate' type="number" class="form-control" ng-change="vm.change()" name="rate" ng-model="segment.rate" required/>
+            <div ng-messages="vm.form.scheduleForm.rate.$error" role="alert">
+              <p class="help-block error-text" ng-message="required">Segment rate is required</p>
+            </div>
+          </td>
           <td><input id="goal" uib-tooltip='what is goal' type="number" class="form-control" ng-change="vm.change()" name="goal" min="0" ng-model="segment.goal" required/></td>
           <td><input id="hold" uib-tooltip='what is hold' type="number" class="form-control" ng-change="vm.change()" name="hold" min="0" ng-model="segment.hold" required/></td>
-          <td><button type="button" uib-tooltip='Remove this segment' class='btn btn-warning btn-block' ng-click="vm.remove(segment)" ><i class="glyphicon glyphicon-remove"></i></button></td>
+          <td><button type="button" uib-tooltip='Remove this segment' ng-if="!$first" class='btn btn-warning btn-block' ng-click="vm.remove(segment)" ><i class="glyphicon glyphicon-remove"></i></button></td>
         </tr>
+      </form>
       </tbody>
     </table>
     <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed"><i class="glyphicon glyphicon-education"></i>  Intructions</button>
     <button type="button" class='btn btn-default' ng-click="vm.addSegment()"><i class="glyphicon glyphicon-plus-sign"></i>  Add Segment</button>
-    <button type="button" class='btn btn-success' ng-click="vm.save()"><i class="glyphicon glyphicon-floppy-save"></i>  Save</button>
+    <!-- <button type="button" class='btn btn-success' ng-click="vm.save()"><i class="glyphicon glyphicon-floppy-save"></i>  Save</button> -->
+    <button type="button" class='btn btn-success' type="submit" ng-click="vm.save()"><i class="glyphicon glyphicon-floppy-save"></i>  Save</button>
+
     <div uib-collapse="!isCollapsed">
       <div class="well well-lg">Please fill out each of the rows fully</div>
       <h1>Add more content here Sam</h1>
