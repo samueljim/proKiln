@@ -16,6 +16,52 @@ function validateIsNumber(v) {
 }
 
 /**
+* Points of data Schema
+*/
+var ProgramSchema = new Schema({
+  segment: {
+    type: Number
+  },
+  rate: {
+    type: Number
+  },
+  goal: {
+    type: Number
+  },
+  hold: {
+    type: Number
+  }
+});
+/**
+ * Schedule Schema
+ */
+var ScheduleSchema = new Schema({
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  modified: {
+    type: Date
+  },
+  title: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Title cannot be blank'
+  },
+  content: {
+    type: String,
+    default: 'No contents',
+    trim: true
+  },
+  program: [ProgramSchema],
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
+});
+
+/**
  * ControlPanel Schema
  */
 var ControlPanelSchema = new Schema({
@@ -61,11 +107,7 @@ var ControlPanelSchema = new Schema({
     }
   }
   ],
-  schedule: {
-    type: String,
-    trim: true,
-    default: ''
-  },
+  schedule: [ScheduleSchema],
   scheduleProgress: {
     type: Number,
     trim: true,

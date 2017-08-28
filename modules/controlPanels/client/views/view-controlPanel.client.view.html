@@ -32,17 +32,19 @@
   <h3>Schedule</h3>
   <div class="form-group col-md-6">
     <label for="sel1">Select Schedule:</label>
-    <select class="form-control" id="sel1">
-      <option ng-repeat="schedule in vm.schedules" ng-bind="schedule.title"></option>
+    <select ng-change="change(schedule)" ng-model="vm.controlPanel.schedule" ng-options="(schedule.title + ' - ' + schedule.content) for schedule in vm.schedules" class="form-control"  id="sel1">
+      <option ng-if="!vm.controlPanel.schedule" value="">Select Schedule</option>
     </select>
   </div>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95273.jpg" alt="graph"/>
   <br>
   <h6>Settings</h6>
-  <button type="button" class="btn btn-primary">Edit</button>
+  <!-- TODO -->
+  <button type="button" ui-sref="schedules.program({ scheduleId: vm.controlPanel.schedule._id })" class="btn btn-primary">Edit</button>
   <div class="btn-group">
-    <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-glyphicon-fire">Start</button>
-    <button type="button" class="btn btn-warning">Cancel</button>
+    <!-- TODO -->
+    <button type="button" ng-disabled="controlPanel.isDisabled" class="btn btn-success" ng-click="vm.start()"><i class="glyphicon glyphicon-glyphicon-fire"></i> Start</button>
+    <button type="button" class="btn btn-warning" ng-click="vm.stop()">Cancel</button>
   </div>
   <p ng-bind="vm.controlPanel.scheduleStatus"></p>
 

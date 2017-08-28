@@ -18,6 +18,19 @@ module.exports = function(io, socket) {
     socket.join(data.id);
   });
 
+  socket.on('kilnClientScheduleUpdate', function(data) {
+    console.log("Kiln " + data.id + " is " + data.scheduleStatus + " " + data.schedule.title);
+    ControlPanel.findByIdAndUpdate(data.id,
+      {schedule: data.schedule, scheduleStatus: data.scheduleStatus, scheduleProgress: data.scheduleProgress},
+      function(err, raw) {
+        if (err) {
+          console.log('Error ' + err + ' The raw response from Mongo was ', raw);
+          errorHandler(err);
+        }
+      });
+      //TODO put this in the kiln's reply
+      io.in(data.id).emit('kilnStatus' + data.id, data);
+  });
   // Send a temp updates to all connected sockets when a data is received
   socket.on('tempKilnUpdate', function(data) {
     data.type = 'temp';

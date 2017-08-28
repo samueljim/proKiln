@@ -16,8 +16,8 @@
       <span class="badge"><h4 ng-bind="controlPanel.liveTemp + ' C'"></h4>Last updated  {{controlPanel.updateTime | date : 'mediumTime'}}</span>
       <!-- <span class="badge"></span> -->
       <h4 class="list-group-item-heading" ng-bind="controlPanel.title"> <small class="list-group-item-text" ng-bind="controlPanel.content"></small></h4>
-      <p ng-if="controlPanel.schedule" class="list-group-item-text" ng-bind="controlPanel.schedule"></p>
-      <p ng-if="!controlPanel.schedule" class="list-group-item-text" >Not running</p>
+      <p ng-if="controlPanel.scheduleStatus" class="list-group-item-text" ng-bind="controlPanel.scheduleStatus"></p>
+      <p ng-if="!controlPanel.scheduleStatus" class="list-group-item-text" >Not running</p>
     </a>
   </div>
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>

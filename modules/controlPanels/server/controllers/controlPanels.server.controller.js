@@ -114,7 +114,11 @@ exports.list = function(req, res) {
   }
   ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function(err, controlPanels) {
     for (let controlPanel of controlPanels) {
+      // remove all but the lastest temp
       controlPanel.temp = controlPanel.temp.slice(-1);
+      // set the schedule to be a none existant schedule so it won't show
+      controlPanel.schedule = controlPanel.schedule.slice(2);
+
     }
 
     if (err) {

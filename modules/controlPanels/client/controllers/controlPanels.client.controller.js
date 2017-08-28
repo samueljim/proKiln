@@ -15,7 +15,10 @@
     vm.sendtemp = sendtemp;
     vm.temp = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].data;
     vm.updateTime = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].time;
-
+    vm.start = start;
+    vm.stop = stop;
+    vm.change = change;
+    // vm.edit = edit;
     vm.schedules = SchedulesService.query();
 
     // vm.controlPanel.temp.data = vm.controlPanel.temp;
@@ -27,10 +30,14 @@
       console.log('👮👮 not the owner 🚓🚓🚓 please leave ASAP 🚨🚨🚨🚨🚨');
       // TODO put back in after debug
       // $state.go('home');
-
     }
 
+    if (vm.controlPanel.online) {
+      console.log("hey");
+      // vm.controlPanel.isDisabled = true;
+    }
     init();
+
 
     function init() {
       // If user is not signed in then redirect back home
@@ -65,12 +72,23 @@
         vm.controlPanel.scheduleProgress = data.scheduleProgress;
         vm.controlPanel.scheduleStatus = data.scheduleStatus;
         vm.controlPanel.online = data.online;
+        if (data.scheduleProgress === 100) {
+          Notification.success ({
+            message: '<i class="glyphicon glyphicon-thumps-up"></i> ' + vm.controlPanel.title + ' Has finished running  ' + data.schedule.title
+          });
+        } else {
         Notification.info ({
           message: '<i class="glyphicon glyphicon-flash"></i> ' + vm.controlPanel.title + ' Has been updated to ' + data.scheduleStatus
         });
+      }
       });
 
-
+      Socket.removeListener('connect_failed');
+      Socket.on('connect_failed', function() {
+        Notification.error ({
+          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection'
+        });
+      });
       // Socket.on('connect_failed', function() {
       //   document.write("Sorry, there seems to be an issue with the connection!");
       //   console.log('connection issue');
@@ -81,6 +99,37 @@
       // });
     }
 
+    function start() {
+      if (vm.controlPanel.online == true) {
+      console.log("start");
+      var data = {
+        scheduleStatus: "Starting",
+        scheduleProgress: 50,
+        schedule: vm.controlPanel.schedule,
+        id: vm.controlPanel._id
+      };
+      Socket.emit('kilnClientScheduleUpdate', data);
+    } else {
+      Notification.error ({
+        message: '<i class="glyphicon glyphicon-ban-circle"></i>  kiln offline'
+      });
+    }
+    }
+
+    function change(schedule) {
+      // TODO add changes from schedule graph
+      vm.controlPanel.schedule = schedule;
+    }
+
+    function stop() {
+      console.log("stop");
+      var data = {
+        scheduleStatus: "Stopping",
+        schedule: vm.controlPanel.schedule,
+        id: vm.controlPanel._id
+      };
+      Socket.emit('kilnClientScheduleUpdate', data);
+    }
     //  method for sending temp
     function sendtemp() {
       // console.log('sendtemp run');
