@@ -59,6 +59,9 @@ var ScheduleSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   }
+  totalTiming: {
+    type: Number
+  }
 });
 
 /**

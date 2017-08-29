@@ -21,6 +21,15 @@ var ProgramSchema = new Schema({
   },
   hold: {
     type: Number
+  },
+  timeToGoal: {
+    type: Number
+  },
+  firstCumulative: {
+    type: Number
+  },
+  secondCumulative: {
+    type: Number
   }
 });
 /**
@@ -49,6 +58,15 @@ var ScheduleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },
+  totalTiming: {
+    type: Number
+  },
+  xvalues: {
+    type: Number
+  },
+  yvalues: {
+    type: Number
   }
 });
 

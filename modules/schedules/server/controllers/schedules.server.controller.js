@@ -58,6 +58,9 @@ exports.update = function (req, res) {
   schedule.scheduleStatus = req.body.scheduleStatus;
   schedule.scheduleStatus = req.body.scheduleStatus;
   schedule.program = req.body.program;
+  schedule.totalTiming = req.body.totalTiming;
+  schedule.xvalues = req.body.xvalues;
+  schedule.yvalues = req.body.yvalues;
 
 
   schedule.save(function (err) {
