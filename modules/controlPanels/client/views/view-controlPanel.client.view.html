@@ -6,6 +6,11 @@
       {{vm.controlPanel.title}}
     </h1>
   </div>
+  <div class="pull-right">
+    <a ui-sref="controlPanel.edit({ controlPanelId: vm.controlPanel._id })" class="btn btn-info" >
+      <i class="glyphicon glyphicon-edit"></i> Edit
+    </a>
+  </div>
 
   <div class="col-md-6">
   <small>
@@ -33,9 +38,9 @@
   <div class="form-group col-md-6">
     <label for="sel1">Select Schedule:</label>
     <select ng-change="change(schedule)" ng-model="vm.controlPanel.schedule" ng-options="(schedule.title + ' - ' + schedule.content) for schedule in vm.schedules" class="form-control"  id="sel1">
-      <option ng-if="!vm.controlPanel.schedule._id" value="">Select Schedule</option>
-      <option ng-if="" value="">Please make a Schedule on the Schedule tab</option>
-
+      <option ng-if="vm.schedules.length <= 0" value="">Please make a Schedule on the Schedule tab</option>
+      <option ng-if="vm.schedules.length >= 1" value="">Pick a Schedule to run</option>
+      <option ng-if="vm.controlPanel.schedule" value="">Please make a Schedule on the Schedule tab</option>
     </select>
   </div>
   <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95273.jpg" alt="graph"/>
