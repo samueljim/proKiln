@@ -68,7 +68,7 @@
       });
       // Add an event listener to the 'kilnStatus' event
       Socket.removeListener('clientStatus' + vm.controlPanel._id);
-      Socket.on('kilnStatus' + vm.controlPanel._id, function(data) {
+      Socket.on('clientStatus' + vm.controlPanel._id, function(data) {
         vm.controlPanel.schedule = data.schedule;
         vm.controlPanel.scheduleProgress = data.scheduleProgress;
         vm.controlPanel.scheduleStatus = data.scheduleStatus;
@@ -91,17 +91,21 @@
       Socket.removeListener('connect_failed');
       Socket.on('connect_failed', function() {
         Notification.error ({
-          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection to proKiln'
+          message: '<i class="glyphicon glyphicon-ban-circle"></i>  connection to proKiln failed'
         });
       });
       Socket.removeListener('disconnect');
       Socket.on('disconnect', function() {
         Notification.error ({
-          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection to proKiln'
+          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection to proKiln', delay: 50000000
         });
       });
-      Socket.on('connection', function() {
-
+      Socket.removeListener('connect');
+      Socket.on('connect', function() {
+        Notification.clearAll();
+        Notification.primary({
+          message: '<i class="glyphicon glyphicon-okay"></i>  Reconnected to proKiln'
+        });
       });
       // Socket.on('connect_failed', function() {
       //   document.write("Sorry, there seems to be an issue with the connection!");
