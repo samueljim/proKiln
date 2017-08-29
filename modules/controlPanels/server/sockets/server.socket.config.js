@@ -29,7 +29,7 @@ module.exports = function(io, socket) {
         }
       });
       //TODO put this in the kiln's reply
-      io.in(data.id).emit('kilnStatus' + data.id, data);
+      io.in(data.id).emit('clientStatus' + data.id, data);
   });
   // Send a temp updates to all connected sockets when a data is received
   socket.on('tempKilnUpdate', function(data) {
