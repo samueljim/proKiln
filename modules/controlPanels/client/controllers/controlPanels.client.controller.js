@@ -73,7 +73,7 @@
         vm.controlPanel.scheduleProgress = data.scheduleProgress;
         vm.controlPanel.scheduleStatus = data.scheduleStatus;
         vm.controlPanel.online = data.online;
-        if (data.scheduleProgress === 100) {
+        if (data.scheduleProgress >= 100) {
           Notification.success ({
             message: '<i class="glyphicon glyphicon-thumps-up"></i> ' + vm.controlPanel.title + ' Has finished running  ' + data.schedule.title
           });
@@ -83,7 +83,7 @@
           });
         } else {
         Notification.info ({
-          message: '<i class="glyphicon glyphicon-flash"></i> ' + vm.controlPanel.title + ' Has been updated to ' + data.scheduleStatus
+          message: '<i class="glyphicon glyphicon-flash"></i> ' + data.scheduleStatus, title:  '' + vm.controlPanel.title
         });
       }
       });
@@ -93,6 +93,15 @@
         Notification.error ({
           message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection to proKiln'
         });
+      });
+      Socket.removeListener('disconnect');
+      Socket.on('disconnect', function() {
+        Notification.error ({
+          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection to proKiln'
+        });
+      });
+      Socket.on('connection', function() {
+
       });
       // Socket.on('connect_failed', function() {
       //   document.write("Sorry, there seems to be an issue with the connection!");
@@ -109,7 +118,7 @@
       console.log("start");
       var data = {
         scheduleStatus: "Starting",
-        scheduleProgress: 50,
+        scheduleProgress: 10,
         schedule: vm.controlPanel.schedule,
         id: vm.controlPanel._id
       };
@@ -131,7 +140,7 @@
         Notification.error ({
           message: '<i class="glyphicon glyphicon-ban-circle"></i>  kiln offline', replaceMessage: true
         });
-      }
+ss      }
       console.log("stop");
       var data = {
         scheduleStatus: "Stopping",
