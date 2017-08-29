@@ -94,7 +94,6 @@
           Socket.on('disconnect', function(){
             console.log("disconnect so connecting again");
             Socket.connect();
-
             // init();
           });
     }

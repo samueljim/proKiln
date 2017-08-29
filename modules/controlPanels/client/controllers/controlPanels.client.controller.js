@@ -47,6 +47,7 @@
 
       // Make sure the Socket is connected
       if (!Socket.socket) {
+
         Socket.connect();
       }
       // emit the id of the kiln
@@ -66,7 +67,7 @@
         }
       });
       // Add an event listener to the 'kilnStatus' event
-      Socket.removeListener('kilnStatus' + vm.controlPanel._id);
+      Socket.removeListener('clientStatus' + vm.controlPanel._id);
       Socket.on('kilnStatus' + vm.controlPanel._id, function(data) {
         vm.controlPanel.schedule = data.schedule;
         vm.controlPanel.scheduleProgress = data.scheduleProgress;
@@ -75,6 +76,10 @@
         if (data.scheduleProgress === 100) {
           Notification.success ({
             message: '<i class="glyphicon glyphicon-thumps-up"></i> ' + vm.controlPanel.title + ' Has finished running  ' + data.schedule.title
+          });
+        } else if (data.scheduleStatus === "error") {
+          Notification.error ({
+            message: '<i class="glyphicon glyphicon-ban-circle"></i>  error with kiln ' + vm.controlPanel.title
           });
         } else {
         Notification.info ({
@@ -86,7 +91,7 @@
       Socket.removeListener('connect_failed');
       Socket.on('connect_failed', function() {
         Notification.error ({
-          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection'
+          message: '<i class="glyphicon glyphicon-ban-circle"></i>  no connection to proKiln'
         });
       });
       // Socket.on('connect_failed', function() {
@@ -100,7 +105,7 @@
     }
 
     function start() {
-      if (vm.controlPanel.online == true) {
+      if (vm.controlPanel.online === true) {
       console.log("start");
       var data = {
         scheduleStatus: "Starting",
@@ -108,10 +113,10 @@
         schedule: vm.controlPanel.schedule,
         id: vm.controlPanel._id
       };
-      Socket.emit('kilnClientScheduleUpdate', data);
+      Socket.emit('clientScheduleUpdate', data);
     } else {
       Notification.error ({
-        message: '<i class="glyphicon glyphicon-ban-circle"></i>  kiln offline'
+        message: '<i class="glyphicon glyphicon-ban-circle"></i>  kiln offline', replaceMessage: true
       });
     }
     }
@@ -122,13 +127,18 @@
     }
 
     function stop() {
+      if (vm.controlPanel.online === false) {
+        Notification.error ({
+          message: '<i class="glyphicon glyphicon-ban-circle"></i>  kiln offline', replaceMessage: true
+        });
+      }
       console.log("stop");
       var data = {
         scheduleStatus: "Stopping",
-        schedule: vm.controlPanel.schedule,
+        // schedule: vm.controlPanel.schedule,
         id: vm.controlPanel._id
       };
-      Socket.emit('kilnClientScheduleUpdate', data);
+      Socket.emit('clientScheduleUpdate', data);
     }
     //  method for sending temp
     function sendtemp() {

@@ -18,7 +18,7 @@ module.exports = function(io, socket) {
     socket.join(data.id);
   });
 
-  socket.on('kilnClientScheduleUpdate', function(data) {
+  socket.on('clientScheduleUpdate', function(data) {
     console.log("Kiln " + data.id + " is " + data.scheduleStatus + " " + data.schedule.title);
     ControlPanel.findByIdAndUpdate(data.id,
       {schedule: data.schedule, scheduleStatus: data.scheduleStatus, scheduleProgress: data.scheduleProgress},
@@ -40,6 +40,7 @@ module.exports = function(io, socket) {
     // update the database before moving on
     updateDatabase(data);
     // send to client the new temp and time of temp change
+    //TODO put this in the kilns reply
     io.in(data.id).emit('tempServerUpdate' + data.id, data);
   });
 
