@@ -36,6 +36,19 @@
           pageTitle: '{{ controlPanelResolve.title }} ControlPanel',
           roles: ['user']
         }
+      })
+      .state('controlPanels.edit', {
+        url: '/:controlPanelId/edit',
+        templateUrl: '/modules/controlPanels/client/views/edit-controlPanel.client.view.html',
+        controller: 'ControlPanelsEditController',
+        controllerAs: 'vm',
+        resolve: {
+          controlPanelResolve: getControlPanel
+        },
+        data: {
+          pageTitle: 'Edit {{ controlPanelResolve.title }} ControlPanel',
+          roles: ['user']
+        }
       });
   }
 
