@@ -80,8 +80,7 @@
     }
 
     function graphifyData(){
-      vm.schedule.yvalues = [0];
-      vm.schedule.xvalues = [0];
+      vm.schedule.values = [{x:0,y:0}];
       for (let program of vm.schedule.program) {
         if (program.segment === 1) {
           program.timeToGoal = program.goal / program.rate;
@@ -92,10 +91,16 @@
           program.firstCumulative = vm.schedule.program[vm.schedule.program.indexOf(program) - 1].secondCumulative + program.timeToGoal;
           program.secondCumulative = program.firstCumulative + program.hold;
         }
-        vm.schedule.xvalues.push(program.firstCumulative);
-        vm.schedule.xvalues.push(program.secondCumulative);
-        vm.schedule.yvalues.push(program.goal);
-        vm.schedule.yvalues.push(program.goal);
+        var data1 = {
+          x: program.firstCumulative,
+          y: program.goal
+        }
+        var data2 = {
+          x: program.secondCumulative,
+          y: program.goal
+        }
+        vm.schedule.values.push(data1);
+        vm.schedule.values.push(data2);
         if (vm.schedule.program.indexOf(program) === vm.schedule.program.length - 1) {
           vm.schedule.totalTiming = program.secondCumulative;
         }

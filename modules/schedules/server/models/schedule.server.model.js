@@ -62,12 +62,17 @@ var ScheduleSchema = new Schema({
   totalTiming: {
     type: Number
   },
-  xvalues: {
-    type: Number
-  },
-  yvalues: {
-    type: Number
-  }
+  values: [
+    {
+      x: {
+        type: Number,
+        min: 0
+      },
+      y: {
+        type: Number
+      }
+    }
+  ]
 });
 
 // var Points  = mongoose.model('Points', pointsSchema);
