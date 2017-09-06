@@ -25,10 +25,12 @@
   <h3>Temp over time</h3>
   <h1 ng-bind="vm.temp + ' C'"></h1>
   <h2 >{{ vm.updateTime | date : 'short'}}</h2>
-  <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95276.jpg" alt="graph"/>
-  <br><br>
+  <canvas id="line" class="chart chart-line col-md-6" chart-data="vm.controlPanel.templot"
+  chart-labels="vm.labels"  chart-options="vm.options"
+  chart-dataset-override="vm.datasetOverride" chart-click="vm.onClick">
+  </canvas>
+  
   <blockquote cite="http://">
-
     <code class="lead" ng-bind="vm.controlPanel.content"></code>
   </blockquote>
 </div>
@@ -37,21 +39,37 @@
   <h3>Schedule</h3>
   <div class="form-group col-md-6">
     <label for="sel1">Select Schedule:</label>
+    <div class="row">
+    <div class="col col-3">
     <select ng-change="change(schedule)" ng-model="vm.controlPanel.schedule" ng-options="(schedule.title + ' - ' + schedule.content) for schedule in vm.schedules" class="form-control"  id="sel1">
-      <option ng-if="vm.schedules.length <= 0" value="">Please make a Schedule on the Schedule tab</option>
-      <option ng-if="vm.schedules.length >= 1" value="">Pick a Schedule to run</option>
-      <option ng-if="vm.controlPanel.schedule" value="">Please make a Schedule on the Schedule tab</option>
+      <!-- <option ng-if="vm.schedules.length <= 0" value="">Please make a Schedule on the Schedule tab</option> -->
+      <!-- <option ng-if="vm.schedules.length >= 1" value="">Pick a Schedule to run</option> -->
+      <option ng-if="vm.schedule.title" value="">Pick a Schedule to run</option>
     </select>
+    </div>
+    <div class="col col-1">
+     <button type="button" ng-disabled="!vm.controlPanel.schedule._id" ui-sref="schedules.program({ scheduleId: vm.controlPanel.schedule._id })" class="btn btn-info"> <i class="glyphicon glyphicon-edit"></i></button>
+     </div>
+    </div>
+    
   </div>
-  <img class="img-responsive" src="http://www.ceramicindustry.com/ext/resources/CI/2003/12/Files/Images/95273.jpg" alt="graph"/>
-  <br>
+
+  <div class="panel-heading">
+    <h3 class="panel-title">Chart of Schedule</h3>
+  </div>
+  <div class="panel-body">
+  <!-- <chartist class="ct-chart" chartist-data="{{vm.barData}}" chartist-chart-type="Bar"></chartist> -->
+  <canvas id="line" class="chart chart-line .col-md-6" chart-data="vm.controlPanel.schedule.values"
+  chart-labels="vm.labels"  chart-options="vm.options"
+  chart-dataset-override="vm.datasetOverride" chart-click="vm.onClick">
+  </canvas>
+  </div>
   <h6>Settings</h6>
   <!-- TODO -->
-  <button type="button" ng-disabled="!vm.controlPanel.schedule._id" ui-sref="schedules.program({ scheduleId: vm.controlPanel.schedule._id })" class="btn btn-primary">Edit</button>
   <div class="btn-group">
     <!-- TODO -->
-    <button type="button" ng-disabled="!vm.controlPanel.online || !vm.controlPanel.schedule._id" class="btn btn-success" ng-click="vm.start()"><i class="glyphicon glyphicon-glyphicon-fire"></i> Start</button>
-    <button type="button" class="btn btn-warning" ng-click="vm.stop()">Cancel</button>
+    <button type="button" ng-disabled="!vm.controlPanel.online || !vm.controlPanel.schedule._id" class="btn btn-success" ng-click="vm.start()"><i class="glyphicon glyphicon-fire"></i> Start</button>
+    <button type="button" class="btn btn-danger" ng-click="vm.stop()">Stop</button>
   </div>
   <p ng-bind="vm.controlPanel.scheduleStatus"></p>
 

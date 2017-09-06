@@ -8,10 +8,11 @@
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
+
     menuService.addMenu('account', {
       roles: ['user']
     });
-
+    
     menuService.addMenuItem('account', {
       title: '',
       state: 'settings',
@@ -21,7 +22,7 @@
 
     menuService.addSubMenuItem('account', 'settings', {
       title: 'Edit Profile',
-      state: 'settings.profile'
+      state: 'settings.profile',
     });
 
     menuService.addSubMenuItem('account', 'settings', {
@@ -33,6 +34,6 @@
       title: 'Change Password',
       state: 'settings.password'
     });
-
+    
   }
 }());

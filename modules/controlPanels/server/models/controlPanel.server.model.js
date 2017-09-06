@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 function validateIsNumber(v) {
   var patt = /^\-?\d+(?:\.\d+)?$/;
   console.log('' + patt.test(v) + '');
-  return pat.test(v);
+  return patt.test(v);
 }
 
 /**
@@ -29,6 +29,9 @@ var ProgramSchema = new Schema({
     type: Number
   },
   hold: {
+    type: Number
+  },
+  timeToGoal: {
     type: Number
   }
 });
@@ -61,7 +64,18 @@ var ScheduleSchema = new Schema({
   },
   totalTiming: {
     type: Number
-  }
+  },
+  values: [
+    {
+      x: {
+        type: Number,
+        min: 0
+      },
+      y: {
+        type: Number
+      }
+    }
+  ]
 });
 
 /**

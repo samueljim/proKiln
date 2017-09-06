@@ -20,5 +20,8 @@
       <p ng-if="!controlPanel.scheduleStatus" class="list-group-item-text" >Not running</p>
     </a>
   </div>
+  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length">
+      No Kiln's found yet, why don't you <a data-ui-sref="core.about">set up one</a>?
+    </div>
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>

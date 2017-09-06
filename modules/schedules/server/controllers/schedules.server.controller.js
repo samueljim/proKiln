@@ -60,7 +60,49 @@ exports.update = function (req, res) {
   schedule.program = req.body.program;
   schedule.totalTiming = req.body.totalTiming;
   schedule.values = req.body.values;
+  schedule.startTemp = req.body.startTemp;
 
+  // schedule.program.forEach(function (segment, index) {
+  //   if (segment.hold < 0 || segment.rate === 0) {
+  //     return res.status(422).send({
+  //       message: 'Segment ' + segment.segment + ' has a error.'
+  //     });
+  //   }
+  // });
+
+  // var continue = true;
+
+  schedule.program.forEach(function (segment, index) {
+    // if (continue === true) {
+      if (segment.hold < 0) {
+        // continue = false;
+        return res.status(422).send({
+          message: 'Hold in Segment ' + segment.segment + ' must be more than zero.'
+        });
+      }
+      if (segment.rate === 0) {
+        // continue = false;
+        return res.status(422).send({
+          message: 'Rate in Segment ' + segment.segment + ' connot be zero.'
+        })
+      }
+      if ( index === 0 ) {
+        // continue = false;
+        if ( ( segment.rate < 0 && segment.goal > schedule.startTemp ) || ( segment.rate > 0 && segment.goal < schedule.startTemp ) ) {
+          return res.status(422).send({
+            message: 'Rate will never reach Goal in Segment ' + segment.segment + ''
+          })
+        }
+      } else {
+        // continue = false;
+        if ( ( segment.rate < 0 && segment.goal > schedule.program[index-1].goal ) || ( segment.rate > 0 && segment.goal < schedule.program[index-1].goal ) ) {
+          return res.status(422).send({
+            message: 'Rate will never reach Goal in Segment ' + segment.segment + ''
+          })
+        }
+      }
+    // }
+  });
 
   schedule.save(function (err) {
     if (err) {

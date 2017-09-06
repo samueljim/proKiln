@@ -62,7 +62,7 @@
         roles: ['user']
       };
 
-      // Initialize the kilns controller.
+      // Initialize the Articles controller.
       EditProfileController = $controller('EditProfileController as vm', {
         $scope: $scope
       });

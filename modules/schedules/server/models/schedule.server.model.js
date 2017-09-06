@@ -62,14 +62,21 @@ var ScheduleSchema = new Schema({
   totalTiming: {
     type: Number
   },
+  startTemp: {
+    type: Number,
+    default: 24,
+    required: 'No start temperature'
+  },
   values: [
     {
       x: {
         type: Number,
+        default: 0,
         min: 0
       },
       y: {
-        type: Number
+        type: Number,
+        default: 0
       }
     }
   ]

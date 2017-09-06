@@ -36,7 +36,7 @@
         }
       })
       .state('admin.controlPanels.edit', {
-        url: '/:controlPanelId/edit',
+        url: '/:controlPanelId/admin',
         templateUrl: '/modules/controlPanels/client/views/admin/form-controlPanel.client.view.html',
         controller: 'ControlPanelsAdminController',
         controllerAs: 'vm',

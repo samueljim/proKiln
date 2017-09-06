@@ -1,13 +1,19 @@
 <section>
   <div class="page-header">
-    <h1>Schedules
-      <a class="btn btn-primary pull-right" data-ui-sref="schedules.create">
-        <i class="glyphicon glyphicon-plus"></i>
-      </a>
-    </h1>
+    <div class="row">
+      <div class="col-md-5">
+       <h1>Schedules</h1>
+      </div>
+  
+    <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-5" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+      </div>
+      <button class="btn btn-primary pull-right" data-ui-sref="schedules.create"><i class="glyphicon glyphicon-plus"></i></button>
   </div>
+</div>
+  
   <div class="list-group">
-    <a ng-repeat="schedule in vm.schedules" ui-sref="schedules.program({ scheduleId: schedule._id })" class="list-group-item">
+    <a ng-repeat="schedule in vm.pagedItems" ui-sref="schedules.program({ scheduleId: schedule._id })" class="list-group-item">
       <small class="list-group-item-text">
         Created on
         <span ng-bind="schedule.created | date:'mediumDate'"></span>
@@ -19,4 +25,10 @@
       <p class="list-group-item-text" ng-bind="schedule.content"></p>
     </a>
   </div>
+  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length">
+      No schedule's found, why don't you <a data-ui-sref="schedules.create">make one</a>?
+    </div>
+    <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination> 
+    <button data-ng-if="vm.pagedItems.length > 5" class="btn btn-primary pull-right" data-ui-sref="schedules.create"><i class="glyphicon glyphicon-plus"></i></button>
+    
 </section>

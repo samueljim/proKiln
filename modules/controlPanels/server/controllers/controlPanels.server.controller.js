@@ -13,11 +13,11 @@ var numOfTemps = 5;
 /**
  * Create an controlPanel
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var controlPanel = new ControlPanel(req.body);
   controlPanel.user = req.user;
   controlPanel.temp = 0;
-  controlPanel.save(function(err) {
+  controlPanel.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -31,7 +31,7 @@ exports.create = function(req, res) {
 /**
  * Show the current controlPanel
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
   // temp filterfindOne
@@ -56,7 +56,7 @@ exports.read = function(req, res) {
 /**
  * Update an controlPanel
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var controlPanel = req.controlPanel;
 
   controlPanel.title = req.body.title;
@@ -71,7 +71,7 @@ exports.update = function(req, res) {
   controlPanel.scheduleProgress = req.body.scheduleProgress;
   controlPanel.scheduleStatus = req.body.scheduleStatus;
 
-  controlPanel.save(function(err) {
+  controlPanel.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -85,10 +85,10 @@ exports.update = function(req, res) {
 /**
  * Delete an controlPanel
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var controlPanel = req.controlPanel;
 
-  controlPanel.remove(function(err) {
+  controlPanel.remove(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -102,7 +102,7 @@ exports.delete = function(req, res) {
 /**
  * List of ControlPanels
  */
-exports.list = function(req, res) {
+exports.list = function (req, res) {
   var ownerOnly;
   if (req.user.roles[1] === 'admin') {
     console.log('' + req.user.roles[1]);
@@ -112,7 +112,7 @@ exports.list = function(req, res) {
       'user': req.user._id
     };
   }
-  ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function(err, controlPanels) {
+  ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function (err, controlPanels) {
     for (let controlPanel of controlPanels) {
       // remove all but the lastest temp
       controlPanel.temp = controlPanel.temp.slice(-1);
@@ -135,7 +135,7 @@ exports.list = function(req, res) {
 /**
  * ControlPanel middleware
  */
-exports.controlPanelByID = function(req, res, next, id) {
+exports.controlPanelByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -143,7 +143,7 @@ exports.controlPanelByID = function(req, res, next, id) {
     });
   }
 
-  ControlPanel.findById(id).populate('user', 'displayName').exec(function(err, controlPanel) {
+  ControlPanel.findById(id).populate('user', 'displayName').exec(function (err, controlPanel) {
     if (err) {
       return next(err);
     } else if (!controlPanel) {
