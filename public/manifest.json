@@ -1,0 +1,14 @@
+{
+  "name": "proKiln",
+  "short_name": "proKiln",
+  "start_url": ".",
+  "display": "browser",
+  "background_color": "#fff",
+  "theme_color": "#000",
+  "description": "proKiln",
+  "icons": [{
+    "src": "/modules/core/client/img/brand/icon.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }]
+}
