@@ -9,7 +9,7 @@
   "engines": {
     "node": ">=8.4.0",
     "npm": ">=5.3.8",
-	"yarn": "^1.0.2"
+    "yarn": "^1.0.2"
   },
   "scripts": {
     "update": "npm update && npm prune && npm run bower",
