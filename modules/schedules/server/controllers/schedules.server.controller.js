@@ -19,7 +19,7 @@ exports.create = function (req, res) {
     rate: 0,
     goal: 0,
     hold: 0
-  }]
+  }];
 
   schedule.save(function (err) {
     if (err) {
@@ -74,33 +74,24 @@ exports.update = function (req, res) {
 
   schedule.program.forEach(function (segment, index) {
     // if (continue === true) {
-      if (segment.hold < 0) {
-        // continue = false;
-        return res.status(422).send({
-          message: 'Hold in Segment ' + segment.segment + ' must be more than zero.'
-        });
-      }
-      if (segment.rate === 0) {
-        // continue = false;
-        return res.status(422).send({
-          message: 'Rate in Segment ' + segment.segment + ' connot be zero.'
-        })
-      }
-      if ( index === 0 ) {
-        // continue = false;
-        if ( ( segment.rate < 0 && segment.goal > schedule.startTemp ) || ( segment.rate > 0 && segment.goal < schedule.startTemp ) ) {
-          return res.status(422).send({
-            message: 'Rate will never reach Goal in Segment ' + segment.segment + ''
-          })
-        }
-      } else {
-        // continue = false;
-        if ( ( segment.rate < 0 && segment.goal > schedule.program[index-1].goal ) || ( segment.rate > 0 && segment.goal < schedule.program[index-1].goal ) ) {
-          return res.status(422).send({
-            message: 'Rate will never reach Goal in Segment ' + segment.segment + ''
-          })
-        }
-      }
+    if (segment.hold < 0) {
+      // continue = false;
+      return res.status(422).send({
+        message: 'Hold in Segment ' + segment.segment + ' must not be less than zero.'
+      });
+    }
+    if (segment.rate <= 0) {
+      // continue = false;
+      return res.status(422).send({
+        message: 'Rate in Segment ' + segment.segment + ' must be more than zero.'
+      });
+    }
+    if (segment.goal < 0) {
+      // continue = false;
+      return res.status(422).send({
+          message: 'Goal in Segment ' + segment.segment + ' must not be less than zero.'
+      });
+    }
     // }
   });
 

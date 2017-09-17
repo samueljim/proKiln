@@ -8,53 +8,65 @@
     </a>
   </div>
   <div class="container">
-      <canvas id="line" class="chart chart-line" chart-data="vm.schedule.values"
+      <canvas style="max-height: 400px" id="line" class="chart chart-line" chart-data="vm.schedule.values"
       chart-labels="vm.labels"  chart-options="vm.options"
-      chart-dataset-override="vm.datasetOverride" chart-click="vm.onClick">
+      chart-dataset-override="vm.datasetOverride">
       </canvas>
     <!-- <h2>Hover Rows</h2> -->
-    <table class="table table-hover">
+    <div class="row">
+        <div class="form-group col-sm-4 col-xs-12">
+            <label class="control-label" for="startTemp">Start Temperature</label>
+            <input type="number" name="startTemp" min="0" class="form-control" ng-change="vm.change()" ng-model="vm.schedule.startTemp">
+        </div>
+        <div class="form-group col-sm-4 col-xs-12">
+            <label class="control-label" for="extimatedTime">Estimated Time</label>
+            <!-- <input type="number" name="estimatedTime" class="form-control" ng-model="vm.schedule.totalTiming" readonly> -->
+            <br>
+            <h4>{{vm.schedule.totalTiming}} minute/s</h4>
+        </div>
+    <table class="table table-condensed col-md-8 col-xs-12">
       <thead>
         <tr>
           <th>Move</th>
           <th></th>
-          <th>Rate</th>
           <th>Goal</th>
+          <th>Rate</th>
           <th>Hold</th>
-          <th ng-if="(vm.schedule.program.length > 1)" >Remove</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody>
         <form name="vm.form.programForm" class="form-horizontal" validate>
-          <div class="form-group">
-            <label class="control-label" for="startTemp">Start Temperature</label>
-            <input type="number" name="startTemp" min="0" class="form-control" ng-change="vm.change()" ng-model="vm.schedule.startTemp">
-          </div>
-        <tr ng-repeat="segment in vm.schedule.program">
+
+        <tr ng-repeat="segment in vm.schedule.program" ng-class="{danger : segment.error}">
           <td>
-          <!-- <button type="button" ng-if="$first" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-up"></i></button> -->
-          <button type="button" ng-if="!$first" class='btn btn-default btn-block btn-sm' ng-click="vm.move($index, 1)"><i class="glyphicon glyphicon-menu-up"></i></button>
-          <button type="button" ng-if="!$last" class='btn btn-default btn-block btn-sm' ng-click="vm.move($index, 0)"><i class="glyphicon glyphicon-menu-down"></i></button>
-          <!-- <button type="button" ng-if="$last" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-down"></i></button> -->
-        </td>
-          <td name="segment"><h6 ng-bind="segment.segment = $index + 1"></h6></td>
-          <td>
-            <input id="rate" uib-tooltip='Rate in °C/hour' type="number" class="form-control" ng-change="vm.change()" name="rate" ng-model="segment.rate" required/>
-            <div ng-messages="vm.form.scheduleForm.rate.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Segment rate is required</p>
-            </div>
+            <!-- <button type="button" ng-if="$first" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-up"></i></button> -->
+            <button type="button" ng-disabled="$first" class='btn btn-default btn-block btn-sm' ng-click="vm.move($index, 1)"><i class="glyphicon glyphicon-menu-up"></i></button>
+            <button type="button" ng-disabled="$last" class='btn btn-default btn-block btn-sm' ng-click="vm.move($index, 0)"><i class="glyphicon glyphicon-menu-down"></i></button>
+            <!-- <button type="button" ng-if="$last" class='btn btn-default disabled btn-block btn-sm'><i class="glyphicon glyphicon-menu-down"></i></button> -->
           </td>
-          <td><input id="goal" uib-tooltip='Goal in °C' type="number" class="form-control" ng-change="vm.change()" name="goal" ng-model="segment.goal" required/></td>
-          <td><input id="hold" uib-tooltip='Hold in minutes' type="number" class="form-control" ng-change="vm.change()" name="hold" ng-model="segment.hold" required/></td>
+          <td name="segment"><h5 ng-bind="segment.segment = $index + 1"></h5></td>
+          <td ng-if="!$last"><input id="goal" uib-tooltip='Goal in °C' type="number" class="form-control" ng-change="vm.change()" name="goal" ng-model="segment.goal" required/></td>
+          <td ng-if="!$last"><input id="rate" uib-tooltip='Rate in °C/hour' type="number" class="form-control" ng-change="vm.change()" name="rate" ng-model="segment.rate" required/></td>
+          <td ng-if="!$last"><input id="hold" uib-tooltip='Hold in minutes'  type="number" class="form-control" ng-change="vm.change()" name="hold" ng-model="segment.hold" required/></td>
+          <td ng-if="$last"><input id="goal" uib-tooltip='Goal in °C' type="number" code="13" dl-key-code="vm.addSegment()" class="form-control" ng-change="vm.change()" name="goal" ng-model="segment.goal" required/></td>
+          <td ng-if="$last"><input id="rate" uib-tooltip='Rate in °C/hour' type="number" code="13" dl-key-code="vm.addSegment()" class="form-control" ng-change="vm.change()" name="rate" ng-model="segment.rate" required/></td>
+          <td ng-if="$last"><input id="hold" uib-tooltip='Hold in minutes' code="13" dl-key-code="vm.addSegment()" type="number" class="form-control" ng-change="vm.change()" name="hold" ng-model="segment.hold" required/></td>
           <td><button type="button" uib-tooltip='Remove this segment' ng-if="(vm.schedule.program.length > 1)" class='btn btn-warning btn-block' ng-click="vm.remove(segment)" ><i class="glyphicon glyphicon-remove"></i></button></td>
+        </tr>
+
+        <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+          <td><button type="button" class='btn btn-default btn-block' ng-click="vm.addSegment()"><i class="glyphicon glyphicon-plus-sign"></i></button></td>
         </tr>
       </form>
       </tbody>
     </table>
+  </div>
     <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed"><i class="glyphicon glyphicon-education"></i>  Intructions</button>
     <button type="button" class='btn btn-default' ng-click="vm.addSegment()"><i class="glyphicon glyphicon-plus-sign"></i>  Add Segment</button>
     <!-- <button type="button" class='btn btn-success' ng-click="vm.save()"><i class="glyphicon glyphicon-floppy-save"></i>  Save</button> -->
-    <button type="button" class='btn btn-success' type="submit" ng-click="vm.save()"><i class="glyphicon glyphicon-floppy-save"></i>  Save</button>
+    <button type="button" class='btn btn-success' type="submit" ng-click="vm.save(true, 1)"><i class="glyphicon glyphicon-floppy-save"></i> Force Save</button>
 
     <div uib-collapse="!isCollapsed">
       <div class="well well-lg">
@@ -68,6 +80,4 @@
         </ul>
       </div>
     </div>
-  </>
-
 </section>

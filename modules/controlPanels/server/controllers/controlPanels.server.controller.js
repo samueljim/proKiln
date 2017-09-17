@@ -8,7 +8,7 @@ var path = require('path'),
   ControlPanel = mongoose.model('ControlPanel'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-var numOfTemps = 5;
+var numOfTemps = 4000;
 
 /**
  * Create an controlPanel
@@ -16,7 +16,6 @@ var numOfTemps = 5;
 exports.create = function (req, res) {
   var controlPanel = new ControlPanel(req.body);
   controlPanel.user = req.user;
-  controlPanel.temp = 0;
   controlPanel.save(function (err) {
     if (err) {
       return res.status(422).send({
@@ -33,6 +32,7 @@ exports.create = function (req, res) {
  */
 exports.read = function (req, res) {
   // convert mongoose document to JSON
+  // numOfTemps = req.controlPanel.numOfTemps;
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
   // temp filterfindOne
   // controlPanel.temp = req.controlPanel.temp[temp]

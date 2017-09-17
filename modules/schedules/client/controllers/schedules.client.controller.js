@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -18,7 +18,7 @@
     // Remove existing Schedule
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.schedule.$remove(function() {
+        vm.schedule.$remove(function () {
           $state.go('schedules.list');
           Notification.success({
             message: '<i class="glyphicon glyphicon-ok"></i> Schedule deleted successfully!'

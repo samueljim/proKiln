@@ -12,7 +12,7 @@
     menuService.addMenu('account', {
       roles: ['user']
     });
-    
+
     menuService.addMenuItem('account', {
       title: '',
       state: 'settings',
@@ -22,7 +22,7 @@
 
     menuService.addSubMenuItem('account', 'settings', {
       title: 'Edit Profile',
-      state: 'settings.profile',
+      state: 'settings.profile'
     });
 
     menuService.addSubMenuItem('account', 'settings', {
@@ -34,6 +34,29 @@
       title: 'Change Password',
       state: 'settings.password'
     });
-    
+
+    menuService.addMenuItem('topbar', {
+      title: 'Documentation',
+      state: 'docs',
+      data: {
+        pageTitle: 'Documentation'
+      }
+    });
+
+    menuService.addMenuItem('topbar', {
+      title: 'About',
+      state: 'about',
+      data: {
+        pageTitle: 'A new way to fire'
+      }
+    });
+
+    menuService.addMenuItem('topbar', {
+      title: 'Buy',
+      state: 'buy',
+      data: {
+        pageTitle: 'Change the way you think about kilns'
+      }
+    });
   }
 }());

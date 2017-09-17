@@ -63,11 +63,15 @@
       })
       .state('about', {
         url: '/about',
-        templateUrl: '/modules/core/client/views/about.client.view.html',
+        templateUrl: '/modules/core/client/views/about.client.view.html'
       })
       .state('docs', {
         url: '/documentation',
-        templateUrl: '/modules/core/client/views/docs.client.view.html',
+        templateUrl: '/modules/core/client/views/docs.client.view.html'
+      })
+      .state('buy', {
+        url: '/buy',
+        templateUrl: '/modules/core/client/views/buy.client.view.html'
       })
       .state('forbidden', {
         url: '/forbidden',

@@ -33,6 +33,12 @@ var ProgramSchema = new Schema({
   },
   timeToGoal: {
     type: Number
+  },
+  firstCumulative: {
+    type: Number
+  },
+  secondCumulative: {
+    type: Number
   }
 });
 /**
@@ -65,14 +71,21 @@ var ScheduleSchema = new Schema({
   totalTiming: {
     type: Number
   },
+  startTemp: {
+    type: Number,
+    default: 24,
+    required: 'No start temperature'
+  },
   values: [
     {
       x: {
         type: Number,
+        default: 0,
         min: 0
       },
       y: {
-        type: Number
+        type: Number,
+        default: 0
       }
     }
   ]
@@ -107,18 +120,17 @@ var ControlPanelSchema = new Schema({
     default: false
   },
   temp: [{
-    data: {
+    y: {
       type: Number,
       trim: true,
-      default: null,
-      required: 'temp cannot be blank'
+      default: null
       //
       // patten: '/^\-?\d+(?:\.\d+)?$/',
       // messages: {
       //   patten: 'temp must be a valid number'
       // }
     },
-    time: {
+    x: {
       type: Date,
       default: Date.now
     }

@@ -35,7 +35,7 @@
       var end = begin + vm.itemsPerPage;
       //
 
-      vm.pagedItems = vm.filteredItems.slice(begin, end);  
+      vm.pagedItems = vm.filteredItems.slice(begin, end);
     }
     function pageChanged() {
       vm.figureOutItemsToDisplay();

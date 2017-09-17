@@ -8,7 +8,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=8.4.0",
-    "npm": ">=3.10.8"
+    "npm": ">=3.10.8",
+	"yarn": "^1.0.2"
   },
   "scripts": {
     "update": "npm update && npm prune && npm run bower",
@@ -69,11 +70,11 @@
     "passport-github": "~1.1.0",
     "passport-google-oauth": "~1.0.0",
     "passport-linkedin": "~1.0.0",
-    "passport-local": "~1.0.0",
+    "passport-local": "^1.0.0",
     "passport-paypal-openidconnect": "~0.1.1",
     "passport-twitter": "~1.0.4",
     "serve-favicon": "~2.4.2",
-    "socket.io": "2.0.3",
+    "socket.io": "^1.7.3",
     "validator": "~8.0.0",
     "winston": "^2.3.1",
     "wiredep": "~4.0.0"

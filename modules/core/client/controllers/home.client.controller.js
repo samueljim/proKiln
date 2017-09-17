@@ -5,11 +5,10 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope'];
+  HomeController.$inject = ['$scope'];
 
   function HomeController($scope) {
     var vm = this;
-    
     vm.myInterval = 3000;
     vm.noWrapSlides = false;
     vm.activeSlide = 0;
@@ -21,7 +20,7 @@
         image: 'http://lorempixel.com/400/200/food'
       },
       {
-        image: 'http://lorempixel.com/400/200/sports'
+        image: 'http://lorempixel.com/400/200/technics'
       },
       {
         image: 'http://lorempixel.com/400/200/people'
