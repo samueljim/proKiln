@@ -8,7 +8,7 @@
   "license": "MIT",
   "engines": {
     "node": ">=8.4.0",
-    "npm": ">=3.10.8",
+    "npm": ">=5.3.8",
 	"yarn": "^1.0.2"
   },
   "scripts": {
@@ -19,7 +19,7 @@
     "start:prod": "gulp prod",
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
     "gulp": "gulp",
-    "bower": "bower install --allow-root && bower prune --allow-root",
+    "bower": "bower install --allow-root",
     "lint": "gulp lint",
     "test": "gulp test",
     "test:server": "gulp test:server",
