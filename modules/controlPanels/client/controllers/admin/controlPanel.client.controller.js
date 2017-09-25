@@ -20,7 +20,7 @@
     // Remove existing ControlPanel
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.controlPanel.$remove(function() {
+        vm.controlPanel.$remove(function () {
           $state.go('admin.controlPanels.list');
           Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> ControlPanel deleted successfully!' });
         });

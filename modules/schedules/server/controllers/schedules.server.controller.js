@@ -14,6 +14,12 @@ var path = require('path'),
 exports.create = function (req, res) {
   var schedule = new Schedule(req.body);
   schedule.user = req.user;
+  schedule.program = [{
+    segment: 1,
+    rate: 0,
+    goal: 0,
+    hold: 0
+  }];
 
   schedule.save(function (err) {
     if (err) {
@@ -50,7 +56,44 @@ exports.update = function (req, res) {
   schedule.content = req.body.content;
   // controlPanel.schedule = req.body.schedule;
   schedule.scheduleStatus = req.body.scheduleStatus;
-  
+  schedule.scheduleStatus = req.body.scheduleStatus;
+  schedule.program = req.body.program;
+  schedule.totalTiming = req.body.totalTiming;
+  schedule.values = req.body.values;
+  schedule.startTemp = req.body.startTemp;
+
+  // schedule.program.forEach(function (segment, index) {
+  //   if (segment.hold < 0 || segment.rate === 0) {
+  //     return res.status(422).send({
+  //       message: 'Segment ' + segment.segment + ' has a error.'
+  //     });
+  //   }
+  // });
+
+  // var continue = true;
+
+  schedule.program.forEach(function (segment, index) {
+    // if (continue === true) {
+    if (segment.hold < 0) {
+      // continue = false;
+      return res.status(422).send({
+        message: 'Hold in Segment ' + segment.segment + ' must not be less than zero.'
+      });
+    }
+    if (segment.rate <= 0) {
+      // continue = false;
+      return res.status(422).send({
+        message: 'Rate in Segment ' + segment.segment + ' must be more than zero.'
+      });
+    }
+    if (segment.goal < 0) {
+      // continue = false;
+      return res.status(422).send({
+          message: 'Goal in Segment ' + segment.segment + ' must not be less than zero.'
+      });
+    }
+    // }
+  });
 
   schedule.save(function (err) {
     if (err) {

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -18,7 +18,7 @@
     // Remove existing Schedule
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.schedule.$remove(function() {
+        vm.schedule.$remove(function () {
           $state.go('schedules.list');
           Notification.success({
             message: '<i class="glyphicon glyphicon-ok"></i> Schedule deleted successfully!'
@@ -40,7 +40,15 @@
         .catch(errorCallback);
 
       function successCallback(res) {
-        $state.go('schedules.list'); // should we send the User to the list or the updated Schedule's view?
+        $state.go('schedules.list');
+        // console.log(schedule._id);
+        // $scope.$on('$viewContentLoaded',
+        //   function(event){
+        //     $state.go('schedules.program({ scheduleId: schedule._id })');
+        //   }
+        // );
+
+        // should we send the User to the list or the updated Schedule's view?
         Notification.success({
           message: '<i class="glyphicon glyphicon-ok"></i> Schedule saved successfully!'
         });

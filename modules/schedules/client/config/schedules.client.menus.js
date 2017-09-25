@@ -14,7 +14,6 @@
       // type: 'dropdown',
       roles: ['user']
     });
-
     // Add the dropdown list item
     // menuService.addSubMenuItem('topbar', 'schedules', {
     //   title: 'List Schedules',

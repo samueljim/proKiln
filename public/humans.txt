@@ -13,5 +13,3 @@
 
     HTML5, CSS3
     jQuery, Modernizr
-
-    Samuel Henry made this

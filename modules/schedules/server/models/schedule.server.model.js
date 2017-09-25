@@ -21,6 +21,15 @@ var ProgramSchema = new Schema({
   },
   hold: {
     type: Number
+  },
+  timeToGoal: {
+    type: Number
+  },
+  firstCumulative: {
+    type: Number
+  },
+  secondCumulative: {
+    type: Number
   }
 });
 /**
@@ -49,7 +58,28 @@ var ScheduleSchema = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'User'
-  }
+  },
+  totalTiming: {
+    type: Number
+  },
+  startTemp: {
+    type: Number,
+    default: 24,
+    required: 'No start temperature'
+  },
+  values: [
+    {
+      x: {
+        type: Number,
+        default: 0,
+        min: 0
+      },
+      y: {
+        type: Number,
+        default: 0
+      }
+    }
+  ]
 });
 
 // var Points  = mongoose.model('Points', pointsSchema);

@@ -10,9 +10,9 @@
   function ControlPanelsListController($state, $scope, $filter, ControlPanelsService, Authentication, Socket, Notification) {
     var vm = this;
 
+    vm.pageChanged = pageChanged;
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
-    vm.pageChanged = pageChanged;
 
     ControlPanelsService.query(function (data) {
       vm.controlPanels = data;
@@ -55,49 +55,53 @@
       // Make sure the Socket is connected
       if (!Socket.socket) {
         Socket.connect();
-        console.log("Connection Socket");
+        console.log('Connection Socket');
       }
 
-    for (let controlPanel of vm.pagedItems) {
-      Socket.emit('id', {
-        id: controlPanel._id,
-        time: Date.now()
-      });
-      controlPanel.liveTemp = controlPanel.temp[controlPanel.temp.length -1].data;
-      controlPanel.updateTime = controlPanel.temp[controlPanel.temp.length -1].time;
+	// for (let controlPanel in vm.pagedItems) {
+      vm.pagedItems.forEach(function (controlPanel, index) {
+        Socket.emit('id', {
+          id: controlPanel._id,
+          time: Date.now()
+        });
+        controlPanel.liveTemp = controlPanel.runs[0].temp[0].y;
+        controlPanel.updateTime = controlPanel.runs[0].temp[0].x;
 
-      Socket.removeListener('tempServerUpdate' + controlPanel._id);
+        Socket.emit('clientId', { id: controlPanel._id });
 
-          Socket.on('tempServerUpdate' + controlPanel._id, function(data) {
-            if (data.id === controlPanel._id){
-              controlPanel.liveTemp = data.temp;
-              controlPanel.updateTime = data.time;
-              // Notification.info ({
-              //   message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + controlPanel.liveTemp
-              // });
-            }
+        Socket.removeListener('tempServerUpdate' + controlPanel._id);
+
+        Socket.on('tempServerUpdate' + controlPanel._id, function (data) {
+          if (data.id === controlPanel._id) {
+            controlPanel.liveTemp = data.temp;
+            controlPanel.updateTime = data.time;
+            // Notification.info ({
+            //   message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + controlPanel.liveTemp
+            // });
+          }
+        });
+
+        Socket.removeListener('kilnStatus' + controlPanel._id);
+
+        Socket.on('kilnStatus' + controlPanel._id, function (data) {
+          controlPanel.schedule = data.schedule;
+          controlPanel.online = data.online;
+          vm.controlPanel.scheduleProgress = data.scheduleProgress;
+          vm.controlPanel.scheduleStatus = data.scheduleStatus;
+          Notification.info({
+            message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + data.scheduleStatus
           });
+        });
 
-          Socket.removeListener('kilnStatus' + controlPanel._id);
-
-          Socket.on('kilnStatus' + controlPanel._id, function(data) {
-            controlPanel.schedule = data.schedule;
-            controlPanel.online = data.online;
-            vm.controlPanel.scheduleProgress = data.scheduleProgress;
-            vm.controlPanel.scheduleStatus = data.scheduleStatus;
-            Notification.info ({
-              message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + data.scheduleStatus
-            });
-          });
-
-          Socket.removeListener('disconnect');
-          Socket.on('disconnect', function(){
-            console.log("disconnect so connecting again");
-            Socket.connect();
-
-            // init();
-          });
+        Socket.removeListener('disconnect');
+        Socket.on('disconnect', function () {
+          console.log('disconnect so connecting again');
+          Socket.connect();
+          // init();
+        });
+      }
+    );
     }
   }
-  }
-}());
+}()
+);

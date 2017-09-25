@@ -4,7 +4,7 @@ module.exports = {
   app: {
     title: 'proKiln',
     description: 'a glass kiln controlling platform',
-    keywords: 'glass works, glass, kiln, furnace, pi, arduino, lowcost',
+    keywords: 'schedules, glass, kiln, furnace, pi, lowcost, kiln controller, controller, schedule, kilncontroller',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'UA-98093068-1'
   },
   db: {
@@ -14,7 +14,7 @@ module.exports = {
   host: process.env.HOST || '0.0.0.0',
   // DOMAIN config should be set to the fully qualified application accessible
   // URL. For example: https://www.myapp.com (including port if required).
-  domain: process.env.DOMAIN || 'https://prokiln.herokuapp.com',
+  domain: process.env.DOMAIN || 'https://www.prokiln.com',
   // Session Cookie settings
   sessionCookie: {
     // session expiration is set by default to 24 hours
@@ -28,7 +28,7 @@ module.exports = {
     secure: false
   },
   // sessionSecret should be changed for security measures and concerns
-  sessionSecret: process.env.SESSION_SECRET || 'SAMUEL',
+  sessionSecret: process.env.SESSION_SECRET || 'tappingIsGreat',
   // sessionKey is the cookie session name
   sessionKey: 'sessionId',
   sessionCollection: 'sessions',
@@ -43,7 +43,7 @@ module.exports = {
   logo: 'modules/core/client/img/brand/logo.png',
   favicon: 'modules/core/client/img/brand/favicon.ico',
   illegalUsernames: ['meanjs', 'administrator', 'password', 'admin', 'user',
-    'unknown', 'anonymous', 'null', 'undefined', 'api'
+    'unknown', 'anonymous', 'null', 'undefined', 'api', 'tapping', 'prokiln', 'doggo', 'proKiln'
   ],
   uploads: {
     profile: {
@@ -60,7 +60,7 @@ module.exports = {
       allowPassphrases: true,
       maxLength: 128,
       minLength: 5,
-      minPhraseLength: 20,
+      minPhraseLength: 15,
       minOptionalTestsToPass: 3
     }
   }

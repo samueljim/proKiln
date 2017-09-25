@@ -1,7 +1,7 @@
 (function (window) {
   'use strict';
 
-  var applicationModuleName = 'mean';
+  var applicationModuleName = 'proKiln';
 
   var service = {
     applicationEnvironment: window.env,
@@ -22,7 +22,7 @@
   }
 
   // Angular-ui-notification configuration
-  angular.module('ui-notification').config(function(NotificationProvider) {
+  angular.module('ui-notification').config(function (NotificationProvider) {
     NotificationProvider.setOptions({
       delay: 2000,
       startTop: 20,

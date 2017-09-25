@@ -8,16 +8,30 @@ var path = require('path'),
   ControlPanel = mongoose.model('ControlPanel'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
-var numOfTemps = 5;
+var numOfTemps = 4000;
 
 /**
  * Create an controlPanel
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   var controlPanel = new ControlPanel(req.body);
+  controlPanel.runs = {
+    scheduleTitle: null,
+    values: [
+      {
+        x: null,
+        y: null
+      }
+    ],
+    temp: [
+      {
+        y: null,
+        x: null
+     }
+    ]
+    };
   controlPanel.user = req.user;
-  controlPanel.temp = 0;
-  controlPanel.save(function(err) {
+  controlPanel.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -31,9 +45,11 @@ exports.create = function(req, res) {
 /**
  * Show the current controlPanel
  */
-exports.read = function(req, res) {
+exports.read = function (req, res) {
   // convert mongoose document to JSON
+  // numOfTemps = req.controlPanel.numOfTemps;
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
+  controlPanel.runs = controlPanel.runs[req.controlPanel.runNum - 1];
   // temp filterfindOne
   // controlPanel.temp = req.controlPanel.temp[temp]
   // req.controlPanel ? req.controlPanel.find( {}, { temp: { $slice: -1 }}) : {};
@@ -41,9 +57,13 @@ exports.read = function(req, res) {
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the ControlPanel model.
   controlPanel.isCurrentUserOwner = !!(req.user && controlPanel.user && controlPanel.user._id.toString() === req.user._id.toString());
   if (controlPanel.isCurrentUserOwner || req.user.roles[1] === 'admin') {
-    // var test = controlPanel.temp.slice(10);
-    // controlPanel.temp.slice(3)
-    controlPanel.temp = controlPanel.temp.slice(-numOfTemps);
+  // TODO put this back in
+
+    // controlPanel.runs = controlPanel.runs[controlPanel.runNum - 1];
+
+    // controlPanel.runs.temp = controlPanel.runs[controlPanel.runNum - 1].temp;
+    // controlPanel.runs = controlPanel.runs[controlPanel.runNum];
+    console.log(controlPanel.runs.temp);
     res.json(controlPanel);
   } else {
     return res.status(403).json({
@@ -56,7 +76,7 @@ exports.read = function(req, res) {
 /**
  * Update an controlPanel
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
   var controlPanel = req.controlPanel;
 
   controlPanel.title = req.body.title;
@@ -71,7 +91,7 @@ exports.update = function(req, res) {
   controlPanel.scheduleProgress = req.body.scheduleProgress;
   controlPanel.scheduleStatus = req.body.scheduleStatus;
 
-  controlPanel.save(function(err) {
+  controlPanel.save(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -85,10 +105,10 @@ exports.update = function(req, res) {
 /**
  * Delete an controlPanel
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
   var controlPanel = req.controlPanel;
 
-  controlPanel.remove(function(err) {
+  controlPanel.remove(function (err) {
     if (err) {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
@@ -102,7 +122,7 @@ exports.delete = function(req, res) {
 /**
  * List of ControlPanels
  */
-exports.list = function(req, res) {
+exports.list = function (req, res) {
   var ownerOnly;
   if (req.user.roles[1] === 'admin') {
     console.log('' + req.user.roles[1]);
@@ -112,9 +132,16 @@ exports.list = function(req, res) {
       'user': req.user._id
     };
   }
-  ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function(err, controlPanels) {
+  ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function (err, controlPanels) {
     for (let controlPanel of controlPanels) {
-      controlPanel.temp = controlPanel.temp.slice(-1);
+      // remove all but the lastest temp
+      controlPanel.runs = controlPanel.runs[controlPanel.runNum - 1];
+      controlPanel.runs.temp = controlPanel.runs[controlPanel.runNum - 1].temp.slice(-1);
+      // controlPanel.runs[controlPanel.runNum-1].values = 0;
+      // controlPanel.runs = 0;
+      // set the schedule to be a none existant schedule so it won't show
+      controlPanel.schedule = controlPanel.schedule.slice(-2);
+
     }
 
     if (err) {
@@ -131,7 +158,7 @@ exports.list = function(req, res) {
 /**
  * ControlPanel middleware
  */
-exports.controlPanelByID = function(req, res, next, id) {
+exports.controlPanelByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
@@ -139,7 +166,7 @@ exports.controlPanelByID = function(req, res, next, id) {
     });
   }
 
-  ControlPanel.findById(id).populate('user', 'displayName').exec(function(err, controlPanel) {
+  ControlPanel.findById(id).populate('user', 'displayName').exec(function (err, controlPanel) {
     if (err) {
       return next(err);
     } else if (!controlPanel) {

@@ -41,7 +41,7 @@ exports.invokeRolesPolicies = function () {
   //     permissions: ['']
   //   }]
   // }
-]);
+  ]);
 };
 
 /**

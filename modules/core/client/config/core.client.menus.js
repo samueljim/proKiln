@@ -8,6 +8,7 @@
   menuConfig.$inject = ['menuService'];
 
   function menuConfig(menuService) {
+
     menuService.addMenu('account', {
       roles: ['user']
     });
@@ -34,5 +35,28 @@
       state: 'settings.password'
     });
 
+    menuService.addMenuItem('topbar', {
+      title: 'Documentation',
+      state: 'documentation',
+      data: {
+        pageTitle: 'Documentation'
+      }
+    });
+
+    menuService.addMenuItem('topbar', {
+      title: 'About',
+      state: 'about',
+      data: {
+        pageTitle: 'A new way to fire'
+      }
+    });
+
+    menuService.addMenuItem('topbar', {
+      title: 'Buy',
+      state: 'buy',
+      data: {
+        pageTitle: 'Change the way you think about kilns'
+      }
+    });
   }
 }());
