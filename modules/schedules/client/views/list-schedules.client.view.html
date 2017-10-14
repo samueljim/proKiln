@@ -25,7 +25,12 @@
       <p class="list-group-item-text" ng-bind="schedule.content"></p>
     </a>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length">
+  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems">
+      <font size="5">
+          Loading request
+      </font>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length && vm.pagedItems">
       No schedule's found, why don't you <a data-ui-sref="schedules.create">make one</a>?
     </div>
     <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination> 

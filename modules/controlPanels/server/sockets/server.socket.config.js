@@ -16,74 +16,93 @@ var path = require('path'),
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
 
-var onlineSockets = [{ socket: 'Socket 1', id: 'Kiln 1' }];
-var onlineClients = [{ socket: 'Socket 1', id: 'Client 1' }];
+var onlineKilnSockets = ['Tapping'];
+var onlineClientSockets = ['Parker'];
+var onlineKilnId = ['Wynter'];
+var onlineClientId = ['Henry'];
+
+var random = 24;
 
 // Create the temp configuration
 module.exports = function (io, socket) {
-  // fuction to see if element is in an array
-  function contains(arr, element) {
-    for (var i = 0; i < arr.length; i++) {
-      if (arr[i] === element) {
-        return true;
-      }
-    }
-    return false;
-}
 
   // add users to new room when they connect
   socket.on('connection', function (data) {
     console.log('connection ' + socket.id);
- //   socket.join(data.id);
+    // socket.join(data.id);
   });
 
   socket.on('disconnect', function (data) {
-    var info;
-    function findSocket(input) {
-      return input.socket === socket.id;
+
+    if (onlineClientSockets.includes(socket.id)) {
+      var client = onlineKilnSockets.indexOf(socket.id);
+
+      // onlineClientId.splice(client, 1);
+
+      for (var i = onlineClientId.length - 1; i >= 0; i--) {
+        if (onlineClientSockets[i] === socket.id) {
+          socket.leave(onlineClientId[i]);
+          onlineClientId.splice(i, 1);
+          onlineClientSockets.splice(i, 1);
+        }
+      }
     }
 
-    var kiln = onlineSockets.indexOf(findSocket);
-    var client = onlineClients.indexOf(findSocket);
-    console.log(kiln);
-    console.log(client);
-    if (kiln != -1) {
-      info = onlineSockets.find(findSocket);
-      console.log(chalk.red('Kiln went offline ' + info.id));
-      kilnOnline(info.id, false);
-      onlineSockets.splice(kiln, 1);
-      socket.leave(info.id);
+    if (onlineKilnSockets.includes(socket.id)) {
+      var kiln = onlineKilnSockets.indexOf(socket.id);
+      socket.leave(onlineKilnId[kiln]);
+      kilnOnline(onlineKilnId[kiln], false);
+      onlineKilnId.splice(kiln, 1);
+      onlineKilnSockets.splice(kiln, 1);
     }
 
-    if (client != -1) {
-      info = onlineSockets.find(findSocket);
-      console.log(chalk.red('User left sockets ' + info.id));
-      onlineSockets.splice(client, 1);
-      socket.leave(info.id);
-    }
+    // var info;
+    // function findSocket(input) {
+    //   return input.socket === socket.id;
+    // }
 
-    console.log('Clients ' + onlineClients);
-    console.log('Kilns ' + onlineSockets);
+    // var kiln = onlineSockets.indexOf(findSocket);
+    // var client = onlineClients.indexOf(findSocket);
+    // console.log(kiln);
+    // console.log(client);
+    // if (kiln != -1) {
+    //   info = onlineSockets.find(findSocket);
+    //   console.log(chalk.red('Kiln went offline ' + info.id));
+    //   kilnOnline(info.id, false);
+    //   onlineSockets.splice(kiln, 1);
+    //   socket.leave(info.id);
+    // }
 
+    // if (client != -1) {
+    //   info = onlineSockets.find(findSocket);
+    //   console.log(chalk.red('User left sockets ' + info.id));
+    //   onlineSockets.splice(client, 1);
+    //   socket.leave(info.id);
+    // }
+
+
+    console.log('Clients ' + onlineClientId);
+    console.log('Connection ' + onlineClientSockets);
+    console.log('----------');
+    console.log('Kilns ' + onlineKilnId);
+    console.log('Connection ' + onlineKilnSockets);
   });
 
   // fuction gets called when client on the site connects
   socket.on('clientId', function (data) {
-    
-    function findId(input) {
-      return input.id === data.id;
+
+    if (onlineClientId.includes(data.id)) {
+      var client = onlineClientId.indexOf(data.id);
+      onlineClientId.splice(client, 1);
+      onlineClientSockets.splice(client, 1);
+      socket.leave(data.id);
     }
 
-    var kiln = onlineSockets.indexOf(findId);
-    socket.leave(data.id);
-    onlineSockets.splice(kiln, 1);
-    if (kiln != -1) {
-    
-    }
-    onlineClients.push({ socket: socket.id, id: data.id });
+    onlineClientId.push(data.id);
+    onlineClientSockets.push(socket.id);
+
     console.log(chalk.green('client connected to ' + data.id));
-
-    console.log(onlineClients);
+    console.log(onlineClientId);
     socket.join(data.id);
   });
 
@@ -91,19 +110,24 @@ module.exports = function (io, socket) {
   socket.on('kilnId', function (data) {
     data = JSON.parse(data);
 
-    function findId(input) {
-      return input.id === data.id;
+    if (onlineKilnSockets.includes(data.id)) {
+      var kiln = onlineKilnSockets.indexOf(data.id);
+      onlineKilnId.splice(kiln, 1);
+      onlineKilnSockets.splice(kiln, 1);
+      socket.leave(data.id);
     }
 
-    socket.leave(data.id);
     data.online = true;
-    onlineSockets.pop(findId);
+
     console.log(chalk.cyan('kiln connected to ' + data.id));
 
     kilnOnline(data.id, true);
-    onlineSockets.push({ socket: socket.id, id: data.id });
 
-    console.log(onlineSockets);
+    onlineKilnId.push(data.id);
+    onlineKilnSockets.push(socket.id);
+
+
+    console.log(onlineKilnSockets);
     socket.join(data.id);
   });
 
@@ -111,40 +135,6 @@ module.exports = function (io, socket) {
     data = JSON.parse(data);
     newKiln(data);
   });
-
-
-  //   passport.use(new LocalStrategy(
-  //     function(data.username, data.password, done) {
-  //       User.findOne({ username: data.username }, function(err, user) {
-  //         if (err) {
-  //           console.log("kilnSetup error");
-  //          }
-  //         if (!user) {
-  //           console.log("no user - kilnSetup error");
-  //         }
-  //         if (!user.validPassword(password)) {
-  //           console.log("wrong password - kilnSetup error");
-  //         }
-  //         console.log("kilnSetup " + user.username);
-  //       });
-  //     }
-  //   ));
-  //   var kiln = {
-  //     title: data.title,
-  //     user: user
-  //   };
-  //   var controlPanel = new ControlPanel(kiln);
-  //   controlPanel.save(function (err) {
-  //     if (err) {
-  //       return res.status(422).send({
-  //         message: errorHandler.getErrorMessage(err)
-  //       });
-  //     } else {
-  //       res.json(controlPanel);
-  //       console.log('kiln ' + controlPanel.id + ' added');
-  //     }
-  //   });
-  // });
 
   socket.on('kilnScheduleUpdate', function (data) {
     data = JSON.parse(data);
@@ -161,7 +151,7 @@ module.exports = function (io, socket) {
 
   // Send a temp updates to all connected sockets when a data is received
   socket.on('tempKilnUpdate', function (data) {
-    console.log(data);    
+    console.log(data);
     data = JSON.parse(data);
     console.log(data);
     data.x = Date.now();
@@ -172,7 +162,7 @@ module.exports = function (io, socket) {
     // // update the database before moving on
     updateTempDatabase(data);
     // send to client the new temp and time of temp change
-    io.in(data.id).emit('tempServerUpdate' + data.id, data);
+    // io.in(data.id).emit('tempServerUpdate' + data.id, data);
   });
 
   socket.on('emailUpdate', function (data) {
@@ -181,25 +171,81 @@ module.exports = function (io, socket) {
   });
 
   socket.on('stop', function (data) {
+
+    // var info = { username: 'samueljim', title: 'Test kiln' };
+    // newKiln(info);
+
     io.in(data.id).emit('kilnStop', {});
   });
+
+  // for demo
+  function randomTemp(inputID) {
+    var data = {
+      id: inputID
+    };
+    // data.x = Date.now();
+    // -1 or 1 with 30% probability
+    random += Math.random() < 0.2 ? -Math.random() : +Math.random();
+
+    if (random > 400) {
+      random += Math.random() < 0.7 ? -Math.random() : +Math.random();
+    }
+    random = Math.round(random * 100) / 100;
+    if (random < 1) {
+      random = 1;
+    }
+    data.y = random;
+
+    updateTempDatabase(data);
+  }
+
   // this fuction will update the database so that it has the latest temp
   function updateTempDatabase(entries) {
     var id = entries.id;
+    var data;
     // var data.data = data.temp;
-    ControlPanel.findByIdAndUpdate(id,
-      { $push: { 'runs.temp[runNum]': { $each: [
-        { y: entries.y }],
-        $slice: -40
-      }
-      }
-      },
-      function (err, raw) {
-        if (err) {
-          console.log(chalk.red('Error ' + err + ' The raw response from Mongo was ', raw));
-          errorHandler(err);
+    // console.log(chalk.red('run'));
+    ControlPanel.findById(id, function (err, controlPanel) {
+      if (err) return errorHandler(err);
+      if (controlPanel.runNum <= 1) {
+        controlPanel.runNum++;
+        // controlPanel.runs[controlPanel.runNum].startTime = Date.now();
+        controlPanel.runs.push({
+          scheduleTitle: 'First Run',
+          startTime: Date.now(),
+          temp: [
+            {
+              y: 0,
+              x: 0
+            }
+          ]
         }
-      });
+      );
+      }
+      var time = Date.now() - controlPanel.runs[controlPanel.runNum].startTime;
+
+      // console.log(time);
+      data = {
+        y: entries.y,
+        x: time
+      };
+      // var array = 'runs.' + controlPanel.runNum + '.temp';
+      // console.log('it works');
+      controlPanel.runs[controlPanel.runNum].temp.push(data);
+
+      // send to client the new temp and time of temp change
+      io.in(id).emit('tempServerUpdate' + id, data);
+
+      controlPanel.save(
+        // $slice: -4000
+    function (err, raw) {
+      if (err) {
+        console.log(chalk.red('Error ' + err + ' The raw response from Mongo was ', raw));
+        // errorHandler(err);
+      }
+    });
+    });
+
   }
   // working
   function kilnOnline(id, state) {
@@ -213,6 +259,20 @@ module.exports = function (io, socket) {
   }
   // not tested
   function kilnStatusUpdate(id, data) {
+    if (data.scheduleStatus === 'start') {
+      data.runNum++;
+      data.runs.push({
+        scheduleTitle: data.scheduleTitle,
+        temp: [
+          {
+            y: 0,
+            x: 0
+          }
+        ]
+      }
+    );
+      data.scheduleStatus = 'starting';
+    }
     ControlPanel.findByIdAndUpdate(id, data,
       function (err, raw) {
         if (err) {
@@ -225,78 +285,37 @@ module.exports = function (io, socket) {
   function newKiln(info) {
     var controlPanel = new ControlPanel(info);
     controlPanel.runs = {
-      scheduleTitle: null,
-      values: [
-        {
-          x: Date.now(),
-          y: null
-        }
-      ],
+      scheduleTitle: 'No runs',
       temp: [
         {
           y: null,
           x: null
-       }
+        }
       ]
     };
-    controlPanel.user = info.user;
-    controlPanel.save(function (err) {
-      if (err) {
-        console.log('Kiln failed to be made');
-        console.log(chalk.red(err));
-        return 'failed';
-      } else {
-        console.log(chalk.bgGreen('New kiln ' + controlPanel.id));
-        return controlPanel.id;
-      }
-    });
-  }
-
-  // function retrieveKiln(id) {
-  //   ControlPanel.findById(id, function (err, ControlPanel) {
-  //     if (err) {
-  //       console.log(err);
-  //       return null;
-  //     } else {
-  //       return ControlPanel[0];
-  //     }
-  //   });
-  // }
-
-  // function retrieveEmail(kilnID) {
-  //   User.findById(kilnID, function (err, User) {
-  //     if (err) {
-  //       console.log(err);
-  //       return null;
-  //     } else {
-  //       return User;
-  //     }
-  //   });
-  // }
-
-  function retrieveUseriId(username) {
-    User.findOne({ 'username': username }, '_id', function (err, User) {
+    User.findOne({ 'username': info.username }, function (err, User) {
       if (err) {
         console.log(chalk.red(err));
-        return null;
       } else {
-        return User._id;
+        controlPanel.user = User._id;
+        controlPanel.save(function (err) {
+          if (err) {
+            console.log('Kiln failed to be made');
+            console.log(chalk.red(err));
+          } else {
+            console.log(chalk.bgGreen('New kiln ' + controlPanel.id));
+            return controlPanel.id;
+          }
+        });
       }
     });
   }
 
-  function retrieveUser(username) {
-    User.findOne({ 'username': username }, function (err, User) {
-      if (err) {
-        console.log(err);
-        return null;
-      } else {
-        console.log(User.email);
-        return User;
-      }
-    });
-  }
-  // TODO fix
+
+  // this is where the demo kilns are set
+
+  setInterval(randomTemp.bind(null, '59e07c27f069b80f3033e260'), 1000);
+
   function emailAlerts(id, message) {
     // find kiln
     ControlPanel.findById(id, function (err, ControlPanel) {
@@ -334,27 +353,5 @@ module.exports = function (io, socket) {
       console.log(chalk.yellow('Email sent: ' + info.response));
     });
   }
-
-  // function login() {
-  //   console.log('login');
-  //   var username = 'thesamueljim';
-  //   var password = '1qaz2wsx3edc4rfv5tgb';
-  //   passport.authenticate(new LocalStrategy(
-  //   function (username, password, done) {
-  //     User.findOne({ username: username }, function (err, user) {
-  //       if (err) {
-  //         console.log('kilnSetup error');
-  //       }
-  //       if (!user) {
-  //         console.log('no user - kilnSetup error');
-  //       }
-  //       if (!user.validPassword(password)) {
-  //         console.log('wrong password - kilnSetup error');
-  //       }
-  //       console.log('kilnSetup ' + username);
-  //     });
-  //   }
-  //   ));
-  // }
 
 };

@@ -6,22 +6,22 @@
     .controller('SchedulesProgramController', SchedulesProgramController)
     .directive('dlKeyCode', dlKeyCode);
 
-    function dlKeyCode() {
-      return {
-        restrict: 'A',
-        link: function($scope, $element, $attrs) {
-          $element.bind("keypress", function(event) {
-            var keyCode = event.which || event.keyCode;
-  
-            if (keyCode == $attrs.code) {
-              $scope.$apply(function() {
-                $scope.$eval($attrs.dlKeyCode, {$event: event});
-              });
-            }
-          });
-        }
-      };
-    }
+  function dlKeyCode() {
+    return {
+      restrict: 'A',
+      link: function($scope, $element, $attrs) {
+        $element.bind("keypress", function(event) {
+          var keyCode = event.which || event.keyCode;
+
+          if (keyCode == $attrs.code) {
+            $scope.$apply(function() {
+              $scope.$eval($attrs.dlKeyCode, {$event: event});
+            });
+          }
+        });
+      }
+    };
+  }
 
   SchedulesProgramController.$inject = ['$scope', '$state', 'scheduleResolve', 'Notification'];
 
@@ -37,13 +37,13 @@
     vm.change = change;
 
     vm.datasetOverride = {
-      backgroundColor: 'rgba(191,64,64,0.6)',
-      borderColor: '#f0ad4e',
+      backgroundColor: 'rgba(191,191,191,0.2)',
+      borderColor: '#804d4d',
       borderWidth: 4,
-      pointBorderColor: '#f0ad4e',
-      pointBackgroundColor: '#f0ad4e',
-      pointHoverBackgroundColor: '#f0ad4e',
-      pointHoverBorderColor: '#f0ad4e',
+      pointBorderColor: '#804d4d',
+      pointBackgroundColor: '#804d4d',
+      pointHoverBackgroundColor: '#804d4d',
+      pointHoverBorderColor: '#804d4d',
       pointHitRadiusL: 120,
       pointBorderWidth: 10,
       pointHoverRadius: 10,
@@ -165,7 +165,7 @@
           program.secondCumulative = program.firstCumulative + program.hold;
         } else {
           if (program.goal >= vm.schedule.program[index - 1].goal) {
-            program.timeToGoal = ((program.goal - vm.schedule.program[index - 1].goal) / program.rate ) * 60;
+            program.timeToGoal = ((program.goal - vm.schedule.program[index - 1].goal) / program.rate) * 60;
           } else {
             program.timeToGoal = ((program.goal - vm.schedule.program[index - 1].goal) / (-1 * Math.abs(program.rate))) * 60;
           }

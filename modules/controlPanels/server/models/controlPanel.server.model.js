@@ -24,19 +24,10 @@ var runsSchema = new Schema({
     type: String,
     default: 'Unamed schedule'
   },
-  values: [
-    {
-      x: {
-        type: Number,
-        default: 0,
-        min: 0
-      },
-      y: {
-        type: Number,
-        default: 0
-      }
-    }
-  ],
+  startTime: {
+    type: Date,
+    trim: true
+  },
   temp: [
     {
       y: {
@@ -46,10 +37,10 @@ var runsSchema = new Schema({
       },
       x: {
         type: Date,
-        trim: true,
-        default: Date.now
+        trim: true
+        // default: Date.now
       }
-   }
+    }
   ]
 }
 );
@@ -92,9 +83,8 @@ var ScheduleSchema = new Schema({
   },
   title: {
     type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
+    default: 'Select a Schedule',
+    trim: true
   },
   content: {
     type: String,
@@ -117,8 +107,7 @@ var ScheduleSchema = new Schema({
   values: [
     {
       x: {
-        type: Number,
-        default: 0,
+        type: Date,
         min: 0
       },
       y: {
@@ -159,7 +148,7 @@ var ControlPanelSchema = new Schema({
   },
   runNum: {
     type: Number,
-    default: '1'
+    default: '0'
   },
   runs: [runsSchema],
   schedule: [ScheduleSchema],

@@ -73,17 +73,17 @@
 
         Socket.on('tempServerUpdate' + controlPanel._id, function (data) {
           if (data.id === controlPanel._id) {
-            controlPanel.liveTemp = data.temp;
-            controlPanel.updateTime = data.time;
+            controlPanel.liveTemp = data.y;
+            controlPanel.updateTime = data.x;
             // Notification.info ({
             //   message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + controlPanel.liveTemp
             // });
           }
         });
 
-        Socket.removeListener('kilnStatus' + controlPanel._id);
+        Socket.removeListener('clientStatus' + controlPanel._id);
 
-        Socket.on('kilnStatus' + controlPanel._id, function (data) {
+        Socket.on('clientStatus' + controlPanel._id, function (data) {
           controlPanel.schedule = data.schedule;
           controlPanel.online = data.online;
           vm.controlPanel.scheduleProgress = data.scheduleProgress;
