@@ -15,6 +15,21 @@ var numOfTemps = 4000;
  */
 exports.create = function (req, res) {
   var controlPanel = new ControlPanel(req.body);
+  controlPanel.runs = {
+    scheduleTitle: null,
+    values: [
+      {
+        x: null,
+        y: null
+      }
+    ],
+    temp: [
+      {
+        y: null,
+        x: null
+      }
+    ]
+  };
   controlPanel.user = req.user;
   controlPanel.save(function (err) {
     if (err) {
@@ -34,6 +49,16 @@ exports.read = function (req, res) {
   // convert mongoose document to JSON
   // numOfTemps = req.controlPanel.numOfTemps;
   var controlPanel = req.controlPanel ? req.controlPanel.toJSON() : {};
+  console.log(req.query.run);
+
+  controlPanel.runNames = [];
+
+  controlPanel.runs.forEach(function (element, i) {
+    controlPanel.runNames.push({ name: element.scheduleTitle, ind: i });
+  });
+
+  controlPanel.runs = controlPanel.runs[req.query.run];
+  // controlPanel.schedule = controlPanel.schedule;
   // temp filterfindOne
   // controlPanel.temp = req.controlPanel.temp[temp]
   // req.controlPanel ? req.controlPanel.find( {}, { temp: { $slice: -1 }}) : {};
@@ -41,9 +66,13 @@ exports.read = function (req, res) {
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the ControlPanel model.
   controlPanel.isCurrentUserOwner = !!(req.user && controlPanel.user && controlPanel.user._id.toString() === req.user._id.toString());
   if (controlPanel.isCurrentUserOwner || req.user.roles[1] === 'admin') {
-    // var test = controlPanel.temp.slice(10);
-    // controlPanel.temp.slice(3)
-    controlPanel.temp = controlPanel.temp.slice(-numOfTemps);
+  // TODO put this back in
+
+    // controlPanel.runs = controlPanel.runs[controlPanel.runNum - 1];
+
+    // controlPanel.runs.temp = controlPanel.runs[controlPanel.runNum - 1].temp;
+    // controlPanel.runs = controlPanel.runs[controlPanel.runNum];
+    // console.log(controlPanel.runs.temp);
     res.json(controlPanel);
   } else {
     return res.status(403).json({
@@ -63,6 +92,7 @@ exports.update = function (req, res) {
   controlPanel.content = req.body.content;
   controlPanel.info = req.body.info;
   controlPanel.online = req.body.online;
+  controlPanel.emailAlerts = req.body.emailAlerts;
   // controlPanel.temp = req.body.temp;
   // controlPanel.temp.data = 0;
   // controlPanel.temp.time = 0;
@@ -115,9 +145,13 @@ exports.list = function (req, res) {
   ControlPanel.find(ownerOnly).sort('-online').populate('user', 'displayName').exec(function (err, controlPanels) {
     for (let controlPanel of controlPanels) {
       // remove all but the lastest temp
-      controlPanel.temp = controlPanel.temp.slice(-1);
+      controlPanel.runs = controlPanel.runs[controlPanel.runNum];
+      // controlPanel.runs.temp = controlPanel.runs.temp.slice(-1);
+
+      // controlPanel.runs[controlPanel.runNum-1].values = 0;
+      // controlPanel.runs = 0;
       // set the schedule to be a none existant schedule so it won't show
-      controlPanel.schedule = controlPanel.schedule.slice(2);
+      controlPanel.schedule = controlPanel.schedule.slice(-2);
 
     }
 

@@ -37,7 +37,7 @@
 
     menuService.addMenuItem('topbar', {
       title: 'Documentation',
-      state: 'docs',
+      state: 'documentation',
       data: {
         pageTitle: 'Documentation'
       }

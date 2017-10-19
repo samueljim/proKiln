@@ -23,8 +23,8 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.min.js',
         'public/lib/ng-file-upload/ng-file-upload.min.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
-        'public/lib/chart.js/dist/Chart.js',
-        'public/lib/angular-chart.js/dist/angular-chart.js',
+        'public/lib/chart.js/dist/Chart.bundle.min.js',
+        'public/lib/angular-chart.js/dist/angular-chart.min.js'
         // endbower
       ]
     },

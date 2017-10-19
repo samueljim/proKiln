@@ -15,6 +15,36 @@ function validateIsNumber(v) {
   return patt.test(v);
 }
 
+
+/**
+* runsSchema
+*/
+var runsSchema = new Schema({
+  scheduleTitle: {
+    type: String,
+    default: 'Unamed schedule'
+  },
+  startTime: {
+    type: Date,
+    trim: true
+  },
+  temp: [
+    {
+      y: {
+        type: Number,
+        trim: true,
+        default: 0
+      },
+      x: {
+        type: Date,
+        trim: true,
+        default: 0
+        // default: Date.now
+      }
+    }
+  ]
+}
+);
 /**
 * Points of data Schema
 */
@@ -54,9 +84,8 @@ var ScheduleSchema = new Schema({
   },
   title: {
     type: String,
-    default: '',
-    trim: true,
-    required: 'Title cannot be blank'
+    default: 'Select a Schedule',
+    trim: true
   },
   content: {
     type: String,
@@ -79,9 +108,7 @@ var ScheduleSchema = new Schema({
   values: [
     {
       x: {
-        type: Number,
-        default: 0,
-        min: 0
+        type: Date
       },
       y: {
         type: Number,
@@ -119,23 +146,11 @@ var ControlPanelSchema = new Schema({
     type: Boolean,
     default: false
   },
-  temp: [{
-    y: {
-      type: Number,
-      trim: true,
-      default: null
-      //
-      // patten: '/^\-?\d+(?:\.\d+)?$/',
-      // messages: {
-      //   patten: 'temp must be a valid number'
-      // }
-    },
-    x: {
-      type: Date,
-      default: Date.now
-    }
-  }
-  ],
+  runNum: {
+    type: Number,
+    default: '0'
+  },
+  runs: [runsSchema],
   schedule: [ScheduleSchema],
   scheduleProgress: {
     type: Number,
@@ -145,6 +160,10 @@ var ControlPanelSchema = new Schema({
   scheduleStatus: {
     type: String,
     trim: true
+  },
+  emailAlerts: {
+    type: Boolean,
+    default: false
   },
   user: {
     type: Schema.ObjectId,

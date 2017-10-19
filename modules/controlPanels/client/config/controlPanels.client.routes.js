@@ -25,7 +25,7 @@
         }
       })
       .state('controlPanels.view', {
-        url: '/:controlPanelId',
+        url: '/:controlPanelId/:run',
         templateUrl: '/modules/controlPanels/client/views/view-controlPanel.client.view.html',
         controller: 'ControlPanelsController',
         controllerAs: 'vm',
@@ -38,7 +38,7 @@
         }
       })
       .state('controlPanels.edit', {
-        url: '/:controlPanelId/edit',
+        url: '/:controlPanelId/:run/edit',
         templateUrl: '/modules/controlPanels/client/views/edit-controlPanel.client.view.html',
         controller: 'ControlPanelsEditController',
         controllerAs: 'vm',
@@ -56,7 +56,8 @@
 
   function getControlPanel($stateParams, ControlPanelsService) {
     return ControlPanelsService.get({
-      controlPanelId: $stateParams.controlPanelId
+      controlPanelId: $stateParams.controlPanelId,
+      run: $stateParams.run
     }).$promise;
   }
 }());

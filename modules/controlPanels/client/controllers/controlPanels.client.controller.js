@@ -11,15 +11,15 @@
     var vm = this;
 
     vm.controlPanel = controlPanel;
-    vm.sendtemp = sendtemp;
-    vm.temp = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].y;
-    vm.updateTime = vm.controlPanel.temp[vm.controlPanel.temp.length - 1].x;
+    vm.temp = vm.controlPanel.runs.temp[vm.controlPanel.runs.temp.length - 1].y;
+    vm.updateTime = vm.controlPanel.runs.temp[vm.controlPanel.runs.temp.length - 1].x;
     // vm.controlPanel.temp.x = vm.controlPanel.temp.data;
     // vm.controlPanel.temp.y = vm.controlPanel.temp.time;
     vm.start = start;
     vm.stop = stop;
     vm.change = change;
-    // vm.edit = edit;data
+    vm.changeRun = changeRun;
+
     vm.schedules = SchedulesService.query();
 
     // vm.controlPanel.temp.data = vm.controlPanel.temp;
@@ -27,19 +27,19 @@
     // vm.labels = ["January", "February", "March", "April", "May", "June", "July"];
 
     vm.datasetOverride = {
-      backgroundColor: '#bf4040',
-      borderColor: '#f0ad4e',
+      backgroundColor: 'rgba(191,191,191,0.2)',
+      borderColor: '#804d4d',
       borderWidth: 4,
-      pointBorderColor: '#f0ad4e',
-      pointBackgroundColor: '#f0ad4e',
-      pointHoverBackgroundColor: '#f0ad4e',
-      pointHoverBorderColor: '#f0ad4e',
-      pointHitRadiusL: 120,
-      pointBorderWidth: 10,
-      pointHoverRadius: 10,
+      pointBorderColor: '#804d4d',
+      pointBackgroundColor: '#804d4d',
+      pointHoverBackgroundColor: '#804d4d',
+      pointHoverBorderColor: '#804d4d',
+      pointHitRadiusL: 0,
+      pointBorderWidth: 0,
+      pointHoverRadius: 0,
       pointHoverBorderWidth: 10,
-      pointRadius: 1,
-      lineTensionL: 0,
+      pointRadius: 0,
+      // lineTensionL: 0.4,
       fill: true
     };
 
@@ -50,26 +50,26 @@
         xAxes: [{
           scaleLabel: {
             display: true,
-            fontColor: 'white',
+            fontColor: 'black',
             labelString: 'Time in minutes'
           },
           type: 'linear',
           ticks: {
-            min: 0,
-            fontColor: 'white',
+            // min: 0,
+            fontColor: 'black',
             defaultFontSize: 13
           }
         }],
         yAxes: [{
           scaleLabel: {
             display: true,
-            fontColor: 'white',
+            fontColor: 'black',
             labelString: 'Temperature in °C'
           },
           type: 'linear',
           ticks: {
             min: 0,
-            fontColor: 'white',
+            fontColor: 'black',
             defaultFontSize: 13
           }
         }]
@@ -83,40 +83,48 @@
 
     vm.optionsTemp = {
       animation: false,
-      beginAtZero: true,
       maintainAspectRatio: true,
       scales: {
         xAxes: [{
           scaleLabel: {
             display: true,
-            fontColor: 'white',
+            fontColor: 'black',
             labelString: 'Time in minutes'
           },
           type: 'time',
-          distribution: 'scaled',
+          // distribution: 'series',
           ticks: {
-            min: 0,
-            fontColor: 'white',
+            // min: 0,
+            fontColor: 'black',
             defaultFontSize: 13
+          },
+          time: {
+            unit: 'minute',
+            // unitStepSize: 10,
+            displayFormats: {
+              // min: 0,
+              // max: moment().startOf('year'),
+              minute: 'm'
+            }
           }
         }],
         yAxes: [{
           scaleLabel: {
             display: true,
-            fontColor: 'white',
+            fontColor: 'black',
             labelString: 'Temperature in °C'
           },
           type: 'linear',
           ticks: {
-            min: 0,
-            fontColor: 'white',
+            // min: 0,
+            fontColor: 'black',
             defaultFontSize: 13
           }
         }]
       },
       elements: {
         line: {
-          tension: 0 // disables bezier curves
+          tension: 0.2 // disables bezier curves
         }
       }
     };
@@ -128,7 +136,6 @@
       // TODO put back in after debug
       $state.go('home');
     }
-
     init();
 
 
@@ -152,13 +159,17 @@
       // Add an event listener to the 'tempServerUpdate' event
       Socket.removeListener('tempServerUpdate' + vm.controlPanel._id);
       Socket.on('tempServerUpdate' + vm.controlPanel._id, function (data) {
-        if (data.id === controlPanel._id) {
-          vm.temp = data.y;
-          vm.updateTime = data.x;
-          vm.controlPanel.temp.push({ x: data.x, y: data.y });
-          vm.controlPanel.temp.slice(-40);
-          console.log('New Temp ' + data.y);
-        }
+        vm.temp = data.y;
+        vm.updateTime = data.x;
+
+
+        vm.controlPanel.runs.temp.push({ x: data.x, y: data.y });
+
+        // for (var i = 2; i < vm.controlPanel.runs.temp.length; i += 3) {
+        //   vm.controlPanel.runs.temp.splice(i, 1);
+        // }
+
+        console.log('New Temp ' + data.y);
       });
       // Add an event listener to the 'kilnStatus' event
       Socket.removeListener('clientStatus' + vm.controlPanel._id);
@@ -216,7 +227,7 @@
         console.log('start');
         var data = {
           scheduleStatus: 'Starting',
-          scheduleProgress: 10,
+          scheduleProgress: 0,
           schedule: vm.controlPanel.schedule,
           id: vm.controlPanel._id
         };
@@ -232,6 +243,11 @@
       vm.controlPanel.schedule = schedule;
     }
 
+    function changeRun() {
+      console.log(vm.runChanger.ind);
+      $state.go('.', { controlPanelId: controlPanel._id, run: vm.runChanger.ind });
+    }
+
     function stop() {
       if (vm.controlPanel.online === false) {
         Notification.error({
@@ -244,19 +260,21 @@
         // schedule: vm.controlPanel.schedule,
         id: vm.controlPanel._id
       };
-      Socket.emit('clientScheduleUpdate', data);
+      Socket.emit('stop');
+      io.in(data.id).emit('kilnStop', {});
+      // Socket.emit('clientScheduleUpdate', data);
     }
     //  method for sending temp
-    function sendtemp() {
-      // console.log('sendtemp run');
-      // Create a new temp object
-      var data = {
-        y: vm.tempText,
-        id: vm.controlPanel._id
-      };
-      // Emit a 'tempKilnUpdate' temp event
-      Socket.emit('tempKilnUpdate', data);
-      console.log('Sent ' + data.temp);
-    }
+    // function sendtemp() {
+    //   // console.log('sendtemp run');
+    //   // Create a new temp object
+    //   var data = {
+    //     y: vm.tempText,
+    //     id: vm.controlPanel._id
+    //   };
+    //   // Emit a 'tempKilnUpdate' temp event
+    //   Socket.emit('tempKilnUpdate', data);
+    //   console.log('Sent ' + data.temp);
+    // }
   }
 }());

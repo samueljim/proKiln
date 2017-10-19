@@ -65,7 +65,7 @@
         url: '/about',
         templateUrl: '/modules/core/client/views/about.client.view.html'
       })
-      .state('docs', {
+      .state('documentation', {
         url: '/documentation',
         templateUrl: '/modules/core/client/views/docs.client.view.html'
       })

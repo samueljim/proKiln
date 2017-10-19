@@ -10,18 +10,33 @@
     </div>
   </div>
   <div class="list-group">
-    <a ng-repeat="controlPanel in vm.pagedItems" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id })" class="list-group-item">
+    <a ng-repeat="controlPanel in vm.pagedItems" ui-sref="controlPanels.view({ controlPanelId: controlPanel._id, run: controlPanel.runNum })" class="list-group-item">
       <span ng-if="controlPanel.online" class="label label-success">Online</span>
       <span ng-if="!controlPanel.online" class="label label-warning">Offline</span>
-      <span class="badge"><h4 ng-bind="controlPanel.liveTemp + ' C'"></h4>Last updated  {{controlPanel.updateTime | date : 'mediumTime'}}</span>
+      <span class="badge"><h4 ng-bind="controlPanel.liveTemp + ' C'"></h4> {{controlPanel.updateTime | date : 'mediumTime'}}</span>
       <!-- <span class="badge"></span> -->
       <h4 class="list-group-item-heading" ng-bind="controlPanel.title"> <small class="list-group-item-text" ng-bind="controlPanel.content"></small></h4>
       <p ng-if="controlPanel.scheduleStatus" class="list-group-item-text" ng-bind="controlPanel.scheduleStatus"></p>
       <p ng-if="!controlPanel.scheduleStatus" class="list-group-item-text" >Not running</p>
     </a>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length">
-      No Kiln's found yet, why don't you <a data-ui-sref="core.about">set up one</a>?
-    </div>
+  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems">
+      <font size="5">
+          Loading request
+      </font>
+  </div>
+    
+  <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length && vm.pagedItems">
+    <!-- <div class="alert alert-warning text-center" data-ng-if="!vm.pagedItems.length"> -->
+    <font size="5">
+      No proKiln controllers found. Would you like to&nbsp
+      <a class="btn btn-primary btn-lg" ui-sref="buy"> buy one </a>
+      &nbsp or &nbsp
+      <a class="btn btn-primary btn-lg" ui-sref="documentation"> set one up </a>
+      &nbsp?
+    </font>
+  </div>
+
+
   <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
 </section>

@@ -64,24 +64,26 @@
           id: controlPanel._id,
           time: Date.now()
         });
-        controlPanel.liveTemp = controlPanel.temp[controlPanel.temp.length - 1].data;
-        controlPanel.updateTime = controlPanel.temp[controlPanel.temp.length - 1].time;
+        controlPanel.liveTemp = controlPanel.runs[0].temp[0].y;
+        controlPanel.updateTime = controlPanel.runs[0].temp[0].x;
+
+        Socket.emit('clientId', { id: controlPanel._id });
 
         Socket.removeListener('tempServerUpdate' + controlPanel._id);
 
         Socket.on('tempServerUpdate' + controlPanel._id, function (data) {
           if (data.id === controlPanel._id) {
-            controlPanel.liveTemp = data.temp;
-            controlPanel.updateTime = data.time;
+            controlPanel.liveTemp = data.y;
+            controlPanel.updateTime = data.x;
             // Notification.info ({
             //   message: '<i class="glyphicon glyphicon-flash"></i> ' + controlPanel.title + ' Has been updated to ' + controlPanel.liveTemp
             // });
           }
         });
 
-        Socket.removeListener('kilnStatus' + controlPanel._id);
+        Socket.removeListener('clientStatus' + controlPanel._id);
 
-        Socket.on('kilnStatus' + controlPanel._id, function (data) {
+        Socket.on('clientStatus' + controlPanel._id, function (data) {
           controlPanel.schedule = data.schedule;
           controlPanel.online = data.online;
           vm.controlPanel.scheduleProgress = data.scheduleProgress;
