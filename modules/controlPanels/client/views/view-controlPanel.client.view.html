@@ -43,15 +43,13 @@
   </div>
   <div class="col-md-6">
     <br>
-    <h4>Schedule</h4>
+    <h4>Schedule: {{ vm.controlPanel.schedule.title }}</h4>
     <div class="form-group">
       <label for="sel1">Select Schedule:</label>
       <div class="row">
           <form role="form" class="form-inline">
-          <select ng-model="vm.controlPanel.schedule" ng-options="schedules.title for schedule.title in vm.schedules"  class="form-control col-md-12" >
-          <option ng-show="schedules.id == 0"
-          value="">-- Choose schedule --
-        </option>
+          <select ng-model="vm.controlPanel.schedule" ng-options="(schedule.title + ' - ' + schedule.totalTiming + 'm') for schedule in vm.schedules"  class="form-control" style="width:90%" >
+          <option ng-show="schedules.id == 0" value="">-- Choose schedule -- </option>
       </select>
         <!-- ng-change="change(schedule)" -->
         <!-- <option ng-if="vm.schedules.length <= 0" value="">Please make a Schedule on the Schedule tab</option> -->
