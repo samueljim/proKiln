@@ -276,7 +276,7 @@
       save(true, 0);
 
       clearInterval(autoCheck);
-      if (changes) {
+      if (changes === true) {
         var message = 'Are you sure you want to navigate away from this page?\n\nThere are issues with the entered data so it will not be saved \n\nPress OK to continue or Cancel to stay on the current page.';
         if (confirm(message)) return true;
         else {
@@ -285,6 +285,6 @@
         }
       }
     });
-
+// Samuel Henry 2017
   }
 }());

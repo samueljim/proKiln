@@ -10,15 +10,35 @@
   function ControlPanelsController($scope, $state, Authentication, controlPanel, Socket, SchedulesService, Notification) {
     var vm = this;
 
+
     vm.controlPanel = controlPanel;
     vm.temp = vm.controlPanel.runs.temp[vm.controlPanel.runs.temp.length - 1].y;
     vm.updateTime = vm.controlPanel.runs.temp[vm.controlPanel.runs.temp.length - 1].x;
+    vm.Authentication = Authentication;
     // vm.controlPanel.temp.x = vm.controlPanel.temp.data;
     // vm.controlPanel.temp.y = vm.controlPanel.temp.time;
     vm.start = start;
     vm.stop = stop;
     vm.change = change;
     vm.changeRun = changeRun;
+
+    vm.demoStart = demoStart;
+    vm.demo;
+    function demoStart() {
+      $state.go('.', { controlPanelId: controlPanel._id, run: controlPanel.runNum });
+      vm.controlPanel.online = true;
+      
+      var data = { id: vm.controlPanel._id, email: vm.Authentication.user.email, scheduleStatus: 'start' };
+      if (vm.demo) {
+        Socket.emit('demoStop', data);
+        vm.demo;
+        
+      } else {
+        Socket.emit('demoStart', data);
+        vm.demo = 1;
+      }
+    
+    }
 
     vm.schedules = SchedulesService.query();
 
@@ -162,6 +182,24 @@
         vm.temp = data.y;
         vm.updateTime = data.x;
 
+        $state.go('.', { controlPanelId: controlPanel._id, run: controlPanel.runNum });
+
+        vm.controlPanel.scheduleProgress++;
+        if (vm.controlPanel.scheduleProgress >= 100) {
+          vm.controlPanel.scheduleStatus = 'starting';
+
+          vm.controlPanel.scheduleProgress = 0;
+        }
+        if (vm.controlPanel.scheduleProgress >= 10) {
+          vm.controlPanel.scheduleStatus = 'heating';
+        }
+        if (vm.controlPanel.scheduleProgress >= 50) {
+          vm.controlPanel.scheduleStatus = 'running';
+        }
+        if (vm.controlPanel.scheduleProgress >= 90) {
+          vm.controlPanel.scheduleStatus = 'stopping';
+        }
+        vm.controlPanel.online = true;
 
         vm.controlPanel.runs.temp.push({ x: data.x, y: data.y });
 
@@ -254,14 +292,15 @@
           message: '<i class="glyphicon glyphicon-ban-circle"></i>  kiln offline', replaceMessage: true
         });
       }
+      vm.controlPanel.online = false;
       console.log('stop');
       var data = {
         scheduleStatus: 'Stopping',
         // schedule: vm.controlPanel.schedule,
         id: vm.controlPanel._id
       };
-      Socket.emit('stop');
-      io.in(data.id).emit('kilnStop', {});
+      Socket.emit('stop', data);
+      // io.in(data.id).emit('kilnStop', {});
       // Socket.emit('clientScheduleUpdate', data);
     }
     //  method for sending temp
@@ -275,6 +314,8 @@
     //   // Emit a 'tempKilnUpdate' temp event
     //   Socket.emit('tempKilnUpdate', data);
     //   console.log('Sent ' + data.temp);
-    // }
-  }
+     // }
+// Samuel Henry 2017
+
+}
 }());

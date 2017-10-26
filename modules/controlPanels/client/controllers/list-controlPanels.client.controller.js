@@ -13,6 +13,16 @@
     vm.pageChanged = pageChanged;
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
+    vm.authentication = Authentication;
+    
+    vm.demoAdd = demoAdd;
+    
+    function demoAdd() {
+      var user = vm.authentication.user.username;
+      var data = { title: 'Demo kiln ' + (vm.controlPanels.length + 1), username: user, content: user };
+      Socket.emit('demokilnSetup', data);
+      // console.log(vm.authentication.user.username);
+    }
 
     ControlPanelsService.query(function (data) {
       vm.controlPanels = data;

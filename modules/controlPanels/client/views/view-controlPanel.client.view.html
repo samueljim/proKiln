@@ -31,7 +31,7 @@
     </canvas>
     <h4 >Status: {{ vm.controlPanel.scheduleStatus }}</h4>
     <label for="sel1">Select Past Run:</label>
-    <select ng-model="vm.runChanger" style="padding:3px 1px; width:100%;" ng-options="runNames.name for runNames in vm.controlPanel.runNames" ng-change="vm.changeRun()">
+    <select ng-disabled="!vm.controlPanel.online" ng-model="vm.runChanger" style="padding:3px 1px; width:100%;" ng-options="runNames.name for runNames in vm.controlPanel.runNames" ng-change="vm.changeRun()">
         <option ng-show="runNames.id == 0"
           value="">-- Choose Run --
         </option>
@@ -80,7 +80,9 @@
       <button type="button" ng-disabled="!vm.controlPanel.online || !vm.controlPanel.schedule._id" class="btn btn-success" ng-click="vm.start()"><i class="glyphicon glyphicon-fire"></i> Start</button>
       <button type="button" class="btn btn-danger" ng-click="vm.stop()">Stop</button>
     </div>
-    <p ng-bind="vm.controlPanel.scheduleStatus"></p>
+    <button type="button" class="btn btn-danger" ng-click="vm.demoStart()" >Demo Start</button>
+    
+    <!-- <h4 ng-bind="vm.controlPanel.scheduleStatus"></h4> -->
 
     <div class="progress">
     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="vm.controlPanel.scheduleProgress" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.controlPanel.scheduleProgress}}%">

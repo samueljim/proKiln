@@ -1,4 +1,29 @@
 <section>
-<h1>TODO buy</h1>
+<h1>Request a Kiln</h1>
+<form name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
+  <fieldset>
+    <div class="form-group" show-errors>
+      <uib-alert type="danger" ng-show="vm.error" class="text-center text-danger">
+        <span ng-bind="vm.error"></span>
+      </uib-alert>
+      <label for="Name">Name</label>
+      <input type="text" id="name" name="name" class="form-control" ng-model="vm.credentials.name" placeholder="Name" required autofocus>
+      <div ng-messages="vm.userForm.name.$error" role="alert">
+        <p class="help-block error-text" ng-message="required">Please enter your name.</p>
+      </div>
+    </div>
+    <div class="form-group" show-errors>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" class="form-control" ng-model="vm.credentials.email" placeholder="Email" required>
+      <div ng-messages="vm.userForm.email.$error" role="alert">
+        <p class="help-block error-text" ng-message="required">Email is required.</p>
+      </div>
+    </div>
+    <div class="text-center form-group">
+      <button type="submit" class="btn btn-primary">Order my kiln</button>
+    </div>
+    <br />
+  </fieldset>
+</form>
 </section>
 <!-- TODO  -->

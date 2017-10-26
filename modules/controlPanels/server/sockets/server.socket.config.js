@@ -15,7 +15,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 var smtpTransport = nodemailer.createTransport(config.mailer.options);
-
+var demo;
 var onlineKilnSockets = ['Tapping'];
 var onlineClientSockets = ['Parker'];
 var onlineKilnId = ['Wynter'];
@@ -136,6 +136,19 @@ module.exports = function (io, socket) {
     newKiln(data);
   });
 
+  socket.on('demokilnSetup', function (data) {
+    newKiln(data);
+  });
+
+  socket.on('demoStart', function (data) {
+    console.log('request to demo start ' + data.id);
+    io.emit('kilnId', data);
+    kilnOnline(data.id, true);
+    emailAlerts(data.id, 'Kiln starting');
+    kilnStatusUpdate(data.id, data);
+    setInterval(randomTemp.bind(null, data.id), 1000);
+  });
+
   socket.on('kilnScheduleUpdate', function (data) {
     data = JSON.parse(data);
     console.log('Kiln ' + data.id + ' is ' + data.scheduleStatus + ' ' + data.schedule);
@@ -145,7 +158,7 @@ module.exports = function (io, socket) {
 
   socket.on('clientScheduleUpdate', function (data) {
     console.log('request to start ' + data.id);
-    setInterval(randomTemp.bind(null, data.id), 1000);
+    demo = setInterval(randomTemp.bind(null, data.id), 1000);
     io.in(data.id).emit('clientScheduleUpdate ' + data.id, data);
   });
 
@@ -171,10 +184,10 @@ module.exports = function (io, socket) {
   });
 
   socket.on('stop', function (data) {
-
+    clearInterval(demo);
     // var info = { username: 'samueljim', title: 'Test kiln' };
     // newKiln(info);
-
+    kilnOnline(data.id, false);
     io.in(data.id).emit('kilnStop', {});
   });
 
@@ -194,6 +207,7 @@ module.exports = function (io, socket) {
     if (random < 1) {
       random = 1;
     }
+
     data.y = random;
 
     updateTempDatabase(data);
@@ -203,6 +217,7 @@ module.exports = function (io, socket) {
   function updateTempDatabase(entries) {
     var id = entries.id;
     var data;
+    // kilnOnline()
     // var data.data = data.temp;
     // console.log(chalk.red('run'));
     ControlPanel.findById(id, function (err, controlPanel) {
@@ -223,6 +238,11 @@ module.exports = function (io, socket) {
       //   }
       // );
       // }
+      // controlPanel.scheduleProgress++;
+
+      // if (controlPanel.scheduleProgress >= 100) {
+      //   controlPanel.scheduleProgress = 0;
+      // }
       var time = Date.now() - controlPanel.runs[controlPanel.runNum].startTime;
       // time = time.toUTCString();
       // console.log(time);
@@ -236,7 +256,7 @@ module.exports = function (io, socket) {
 
       // send to client the new temp and time of temp change
       io.in(id).emit('tempServerUpdate' + id, data);
-
+      controlPanel.online = true;
       controlPanel.save(
     function (err, raw) {
       if (err) {
@@ -300,11 +320,12 @@ module.exports = function (io, socket) {
       scheduleTitle: 'No runs',
       temp: [
         {
-          y: null,
-          x: null
+          y: 0,
+          x: 0
         }
       ]
     };
+    console.log(info);
     User.findOne({ 'username': info.username }, function (err, User) {
       if (err) {
         console.log(chalk.red(err));
@@ -336,9 +357,11 @@ module.exports = function (io, socket) {
         console.log(chalk.red(err));
       } else {
         // check if they want emails
+        console.log(ControlPanel.user.username);
+        
         if (ControlPanel.emailAlerts === true) {
         // find user who owns kiln
-          User.findOne({ 'username': ControlPanel.username }, function (err, User) {
+          User.findOne({ '_id': ControlPanel.user }, function (err, User) {
             if (err) {
               console.log(err);
             } else {
@@ -347,8 +370,8 @@ module.exports = function (io, socket) {
               var mailOptions = {
                 to: User.email,
                 from: config.mailer.from,
-                subject: 'Kiln update ' + ControlPanel.kilnstatus + ' - proKiln',
-                html: '<!DOCTYPE html><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title></title></head><body><p>Dear ' + User.username + ',</p><p></p><p>' + ControlPanel.title + ' has ' + ControlPanel.kilnstatus + ' </p><br /><p>' + message + '</p><br /><br /><p>The proKiln Support Team</p></body></html>'
+                subject: 'Kiln update ' + ControlPanel.scheduleStatus + ' - proKiln',
+                html: '<!DOCTYPE html><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title></title></head><body><p>Dear ' + User.username + ',</p><p></p><p>' + ControlPanel.title + ' has ' + ControlPanel.scheduleStatus + ' </p><br /><p>' + message + '</p><br /><br /><p>The proKiln Support Team</p></body></html>'
               };
               sendEmail(mailOptions);
             }
@@ -366,5 +389,5 @@ module.exports = function (io, socket) {
       console.log(chalk.yellow('Email sent: ' + info.response));
     });
   }
-
+// Samuel Henry 2017
 };
