@@ -70,7 +70,7 @@
         templateUrl: '/modules/core/client/views/docs.client.view.html'
       })
       .state('buy', {
-        url: '/buy',
+        url: '/order',
         templateUrl: '/modules/core/client/views/buy.client.view.html'
       })
       .state('forbidden', {

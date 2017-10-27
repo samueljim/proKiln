@@ -14,13 +14,14 @@
     vm.buildPager = buildPager;
     vm.figureOutItemsToDisplay = figureOutItemsToDisplay;
     vm.authentication = Authentication;
-    
+
     vm.demoAdd = demoAdd;
-    
+
     function demoAdd() {
       var user = vm.authentication.user.username;
-      var data = { title: 'Demo kiln ' + (vm.controlPanels.length + 1), username: user, content: user };
+      var data = { title: 'Demo ' + vm.search, username: user, content: user };
       Socket.emit('demokilnSetup', data);
+      $state.reload();
       // console.log(vm.authentication.user.username);
     }
 

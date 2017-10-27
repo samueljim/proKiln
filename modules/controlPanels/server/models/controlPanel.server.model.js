@@ -163,7 +163,7 @@ var ControlPanelSchema = new Schema({
   },
   emailAlerts: {
     type: Boolean,
-    default: false
+    default: true
   },
   user: {
     type: Schema.ObjectId,

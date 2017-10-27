@@ -25,19 +25,20 @@
     vm.demoStart = demoStart;
     vm.demo;
     function demoStart() {
+      vm.controlPanel.runNum++;
+
       $state.go('.', { controlPanelId: controlPanel._id, run: controlPanel.runNum });
       vm.controlPanel.online = true;
-      
       var data = { id: vm.controlPanel._id, email: vm.Authentication.user.email, scheduleStatus: 'start' };
       if (vm.demo) {
         Socket.emit('demoStop', data);
         vm.demo;
-        
+
       } else {
         Socket.emit('demoStart', data);
         vm.demo = 1;
       }
-    
+
     }
 
     vm.schedules = SchedulesService.query();

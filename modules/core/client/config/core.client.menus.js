@@ -52,7 +52,7 @@
     });
 
     menuService.addMenuItem('topbar', {
-      title: 'Buy',
+      title: 'Order',
       state: 'buy',
       data: {
         pageTitle: 'Change the way you think about kilns'
