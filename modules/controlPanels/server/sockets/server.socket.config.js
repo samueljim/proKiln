@@ -358,7 +358,7 @@ module.exports = function (io, socket) {
       } else {
         // check if they want emails
         console.log(ControlPanel.user.username);
-        
+
         if (ControlPanel.emailAlerts === true) {
         // find user who owns kiln
           User.findOne({ '_id': ControlPanel.user }, function (err, User) {
@@ -371,7 +371,7 @@ module.exports = function (io, socket) {
                 to: User.email,
                 from: config.mailer.from,
                 subject: 'Kiln update ' + ControlPanel.scheduleStatus + ' - proKiln',
-                html: '<!DOCTYPE html><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title></title></head><body><p>Dear ' + User.username + ',</p><p></p><p>' + ControlPanel.title + ' has ' + ControlPanel.scheduleStatus + ' </p><br /><p>' + message + '</p><br /><br /><p>The proKiln Support Team</p></body></html>'
+                html: '<!DOCTYPE html><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title></title></head><body><p>Dear ' + User.username + ',</p><p></p><p>' + ControlPanel.title + ' has ' + ControlPanel.scheduleStatus + ' for a status </p><br /><p>' + message + '</p><br /><br /><p>The proKiln Support Team</p></body></html>'
               };
               sendEmail(mailOptions);
             }
