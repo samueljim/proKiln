@@ -1,4 +1,4 @@
-[![Kiln Logo](http://i.imgur.com/LCxu7fZ.png)]
+![Kiln Logo](http://i.imgur.com/LCxu7fZ.png)
 
 ## Website
 This web app allows for users to make accounts and control there kilns that use our kilnPiApp
